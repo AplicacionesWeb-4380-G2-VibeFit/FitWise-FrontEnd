@@ -36,10 +36,12 @@ import {
     ToastService,
     Toolbar
 } from "primevue";
+import i18n from "@/i18n.js";
 
 const app = createApp(App)
 
 app
+    .use(i18n)
     .use(pinia)
 
     .use(PrimeVue, {theme: { preset: Material}, ripple: true})
