@@ -1,7 +1,12 @@
 {
   "option": {
     "home": "Inicio",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "reviews": "Reseñas",
+    "profile": "Perfil",
+    "routine-management": "Editor de Rutina",
+    "routine-sales": "Venta de rutina",
+    "schedule": "Cronograma"
   },
   "authoring-phrase": {
     "intro": "Hecho con",

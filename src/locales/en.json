@@ -1,7 +1,12 @@
 {
   "option": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "reviews": "Reviews",
+    "profile": "Profile",
+    "routine-management": "Routine Management",
+    "routine-sales": "Routine Sales",
+    "schedule": "Schedule"
   },
   "authoring-phrase": {
     "intro": "Made with",
