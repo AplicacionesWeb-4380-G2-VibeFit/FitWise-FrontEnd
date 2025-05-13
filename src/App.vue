@@ -19,13 +19,10 @@ export default {
 <template>
   <pv-toast/>
   <pv-confirm-dialog/>
-
   <header-content :items="items"/>
-
   <main>
     <router-view/>
   </main>
-
   <footer-content/>
 </template>
 
