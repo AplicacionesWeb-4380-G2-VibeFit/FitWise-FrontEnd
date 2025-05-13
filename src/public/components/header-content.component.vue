@@ -28,7 +28,7 @@ export default {
   <header>
     <pv-toolbar class="bg-primary">
       <template #start>
-        <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
+        <i class="pi pi-bars text-4xl text-white mr-3" @click="toggleDrawer"/>
         <h3>FitWise</h3>
       </template>
       <template #center>
