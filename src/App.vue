@@ -5,11 +5,11 @@ import FooterContent from "@/public/components/footer-content.component.vue";
 export default {
   name: "App",
   components: { FooterContent, HeaderContent },
-  data() {
+  data(){
     return {
       items: [
         {label: 'option.home',       to: '/home'},
-        {label: 'option.about',      to: '/about'}
+        {label: 'option.about',      to: '/about'},
       ]
     }
   }
