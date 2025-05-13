@@ -10,6 +10,11 @@ export default {
       items: [
         {label: 'option.home',       to: '/home'},
         {label: 'option.about',      to: '/about'},
+        {label: 'option.reviews',      to: '/home'},
+        {label: 'option.profile',      to: '/about'},
+        {label: 'option.routine-management',      to: '/home'},
+        {label: 'option.routine-sales',      to: '/about'},
+        {label: 'option.schedule',      to: '/home'}
       ]
     }
   }
