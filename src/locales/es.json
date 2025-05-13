@@ -1,4 +1,8 @@
 {
+  "option": {
+    "home": "Inicio",
+    "about": "Acerca de"
+  },
   "authoring-phrase": {
     "intro": "Hecho con",
     "use": "utilizando",
