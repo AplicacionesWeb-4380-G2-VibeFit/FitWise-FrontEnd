@@ -34,6 +34,7 @@ export class HealthPlan {
         /**
          * @type {string}
          * @description Display name of the health plan
+         */
         this.name = name;
 
         /**
