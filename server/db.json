@@ -56,45 +56,5 @@
     { "id": 6, "mealId": 3, "name": "Atún", "description": "1 lata" },
     { "id": 7, "mealId": 4, "name": "Banana", "description": "1 unidad" },
     { "id": 8, "mealId": 4, "name": "Leche de almendras", "description": "1 taza" }
-  ],
-  "users": [
-    { "id": 1, "name": "Ana López", "email": "ana@example.com" },
-    { "id": 2, "name": "Carlos Gómez", "email": "carlos@example.com" },
-    { "id": 3, "name": "Lucía Torres", "email": "lucia@example.com" },
-    { "id": 4, "name": "Pedro Ramírez", "email": "pedro@example.com" }
-  ],
-  "userHealthPlanAssignments": [
-    {
-      "id": 1,
-      "userId": 1,
-      "healthPlanId": "plan1",
-      "startDate": "2025-05-01",
-      "endDate": "2025-06-26",
-      "status": "active"
-    },
-    {
-      "id": 2,
-      "userId": 2,
-      "healthPlanId": "plan2",
-      "startDate": "2025-04-15",
-      "endDate": "2025-06-24",
-      "status": "paused"
-    },
-    {
-      "id": 3,
-      "userId": 3,
-      "healthPlanId": "plan3",
-      "startDate": "2025-03-01",
-      "endDate": "2025-05-24",
-      "status": "completed"
-    },
-    {
-      "id": 4,
-      "userId": 4,
-      "healthPlanId": "plan1",
-      "startDate": "2025-05-10",
-      "endDate": "2025-07-05",
-      "status": "active"
-    }
   ]
 }
