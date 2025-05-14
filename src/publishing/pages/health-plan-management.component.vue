@@ -1,12 +1,11 @@
 <script>
 import {HealthPlan} from "@/publishing/model/health-plan.entity.js";
 import {HealthPlanService} from "@/publishing/services/health-plan.service.js";
-import {Button as PvButton} from "primevue";
 import HealthPlanList from "@/publishing/components/health-plan-list.component.vue";
 
 export default {
   name: "health-plan-management",
-  components: {HealthPlanList, PvButton},
+  components: {HealthPlanList},
   data() {
     return {
       healthPlans: [],
