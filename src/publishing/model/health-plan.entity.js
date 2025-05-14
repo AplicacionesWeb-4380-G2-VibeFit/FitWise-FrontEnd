@@ -14,7 +14,7 @@ export class HealthPlan {
      * @param {string} [params.duration=""] - Display the time that the health plan will be active
      * @param {number} [params.price=0] - Display the money that the health plan costs
      * @param {string} [params.description=""] - Display the information about the health plan
-     * @param {string} [params.creador=""] - Contains the id of the trainer/user that created the health plan
+     * @param {string} [params.creadorId=""] - Contains the id of the trainer/user that created the health plan
      */
     constructor({
         id = "",
@@ -23,7 +23,7 @@ export class HealthPlan {
         duration = "",
         price = 0,
         description = "",
-        creador = ""
+        creadorId = ""
                 }) {
         /**
          * @type {string}
@@ -65,6 +65,6 @@ export class HealthPlan {
          * @type {string}
          * @description Contains the id of the trainer/user that created the health plan
          */
-        this.creador = creador;
+        this.creadorId = creadorId;
     }
 }
