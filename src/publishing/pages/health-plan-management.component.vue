@@ -1,14 +1,19 @@
 <script>
 import {HealthPlan} from "@/publishing/model/health-plan.entity.js";
 import {HealthPlanService} from "@/publishing/services/health-plan.service.js";
+import {Button as PvButton} from "primevue";
+import HealthPlanList from "@/publishing/components/health-plan-list.component.vue";
 
 export default {
   name: "health-plan-management",
+  components: {HealthPlanList, PvButton},
   data() {
     return {
       healthPlans: [],
       healthPlan: new HealthPlan({}),
-      healthPlanService: null
+      healthPlanService: null,
+      errors: [],
+      creatorIds: [],
     }
   },
   methods: {
@@ -19,24 +24,56 @@ export default {
       return this.healthPlans.findIndex(healthPlan => healthPlan.id === id);
     },
     getAllHealthPlans() {
-      this.healthPlanService = new HealthPlanService();
       this.healthPlanService.getAll().then(response => {
-        console.log(response)
+        const rawPlans = response.data.map(healthPlan => new HealthPlan(healthPlan));
+        this.healthPlans = rawPlans;
+        console.log(this.healthPlans);
+        // Obtener creadorIds únicos
+        const ids = [...new Set(rawPlans.map(plan => plan.creadorId))];
+        this.creatorIds = ids;
+      }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error); });
+    },
+    getPlansByCreator(creatorId) {
+      this.healthPlanService.getByCreatorId(creatorId).then(response => {
         this.healthPlans = response.data.map(healthPlan => new HealthPlan(healthPlan));
         console.log(this.healthPlans);
-      }).catch(error => console.log(error));
+      }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error); });
+    },
+    resetToAll() {
+      this.getAllHealthPlans();
+    }
+  },
+  computed: {
+    uniqueCreadorCount() {
+      const ids = new Set(this.healthPlans.map(plan => plan.creadorId));
+      return ids.size;
     }
   },
   created() {
+    this.healthPlanService = new HealthPlanService();
     this.getAllHealthPlans();
   }
 }
 </script>
 
 <template>
-    <h1>Miguelito</h1>
+  <p>Total de creadores únicos: {{ uniqueCreadorCount }}</p>
+  <div class="mb-4">
+    <pv-button
+        label="Mostrar todos"
+        class="p-button-secondary mr-2 mb-2"
+        @click="resetToAll"
+    />
+    <pv-button
+        v-for="id in creatorIds"
+        :key="id"
+        class="p-button-outlined mr-2 mb-2"
+        :label="'Creador ' + id"
+        @click="getPlansByCreator(id)"
+    />
+  </div>
+  <health-plan-list v-if="errors" :health-plans="healthPlans"/>
 </template>
 
 <style scoped>
-
 </style>
