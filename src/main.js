@@ -9,7 +9,7 @@ import 'primeicons/primeicons.css';
 import Material from '@primeuix/themes/material';
 
 import {
-    Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTab,
+    Accordion, AccordionContent, AccordionHeader, AccordionPanel,
     Button,
     Card,
     Checkbox, Chip,
