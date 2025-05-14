@@ -8,13 +8,13 @@ export default {
   data(){
     return {
       items: [
-        {label: 'option.home',       to: '/home'},
-        {label: 'option.about',      to: '/about'},
-        {label: 'option.reviews',      to: '/home'},
-        {label: 'option.profile',      to: '/about'},
-        {label: 'option.routine-management',      to: '/home'},
-        {label: 'option.routine-sales',      to: '/about'},
-        {label: 'option.schedule',      to: '/home'}
+        {label: 'option.home',                to: '/home'},
+        {label: 'option.about',               to: '/about'},
+        {label: 'option.reviews',             to: '/home'},
+        {label: 'option.profile',             to: '/about'},
+        {label: 'option.routine-management',  to: '/publishing'},
+        {label: 'option.routine-sales',       to: '/about'},
+        {label: 'option.schedule',            to: '/home'}
       ]
     }
   }
@@ -24,11 +24,15 @@ export default {
 <template>
   <pv-toast/>
   <pv-confirm-dialog/>
+
   <header-content :items="items"/>
+
   <main>
     <router-view/>
   </main>
+
   <footer-content/>
+
 </template>
 
 <style scoped>

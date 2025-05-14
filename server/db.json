@@ -1,8 +1,60 @@
 {
-  "reviews": [
+  "healthPlans": [
     {
       "id": 1,
-      "description": "Esta muy bueno"
+      "name": "Plan de pérdida de peso",
+      "objective": "Perder 5kg en 2 meses",
+      "duration": "8 semanas",
+      "price": 49.99,
+      "description": "Plan con comidas hipocalóricas y ejercicios de cardio.",
+      "creadorId": 1
+    },
+    {
+      "id": 2,
+      "name": "Plan de ganancia muscular",
+      "objective": "Ganar 3kg de músculo",
+      "duration": "10 semanas",
+      "price": 59.99,
+      "description": "Enfocado en comidas proteicas y entrenamientos de fuerza.",
+      "creadorId": 2
+    },
+    {
+      "id": 3,
+      "name": "Plan bienestar general",
+      "objective": "Mantener salud y energía",
+      "duration": "12 semanas",
+      "price": 39.99,
+      "description": "Combina alimentación saludable con ejercicio moderado.",
+      "creadorId": 3
     }
+  ],
+  "meals": [
+    { "id": 1, "healthPlanId": 1, "image": "https://i.pinimg.com/736x/44/94/ce/4494cee6e43e4d0028c7f62766d0ff81.jpg" },
+    { "id": 2, "healthPlanId": 1, "image": "https://i.ytimg.com/vi/RTxW97yArig/maxresdefault.jpg" },
+    { "id": 3, "healthPlanId": 2, "image": "https://static.diariofemenino.com/media/108637/c/se-puede-adelgazar-comiendo-atun-y-arroz-lg.jpg" },
+    { "id": 4, "healthPlanId": 3, "image": "https://cdn7.kiwilimon.com/recetaimagen/12107/960x640/23941.jpg.jpg" }
+  ],
+  "exercises": [
+    { "id": 1, "healthPlanId": 1, "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://i.ytimg.com/vi/i4x0Fl-kRmk/maxresdefault.jpg" },
+    { "id": 2, "healthPlanId": 2, "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://media.gq.com.mx/photos/611fbbddfde8c9b5f40c24f2/master/pass/press%20mancuernas-1056610648.jpg" },
+    { "id": 3, "healthPlanId": 2, "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://i.ytimg.com/vi/QJO-Azp5k9s/maxresdefault.jpg" },
+    { "id": 4, "healthPlanId": 3, "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://www.soycorredor.es/uploads/s1/51/01/81/5dc178db0de6941d2e349477-como-respirar-al-estirar.jpeg" }
+  ],
+  "instructions": [
+    { "id": 1, "mealId": 1, "position": "1", "description": "Lava los ingredientes." },
+    { "id": 2, "mealId": 1, "position": "2", "description": "Cocina a fuego lento por 20 minutos." },
+    { "id": 3, "mealId": 2, "position": "1", "description": "Pica la fruta y sirve fría." },
+    { "id": 4, "mealId": 3, "position": "1", "description": "Cocina el pollo a la plancha." },
+    { "id": 5, "mealId": 4, "position": "1", "description": "Prepara el batido en licuadora." }
+  ],
+  "ingredients": [
+    { "id": 1, "mealId": 1, "name": "Brócoli", "description": "1 taza" },
+    { "id": 2, "mealId": 1, "name": "Pechuga de pollo", "description": "150g" },
+    { "id": 3, "mealId": 2, "name": "Manzana", "description": "1 unidad" },
+    { "id": 4, "mealId": 2, "name": "Yogur natural", "description": "1/2 taza" },
+    { "id": 5, "mealId": 3, "name": "Arroz integral", "description": "1 taza" },
+    { "id": 6, "mealId": 3, "name": "Atún", "description": "1 lata" },
+    { "id": 7, "mealId": 4, "name": "Banana", "description": "1 unidad" },
+    { "id": 8, "mealId": 4, "name": "Leche de almendras", "description": "1 taza" }
   ]
 }

@@ -3,12 +3,16 @@ import {createRouter, createWebHistory} from "vue-router";
 const HomeComponent = () => import('../public/pages/home.component.vue');
 const AboutComponent = () => import('../public/pages/about.component.vue');
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
+const HealthPlanManagementComponent = () => import('../publishing/pages/health-plan-management.component.vue');
+const HealthPlanDetailsComponent = () => import('../publishing/pages/health-plan-details.component.vue');
 
 const routes = [
-    {   path: '/home',                  name: 'home',       component: HomeComponent,               meta: {title: 'Home'}},
-    {   path: '/about',                 name: 'about',      component: AboutComponent,              meta: {title: 'About us'}},
+    {   path: '/home',                  name: 'home',       component: HomeComponent,                   meta: {title: 'Home'}},
+    {   path: '/about',                 name: 'about',      component: AboutComponent,                  meta: {title: 'About us'}},
+    {   path: '/publishing',            name: 'publishing', component: HealthPlanManagementComponent,   meta: {title: 'Health Plans'}},
+    {   path: '/publishing/details/:id',    name: 'details',    component: HealthPlanDetailsComponent,      meta: {title: 'Health Plans Details'}},
     {   path: '/',                      name: 'default',    redirect: {name: 'home'}},
-    {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,       meta: {title: 'Page not found'}},
+    {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,           meta: {title: 'Page not found'}},
 ]
 
 const router = createRouter({
