@@ -89,14 +89,4 @@ export default {
 .meal-list-container {
   width: 100%;
 }
-
-.exercise-item {
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.exercise-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 </style>
