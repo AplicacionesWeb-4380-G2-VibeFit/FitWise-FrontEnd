@@ -4,14 +4,14 @@
     "about": "Acerca de",
     "reviews": "Reseñas",
     "profile": "Perfil",
-    "routine-management": "Gestión de Rutinas",
-    "routine-sales": "Ventas de Rutinas",
+    "routine-management": "Editor de Rutina",
+    "routine-sales": "Venta de rutina",
     "schedule": "Cronograma"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
     "use": "utilizando",
-    "author": "por el equipo de desarrollo de {brand}"
+    "author": "por el Equipo de Desarrollo de {brand}"
   },
   "review": {
     "score": "Puntuación",
