@@ -1,16 +1,16 @@
-<script >
+<script>
 import HeaderContent from "@/public/components/header-content.component.vue";
 import FooterContent from "@/public/components/footer-content.component.vue";
 
 export default {
   name: "App",
   components: { FooterContent, HeaderContent },
-  data(){
+  data() {
     return {
       items: [
         {label: 'option.home',                to: '/home'},
         {label: 'option.about',               to: '/about'},
-        {label: 'option.reviews',             to: '/home'},
+        {label: 'option.reviews',             to: '/reviewing'}, // This is the resolved path
         {label: 'option.profile',             to: '/about'},
         {label: 'option.routine-management',  to: '/publishing'},
         {label: 'option.routine-sales',       to: '/about'},
@@ -32,7 +32,6 @@ export default {
   </main>
 
   <footer-content/>
-
 </template>
 
 <style scoped>

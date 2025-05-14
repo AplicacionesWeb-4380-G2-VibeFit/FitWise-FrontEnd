@@ -56,5 +56,24 @@
     { "id": 6, "mealId": 3, "name": "Atún", "description": "1 lata" },
     { "id": 7, "mealId": 4, "name": "Banana", "description": "1 unidad" },
     { "id": 8, "mealId": 4, "name": "Leche de almendras", "description": "1 taza" }
+  ],
+  "reviews": [
+    { "id": "r2", "userId": "u2", "score": 4, "description": "Los ejercicios son exigentes pero efectivos. Me gustó el enfoque progresivo.", "healthPlanId": 1 },
+    { "id": "r3", "userId": "u3", "score": 3, "description": "Las comidas estaban bien, pero me costó seguir el ritmo de los ejercicios.BEIN", "healthPlanId": 1 },
+    { "id": "r4", "userId": "u4", "score": 4, "description": "Perdí 3kg en un mes. No es mágico, pero sí efectivo con constancia.", "healthPlanId": 1 },
+    { "id": "r5", "userId": "u5", "score": 5, "description": "Muy completo y fácil de seguir. Las recetas son simples y ricas.", "healthPlanId": 1 },
+    { "id": "r7", "userId": "u7", "score": 5, "description": "Gané músculo más rápido de lo esperado. Excelente combinación de dieta y fuerza.", "healthPlanId": 2 },
+    { "id": "r8", "userId": "u8", "score": 4, "description": "Requiere disciplina, pero da resultados si te lo tomás en serio.", "healthPlanId": 2 },
+    { "id": "r9", "userId": "u9", "score": 3, "description": "Algunos ejercicios eran demasiado avanzados para mí.", "healthPlanId": 2 },
+    { "id": "r10", "userId": "u10", "score": 5, "description": "Las recomendaciones de comida alta en proteína me encantaron.", "healthPlanId": 2 },
+    { "id": "r11", "userId": "u11", "score": 4, "description": "Muy bien estructurado. Ideal para quienes ya tienen algo de experiencia.", "healthPlanId": 2 },
+    { "id": "r12", "userId": "u12", "score": 2, "description": "Esperaba más variedad en los entrenamientos. Me resultó monótono.", "healthPlanId": 2 },
+    { "id": "r13", "userId": "u13", "score": 5, "description": "Este plan me ayudó a crear hábitos saludables sin presionarme.", "healthPlanId": 3 },
+    { "id": "r14", "userId": "u14", "score": 4, "description": "Muy balanceado y fácil de seguir. Me siento con más energía.", "healthPlanId": 3 },
+    { "id": "r15", "userId": "u15", "score": 3, "description": "Sólido, aunque algunas rutinas de ejercicio eran repetitivas.", "healthPlanId": 3 },
+    { "id": "r16", "userId": "u16", "score": 5, "description": "Excelente para mantener una vida activa y saludable.", "healthPlanId": 3 },
+    { "id": "r17", "userId": "u17", "score": 4, "description": "Me gustó la variedad en las comidas y el enfoque integral.", "healthPlanId": 3 },
+    { "id": "r18", "userId": "u18", "score": 2, "description": "Sentí que no se ajustaba a mi nivel. Demasiado general.", "healthPlanId": 3 },
+    { "id": "-egpIBT", "userId": "124", "score": 2, "description": "PRUEBA4", "healthPlanId": 4 }
   ]
 }
