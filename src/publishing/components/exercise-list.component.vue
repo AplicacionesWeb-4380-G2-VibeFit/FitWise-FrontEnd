@@ -45,9 +45,11 @@ export default {
                class="col-12 exercise-item p-3">
             <div class="flex flex-column md:flex-row align-items-center p-3 w-full gap-3"
                  :class="{'surface-50': index % 2 === 0, 'surface-0': index % 2 !== 0}">
-              <img :src="exercise.image || defaultImage"
-                   :alt="exercise.name"
-                   class="w-9 sm:w-10rem shadow-2 exercise-image" />
+              <pv-image :src="exercise.image || defaultImage" :alt="exercise.name" width="250" preview>
+                <template #previewicon>
+                  <i class="pi pi-search"></i>
+                </template>
+              </pv-image>
               <div class="flex-1 flex flex-column align-items-start gap-2">
                 <div class="text-xl font-bold">{{ exercise.name }}</div>
                 <div class="text-sm">{{ exercise.description }}</div>
@@ -86,20 +88,5 @@ export default {
 .exercise-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.exercise-image {
-  border-radius: 8px;
-  object-fit: cover;
-  height: 120px;
-  width: 160px;
-}
-
-@media (max-width: 576px) {
-  .exercise-image {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-  }
 }
 </style>
