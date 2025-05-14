@@ -1,11 +1,9 @@
 <script>
 import {Exercise} from "@/publishing/model/exercise.entity.js";
 import {ExerciseService} from "@/publishing/services/exercise.service.js";
-import {Image as PvImage} from "primevue";
 
 export default {
   name: "exercise-list",
-  components: {PvImage},
   props: {
     healthPlanId: {
       type: Number,
