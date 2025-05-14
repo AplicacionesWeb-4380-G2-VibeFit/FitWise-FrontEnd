@@ -1,96 +1,96 @@
 {
   "healthPlans": [
     {
-      "id": "plan1",
+      "id": 1,
       "name": "Plan de pérdida de peso",
       "objective": "Perder 5kg en 2 meses",
       "duration": "8 semanas",
       "price": 49.99,
       "description": "Plan con comidas hipocalóricas y ejercicios de cardio.",
-      "creadorId": "user1"
+      "creadorId": 1
     },
     {
-      "id": "plan2",
+      "id": 2,
       "name": "Plan de ganancia muscular",
       "objective": "Ganar 3kg de músculo",
       "duration": "10 semanas",
       "price": 59.99,
       "description": "Enfocado en comidas proteicas y entrenamientos de fuerza.",
-      "creadorId": "user2"
+      "creadorId": 2
     },
     {
-      "id": "plan3",
+      "id": 3,
       "name": "Plan bienestar general",
       "objective": "Mantener salud y energía",
       "duration": "12 semanas",
       "price": 39.99,
       "description": "Combina alimentación saludable con ejercicio moderado.",
-      "creadorId": "user3"
+      "creadorId": 3
     }
   ],
   "meals": [
-    { "id": "meal1", "healthPlanId": "plan1", "image": "https://example.com/images/meal1.jpg" },
-    { "id": "meal2", "healthPlanId": "plan1", "image": "https://example.com/images/meal2.jpg" },
-    { "id": "meal3", "healthPlanId": "plan2", "image": "https://example.com/images/meal3.jpg" },
-    { "id": "meal4", "healthPlanId": "plan3", "image": "https://example.com/images/meal4.jpg" }
+    { "id": 1, "healthPlanId": 1, "image": "https://example.com/images/meal1.jpg" },
+    { "id": 2, "healthPlanId": 1, "image": "https://example.com/images/meal2.jpg" },
+    { "id": 3, "healthPlanId": 2, "image": "https://example.com/images/meal3.jpg" },
+    { "id": 4, "healthPlanId": 3, "image": "https://example.com/images/meal4.jpg" }
   ],
   "exercises": [
-    { "id": "exercise1", "healthPlanId": "plan1", "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://example.com/images/exercise1.jpg" },
-    { "id": "exercise2", "healthPlanId": "plan2", "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://example.com/images/exercise2.jpg" },
-    { "id": "exercise3", "healthPlanId": "plan2", "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://example.com/images/exercise3.jpg" },
-    { "id": "exercise4", "healthPlanId": "plan3", "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://example.com/images/exercise4.jpg" }
+    { "id": 1, "healthPlanId": 1, "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://example.com/images/exercise1.jpg" },
+    { "id": 2, "healthPlanId": 2, "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://example.com/images/exercise2.jpg" },
+    { "id": 3, "healthPlanId": 2, "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://example.com/images/exercise3.jpg" },
+    { "id": 4, "healthPlanId": 3, "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://example.com/images/exercise4.jpg" }
   ],
   "instructions": [
-    { "id": "instr1", "mealId": "meal1", "position": "1", "description": "Lava los ingredientes." },
-    { "id": "instr2", "mealId": "meal1", "position": "2", "description": "Cocina a fuego lento por 20 minutos." },
-    { "id": "instr3", "mealId": "meal2", "position": "1", "description": "Pica la fruta y sirve fría." },
-    { "id": "instr4", "mealId": "meal3", "position": "1", "description": "Cocina el pollo a la plancha." },
-    { "id": "instr5", "mealId": "meal4", "position": "1", "description": "Prepara el batido en licuadora." }
+    { "id": 1, "mealId": 1, "position": "1", "description": "Lava los ingredientes." },
+    { "id": 2, "mealId": 1, "position": "2", "description": "Cocina a fuego lento por 20 minutos." },
+    { "id": 3, "mealId": 2, "position": "1", "description": "Pica la fruta y sirve fría." },
+    { "id": 4, "mealId": 3, "position": "1", "description": "Cocina el pollo a la plancha." },
+    { "id": 5, "mealId": 4, "position": "1", "description": "Prepara el batido en licuadora." }
   ],
   "ingredients": [
-    { "id": "ing1", "mealId": "meal1", "name": "Brócoli", "description": "1 taza" },
-    { "id": "ing2", "mealId": "meal1", "name": "Pechuga de pollo", "description": "150g" },
-    { "id": "ing3", "mealId": "meal2", "name": "Manzana", "description": "1 unidad" },
-    { "id": "ing4", "mealId": "meal2", "name": "Yogur natural", "description": "1/2 taza" },
-    { "id": "ing5", "mealId": "meal3", "name": "Arroz integral", "description": "1 taza" },
-    { "id": "ing6", "mealId": "meal3", "name": "Atún", "description": "1 lata" },
-    { "id": "ing7", "mealId": "meal4", "name": "Banana", "description": "1 unidad" },
-    { "id": "ing8", "mealId": "meal4", "name": "Leche de almendras", "description": "1 taza" }
+    { "id": 1, "mealId": 1, "name": "Brócoli", "description": "1 taza" },
+    { "id": 2, "mealId": 1, "name": "Pechuga de pollo", "description": "150g" },
+    { "id": 3, "mealId": 2, "name": "Manzana", "description": "1 unidad" },
+    { "id": 4, "mealId": 2, "name": "Yogur natural", "description": "1/2 taza" },
+    { "id": 5, "mealId": 3, "name": "Arroz integral", "description": "1 taza" },
+    { "id": 6, "mealId": 3, "name": "Atún", "description": "1 lata" },
+    { "id": 7, "mealId": 4, "name": "Banana", "description": "1 unidad" },
+    { "id": 8, "mealId": 4, "name": "Leche de almendras", "description": "1 taza" }
   ],
   "users": [
-    { "id": "user1", "name": "Ana López", "email": "ana@example.com" },
-    { "id": "user2", "name": "Carlos Gómez", "email": "carlos@example.com" },
-    { "id": "user3", "name": "Lucía Torres", "email": "lucia@example.com" },
-    { "id": "user4", "name": "Pedro Ramírez", "email": "pedro@example.com" }
+    { "id": 1, "name": "Ana López", "email": "ana@example.com" },
+    { "id": 2, "name": "Carlos Gómez", "email": "carlos@example.com" },
+    { "id": 3, "name": "Lucía Torres", "email": "lucia@example.com" },
+    { "id": 4, "name": "Pedro Ramírez", "email": "pedro@example.com" }
   ],
   "userHealthPlanAssignments": [
     {
-      "id": "assign1",
-      "userId": "user1",
+      "id": 1,
+      "userId": 1,
       "healthPlanId": "plan1",
       "startDate": "2025-05-01",
       "endDate": "2025-06-26",
       "status": "active"
     },
     {
-      "id": "assign2",
-      "userId": "user2",
+      "id": 2,
+      "userId": 2,
       "healthPlanId": "plan2",
       "startDate": "2025-04-15",
       "endDate": "2025-06-24",
       "status": "paused"
     },
     {
-      "id": "assign3",
-      "userId": "user3",
+      "id": 3,
+      "userId": 3,
       "healthPlanId": "plan3",
       "startDate": "2025-03-01",
       "endDate": "2025-05-24",
       "status": "completed"
     },
     {
-      "id": "assign4",
-      "userId": "user4",
+      "id": 4,
+      "userId": 4,
       "healthPlanId": "plan1",
       "startDate": "2025-05-10",
       "endDate": "2025-07-05",
