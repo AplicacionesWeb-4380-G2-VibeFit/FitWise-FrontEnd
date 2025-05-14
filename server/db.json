@@ -29,16 +29,16 @@
     }
   ],
   "meals": [
-    { "id": 1, "healthPlanId": 1, "image": "https://example.com/images/meal1.jpg" },
-    { "id": 2, "healthPlanId": 1, "image": "https://example.com/images/meal2.jpg" },
-    { "id": 3, "healthPlanId": 2, "image": "https://example.com/images/meal3.jpg" },
-    { "id": 4, "healthPlanId": 3, "image": "https://example.com/images/meal4.jpg" }
+    { "id": 1, "healthPlanId": 1, "image": "https://i.pinimg.com/736x/44/94/ce/4494cee6e43e4d0028c7f62766d0ff81.jpg" },
+    { "id": 2, "healthPlanId": 1, "image": "https://i.ytimg.com/vi/RTxW97yArig/maxresdefault.jpg" },
+    { "id": 3, "healthPlanId": 2, "image": "https://static.diariofemenino.com/media/108637/c/se-puede-adelgazar-comiendo-atun-y-arroz-lg.jpg" },
+    { "id": 4, "healthPlanId": 3, "image": "https://cdn7.kiwilimon.com/recetaimagen/12107/960x640/23941.jpg.jpg" }
   ],
   "exercises": [
-    { "id": 1, "healthPlanId": 1, "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://example.com/images/exercise1.jpg" },
-    { "id": 2, "healthPlanId": 2, "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://example.com/images/exercise2.jpg" },
-    { "id": 3, "healthPlanId": 2, "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://example.com/images/exercise3.jpg" },
-    { "id": 4, "healthPlanId": 3, "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://example.com/images/exercise4.jpg" }
+    { "id": 1, "healthPlanId": 1, "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://i.ytimg.com/vi/i4x0Fl-kRmk/maxresdefault.jpg" },
+    { "id": 2, "healthPlanId": 2, "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://media.gq.com.mx/photos/611fbbddfde8c9b5f40c24f2/master/pass/press%20mancuernas-1056610648.jpg" },
+    { "id": 3, "healthPlanId": 2, "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://i.ytimg.com/vi/QJO-Azp5k9s/maxresdefault.jpg" },
+    { "id": 4, "healthPlanId": 3, "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://www.soycorredor.es/uploads/s1/51/01/81/5dc178db0de6941d2e349477-como-respirar-al-estirar.jpeg" }
   ],
   "instructions": [
     { "id": 1, "mealId": 1, "position": "1", "description": "Lava los ingredientes." },
