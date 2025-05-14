@@ -29,8 +29,7 @@ export default {
         this.healthPlans = rawPlans;
         console.log(this.healthPlans);
         // Obtener creadorIds únicos
-        const ids = [...new Set(rawPlans.map(plan => plan.creadorId))];
-        this.creatorIds = ids;
+        this.creatorIds = [...new Set(rawPlans.map(plan => plan.creadorId))];
       }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error); });
     },
     getPlansByCreator(creatorId) {
