@@ -16,7 +16,6 @@ export default {
   methods: {
     getHealthPlanById(id) {
       this.healthPlanService.getById(id).then(response => {
-        console.log(response);
         this.healthPlan = new HealthPlan(response.data);
         console.log(this.healthPlan);
       }).catch(error => { this.errors.push(error); this.healthPlan = null; console.log(error); });
