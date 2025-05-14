@@ -6,6 +6,12 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    goToDetails(planId) {
+      console.log(this.$router);
+      this.$router.push({ name: 'details', params: { id: planId } });
+    }
   }
 }
 </script>
@@ -21,7 +27,7 @@ export default {
         <p class="mt-2">{{ plan.description }}</p>
       </template>
       <template #footer>
-        <pv-button label="Ver más" icon="pi pi-eye" class="p-button-sm" />
+        <pv-button label="Ver más" icon="pi pi-eye" class="p-button-sm" @click="goToDetails(plan.id)"/>
       </template>
     </pv-card>
   </div>
