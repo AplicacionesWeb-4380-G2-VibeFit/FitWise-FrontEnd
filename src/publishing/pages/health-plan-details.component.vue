@@ -3,10 +3,11 @@ import HealthPlanInfo from "@/publishing/components/health-plan-info.component.v
 import {HealthPlan} from "@/publishing/model/health-plan.entity.js";
 import {HealthPlanService} from "@/publishing/services/health-plan.service.js";
 import ExerciseList from "@/publishing/components/exercise-list.component.vue";
+import MealList from "@/publishing/components/meal-list.component.vue";
 
 export default {
   name: "health-plan-details",
-  components: {ExerciseList, HealthPlanInfo},
+  components: {MealList, ExerciseList, HealthPlanInfo},
   data() {
     return {
       healthPlan: new HealthPlan({}),
@@ -43,7 +44,7 @@ export default {
     <pv-accordion-panel value="1">
       <pv-accordion-header>Diets</pv-accordion-header>
       <pv-accordion-content>
-
+        <meal-list :health-plan-id="id"/>
       </pv-accordion-content>
     </pv-accordion-panel>
   </pv-accordion>
