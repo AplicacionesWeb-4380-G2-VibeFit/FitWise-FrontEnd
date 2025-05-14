@@ -1,7 +1,7 @@
 import httpInstance from "@/shared/services/http.instance.js";
 
 export class HealthPlanService {
-    resourceEndpoint = import.meta.env.VITE_HEALTH_PLAN_ENDOPOINT_PATH;
+    resourceEndpoint = import.meta.env.VITE_HEALTH_PLAN_ENDPOINT_PATH;
 
     getAll() {
         return httpInstance.get(this.resourceEndpoint);
