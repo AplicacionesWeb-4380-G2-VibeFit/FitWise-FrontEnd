@@ -17,6 +17,7 @@ import {
     ConfirmationService,
     ConfirmDialog,
     DataTable,
+    DataView,
     Dialog,
     DialogService, Divider,
     Drawer,
@@ -82,6 +83,7 @@ app
     .component('pv-image',              Image)
     .component('pv-divider',            Divider)
     .component('pv-timeline',           Timeline)
+    .component('pv-data-view',          DataView)
 
     .use(router)
     .mount('#app')
