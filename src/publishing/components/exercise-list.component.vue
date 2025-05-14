@@ -52,7 +52,7 @@ export default {
                 <div class="text-xl font-bold">{{ exercise.name }}</div>
                 <div class="text-sm">{{ exercise.description }}</div>
               </div>
-              <pv-button icon="pi pi-chevron-right"
+              <pv-button icon="pi pi-cog"
                       class="p-button-rounded p-button-text"
                       @click="$emit('exercise-selected', exercise)" />
             </div>
