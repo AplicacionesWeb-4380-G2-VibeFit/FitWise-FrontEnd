@@ -32,7 +32,21 @@ export default {
 
 <template>
   <health-plan-info :health-plan="healthPlan"/>
-  <exercise-list :health-plan-id="id"/>
+
+  <pv-accordion :value="['0']" multiple>
+    <pv-accordion-panel value="0">
+      <pv-accordion-header>Exercises</pv-accordion-header>
+      <pv-accordion-content>
+        <exercise-list :health-plan-id="id"/>
+      </pv-accordion-content>
+    </pv-accordion-panel>
+    <pv-accordion-panel value="1">
+      <pv-accordion-header>Diets</pv-accordion-header>
+      <pv-accordion-content>
+
+      </pv-accordion-content>
+    </pv-accordion-panel>
+  </pv-accordion>
 </template>
 
 <style scoped>
