@@ -35,7 +35,7 @@ export default {
         { label: 'option.profile', to: '/about' },
         { label: 'option.routine-management', to: '/publishing' },
         { label: 'option.routine-sales', to: '/selling' },
-        { label: 'option.schedule', to: '/home' }
+        { label: 'option.schedule', to: '/organizing' }
       ]
     };
   }

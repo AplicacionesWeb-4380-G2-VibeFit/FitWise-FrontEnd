@@ -12,6 +12,7 @@ const PageNotFoundComponent = () => import('../public/pages/page-not-found.compo
 const HealthPlanManagementComponent = () => import('../publishing/pages/health-plan-management.component.vue');
 const HealthPlanDetailsComponent = () => import('../publishing/pages/health-plan-details.component.vue');
 const ReviewManagementComponent = () => import('../reviewing/pages/review-management.component.vue');
+const ScheduleManagementComponent = () => import('../organizing/pages/schedule-management.component.vue');
 
 const routes = [
     { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
@@ -21,6 +22,8 @@ const routes = [
     { path: '/selling/create', name: 'selling-create', component: SellingViewComponent, meta: { title: 'Selling Create' } },
     { path: '/selling/:id', name: 'selling-details', component: SellingViewComponent, meta: { title: 'Selling Details' } },
     { path: '/selling/:id/edit', name: 'selling-edit', component: SellingViewComponent, meta: { title: 'Selling Edit' } },
+
+    { path: '/organizing', name: 'organizing', component: ScheduleManagementComponent, meta: { title: 'Schedule' } },
 
     { path: '/about', name: 'about', component: AboutComponent, meta: { title: 'About us' } },
     { path: '/publishing', name: 'publishing', component: HealthPlanManagementComponent, meta: { title: 'Health Plans' } },
