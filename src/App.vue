@@ -54,13 +54,7 @@ export default {
 
   <footer-content />
 
-  <PurchasedPlanList />
 
-  <!-- Modal de Detalles -->
-  <PurchasedPlanDetails v-if="isDetailsRoute" @close="goBack" />
-
-  <!-- Modal de Crear/Editar -->
-  <PurchasedPlanManagement v-if="isCreateOrEditRoute" @close="goBack" />
 </template>
 
 <style scoped>
