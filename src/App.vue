@@ -1,3 +1,4 @@
+<!-- App.vue -->
 <script>
 import HeaderContent from "@/public/components/header-content.component.vue";
 import FooterContent from "@/public/components/footer-content.component.vue";
@@ -7,27 +8,30 @@ import PurchasedPlanDetails from '@/selling/pages/purchased-plan-details.compone
 import PurchasedPlanManagement from '@/selling/pages/purchased-plan-management.component.vue'
 import { computed } from "vue";
 
-const route = useRoute();
-const router = useRouter();
-
-const isDetailsRoute = computed(() => route.name === 'selling-details');
-const isCreateOrEditRoute = computed(() =>
-    route.name === 'selling-create' || route.name === 'selling-edit'
-);
-
-function goBack() {
-  router.push('/selling');
-}
-
 export default {
   name: "App",
   components: { FooterContent, HeaderContent, PurchasedPlanList, PurchasedPlanDetails, PurchasedPlanManagement },
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+
+    const isDetailsRoute = computed(() => route.name === 'selling-details');
+    const isCreateOrEditRoute = computed(() =>
+        route.name === 'selling-create' || route.name === 'selling-edit'
+    );
+
+    function goBack() {
+      router.push('/selling');
+    }
+
+    return { isDetailsRoute, isCreateOrEditRoute, goBack };
+  },
   data() {
     return {
       items: [
         { label: 'option.home', to: '/home' },
         { label: 'option.about', to: '/about' },
-        { label: 'option.reviews', to: '/home' },
+        { label: 'option.reviews', to: '/reviewing' },
         { label: 'option.profile', to: '/about' },
         { label: 'option.routine-management', to: '/publishing' },
         { label: 'option.routine-sales', to: '/selling' },

@@ -12,5 +12,28 @@
     "intro": "Made with",
     "use": "using",
     "author": "by {brand} Developer Team"
-  }
+  },
+  "review": {
+    "score": "Score",
+    "user": "User",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add Review",
+    "update": "Update Review",
+    "created": "Review created",
+    "updated": "Review updated",
+    "deleted": "Review deleted",
+    "confirm-message": "Are you sure you want to delete this review?",
+    "confirm-title": "Confirm deletion",
+    "no-reviews-title": "No reviews available",
+    "no-reviews-message": "Be the first to leave a review",
+    "show-all": "Show All",
+    "plan-count": "Total plans with reviews",
+    "cancel": "Cancel",
+    "save": "Save",
+    "description": "Description"
+  },
+  "success": "Success",
+  "yes": "Yes",
+  "no": "No"
 }
