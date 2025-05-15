@@ -1,4 +1,22 @@
 {
+  "profile": {
+    "title": "Profile",
+    "username": "Username",
+    "email": "Email",
+    "name": "Name",
+    "lastname": "Lastname",
+    "gender": "Gender",
+    "edit": "Edit",
+    "subscription": "Subscription",
+    "description": "Update your information."
+  },
+
+  "followers": {
+    "followers": "Followers List",
+    "follow": "Follow",
+    "delete": "Delete"
+  },
+
   "option": {
     "home": "Home",
     "about": "About",

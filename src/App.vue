@@ -32,7 +32,7 @@ export default {
         { label: 'option.home', to: '/home' },
         { label: 'option.about', to: '/about' },
         { label: 'option.reviews', to: '/reviewing' },
-        { label: 'option.profile', to: '/about' },
+        {label: 'option.profile',      to: '/presenting'},
         { label: 'option.routine-management', to: '/publishing' },
         { label: 'option.routine-sales', to: '/selling' },
         { label: 'option.schedule', to: '/organizing' }
