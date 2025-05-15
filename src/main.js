@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import pinia from "@/pinia.js";
 import router from "./router/index.js";
+import Tooltip from 'primevue/tooltip';
 
 import { PrimeVue } from "@primevue/core";
 import 'primeflex/primeflex.css';
@@ -88,4 +89,5 @@ app
     .component('pv-divider', Divider)
 
     .use(router)
+    .directive('tooltip', Tooltip)
     .mount('#app')
