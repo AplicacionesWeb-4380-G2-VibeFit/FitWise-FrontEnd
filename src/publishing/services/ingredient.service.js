@@ -1,0 +1,33 @@
+import httpInstance from "@/shared/services/http.instance.js";
+
+export class IngredientService {
+    resourceEndpoint = import.meta.env.VITE_INGREDIENTS_ENDPOINT_PATH;
+
+    getAll() {
+        return httpInstance.get(this.resourceEndpoint);
+    }
+
+    getById(id) {
+        return httpInstance.get(`${this.resourceEndpoint}/${id}`);
+    }
+
+    getByMealId(mealId) {
+        return httpInstance.get(this.resourceEndpoint, {
+            params: {
+                mealId: mealId
+            }
+        });
+    }
+
+    create(resource) {
+        return httpInstance.post(this.resourceEndpoint, resource);
+    }
+
+    update(id, resource) {
+        return httpInstance.put(`${this.resourceEndpoint}/${id}`, resource);
+    }
+
+    delete(id) {
+        return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
+    }
+}
