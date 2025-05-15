@@ -4,7 +4,7 @@ import {Schedule} from "@/organizing/model/schedule.entity.js";
 import {ScheduleService} from "@/organizing/services/schedule.service.js"
 import ScheduleList from "@/organizing/components/schedule-list.component.vue";
 
-export default ({
+export default {
   name: "schedule-management.component.vue",
   components: {ScheduleList},
   data(){
@@ -63,7 +63,7 @@ export default ({
     this.scheduleService = new ScheduleService();
     this.getAllSchedules();
   }
-})
+}
 </script>
 
 <template>
