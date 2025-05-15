@@ -4,5 +4,35 @@
       "id": 1,
       "description": "Esta muy bueno"
     }
+  ],
+  "purchasedPlans": [
+    {
+      "id": 1,
+      "ownerId": 101,
+      "planId": "basic-2024",
+      "purchaseDate": "2025-05-01",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "ownerId": 102,
+      "planId": "pro-2024",
+      "purchaseDate": "2025-04-15",
+      "status": "expired"
+    },
+    {
+      "ownerId": "101",
+      "planId": "1",
+      "purchaseDate": "2025-05-14",
+      "status": "expired",
+      "id": 3
+    },
+    {
+      "ownerId": "asd",
+      "planId": "asd",
+      "purchaseDate": "2025-04-29",
+      "status": "active",
+      "id": 4
+    }
   ]
 }
