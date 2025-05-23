@@ -1,8 +1,342 @@
 {
-  "reviews": [
+  "users": [
+    { "id": 1, "userName": "jose_gomez", "email": "jose.gomez@example.com", "password": "Jose1234!" },
+    { "id": 2, "userName": "laura.martinez", "email": "laura.martinez@example.com", "password": "LauraM2024*" },
+    { "id": 3, "userName": "carlos_rivera", "email": "carlos.rivera@example.com", "password": "CR!ver@88" },
+    { "id": 4, "userName": "andrea.fernandez", "email": "andrea.fernandez@example.com", "password": "Andr3aF!" },
+    { "id": 5, "userName": "marco_diaz", "email": "marco.diaz@example.com", "password": "MarcoD2025#" },
+    { "id": 6, "userName": "sofia.romero", "email": "sofia.romero@example.com", "password": "Sofi@123" },
+    { "id": 7, "userName": "ricardo_soto", "email": "ricardo.soto@example.com", "password": "RicardoS0!" },
+    { "id": 8, "userName": "valentina.mora", "email": "valentina.mora@example.com", "password": "V@leMora!" },
+    { "id": 9, "userName": "martin_lopez", "email": "martin.lopez@example.com", "password": "Martin2024@" },
+    { "id": 10, "userName": "camila_vargas", "email": "camila.vargas@example.com", "password": "CamiVg$85" },
+    { "id": 11, "userName": "sebastian_ortiz", "email": "sebastian.ortiz@example.com", "password": "SebO!r123" },
+    { "id": 12, "userName": "diana_navarro", "email": "diana.navarro@example.com", "password": "Diana*2025" },
+    { "id": 13, "userName": "fernando.mendez", "email": "fernando.mendez@example.com", "password": "FernMZ99!" },
+    { "id": 14, "userName": "paula_arias", "email": "paula.arias@example.com", "password": "Paula#A1" },
+    { "id": 15, "userName": "alejandro_silva", "email": "alejandro.silva@example.com", "password": "AlexSilva@" }
+  ],
+  "profiles": [
     {
       "id": 1,
-      "description": "Esta muy bueno"
+      "name": "José",
+      "lastname": "Gomez",
+      "gender": "male",
+      "userId": 1,
+      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
+    },
+    {
+      "id": 2,
+      "name": "Laura",
+      "lastname": "Martínez",
+      "gender": "female",
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 3,
+      "name": "Carlos",
+      "lastname": "Rivera",
+      "gender": "male",
+      "userId": 3,
+      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 4,
+      "name": "Andrea",
+      "lastname": "Fernández",
+      "gender": "female",
+      "userId": 4,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 5,
+      "name": "Marco",
+      "lastname": "Díaz",
+      "gender": "male",
+      "userId": 5,
+      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 6,
+      "name": "Sofía",
+      "lastname": "Romero",
+      "gender": "female",
+      "userId": 6,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
+    },
+    {
+      "id": 7,
+      "name": "Ricardo",
+      "lastname": "Soto",
+      "gender": "male",
+      "userId": 7,
+      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 8,
+      "name": "Valentina",
+      "lastname": "Mora",
+      "gender": "female",
+      "userId": 8,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 9,
+      "name": "Martín",
+      "lastname": "López",
+      "gender": "male",
+      "userId": 9,
+      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
+    },
+    {
+      "id": 10,
+      "name": "Camila",
+      "lastname": "Vargas",
+      "gender": "female",
+      "userId": 10,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 11,
+      "name": "Sebastián",
+      "lastname": "Ortiz",
+      "gender": "male",
+      "userId": 11,
+      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 12,
+      "name": "Diana",
+      "lastname": "Navarro",
+      "gender": "female",
+      "userId": 12,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
+    },
+    {
+      "id": 13,
+      "name": "Fernando",
+      "lastname": "Méndez",
+      "gender": "male",
+      "userId": 13,
+      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
+      "isPremium": false,
+      "membershipExpiry": ""
+    },
+    {
+      "id": 14,
+      "name": "Paula",
+      "lastname": "Arias",
+      "gender": "female",
+      "userId": 14,
+      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
+    },
+    {
+      "id": 15,
+      "name": "Alejandro",
+      "lastname": "Silva",
+      "gender": "male",
+      "userId": 15,
+      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
+      "isPremium": true,
+      "membershipExpiry": "2025-12-31"
     }
+  ],
+  "followedUsers": [
+    {
+      "id": 1,
+      "followerId": 1,
+      "followedId": 3
+    },
+    {
+      "id": 2,
+      "followerId": 1,
+      "followedId": 5
+    },
+    {
+      "id": 3,
+      "followerId": 1,
+      "followedId": 7
+    },
+    {
+      "id": 4,
+      "followerId": 1,
+      "followedId": 8
+    },
+    {
+      "id": 5,
+      "followerId": 1,
+      "followedId": 11
+    },
+    {
+      "id": 6,
+      "followerId": 1,
+      "followedId": 14
+    }
+  ],
+  "schedules": [
+    {
+      "id": 1,
+      "userId": 1,
+      "healthPlanId": 1,
+      "startDate": "2025-05-15"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "healthPlanId": 3,
+      "startDate": "2025-05-15"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "healthPlanId": 2,
+      "startDate": "2025-05-15"
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "healthPlanId": 1,
+      "startDate": "2025-05-15"
+    }
+  ],
+  "healthPlans": [
+    {
+      "id": 1,
+      "name": "Plan de pérdida de peso",
+      "objective": "Perder 5kg en 2 meses",
+      "duration": "8 semanas",
+      "price": 49.99,
+      "description": "Plan con comidas hipocalóricas y ejercicios de cardio.",
+      "creadorId": 1
+    },
+    {
+      "id": 2,
+      "name": "Plan de ganancia muscular",
+      "objective": "Ganar 3kg de músculo",
+      "duration": "10 semanas",
+      "price": 59.99,
+      "description": "Enfocado en comidas proteicas y entrenamientos de fuerza.",
+      "creadorId": 2
+    },
+    {
+      "id": 3,
+      "name": "Plan bienestar general",
+      "objective": "Mantener salud y energía",
+      "duration": "12 semanas",
+      "price": 39.99,
+      "description": "Combina alimentación saludable con ejercicio moderado.",
+      "creadorId": 3
+    }
+  ],
+
+  "purchasedPlans": [
+    {
+      "id": 1,
+      "ownerId": 101,
+      "planId": 1,
+      "purchaseDate": "2025-05-01",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "ownerId": 102,
+      "planId": 2,
+      "purchaseDate": "2025-04-15",
+      "status": "expired"
+    },
+    {
+      "id": 3,
+      "ownerId": 101,
+      "planId": 1,
+      "purchaseDate": "2025-05-14",
+      "status": "expired"
+    },
+    {
+      "id": 4,
+      "ownerId": "asd",
+      "planId": "asd",
+      "purchaseDate": "2025-04-29",
+      "status": "active"
+    }
+  ],
+
+  "meals": [
+    { "id": 1, "healthPlanId": 1, "image": "https://i.pinimg.com/736x/44/94/ce/4494cee6e43e4d0028c7f62766d0ff81.jpg" },
+    { "id": 2, "healthPlanId": 1, "image": "https://i.ytimg.com/vi/RTxW97yArig/maxresdefault.jpg" },
+    { "id": 3, "healthPlanId": 2, "image": "https://static.diariofemenino.com/media/108637/c/se-puede-adelgazar-comiendo-atun-y-arroz-lg.jpg" },
+    { "id": 4, "healthPlanId": 3, "image": "https://cdn7.kiwilimon.com/recetaimagen/12107/960x640/23941.jpg.jpg" }
+  ],
+
+  "exercises": [
+    { "id": 1, "healthPlanId": 1, "name": "Cardio HIIT", "description": "Cardio de alta intensidad", "image": "https://i.ytimg.com/vi/i4x0Fl-kRmk/maxresdefault.jpg" },
+    { "id": 2, "healthPlanId": 2, "name": "Press de banca", "description": "Ejercicio de fuerza para el pecho", "image": "https://media.gq.com.mx/photos/611fbbddfde8c9b5f40c24f2/master/pass/press%20mancuernas-1056610648.jpg" },
+    { "id": 3, "healthPlanId": 2, "name": "Sentadillas con peso", "description": "Fortalece piernas y glúteos", "image": "https://i.ytimg.com/vi/QJO-Azp5k9s/maxresdefault.jpg" },
+    { "id": 4, "healthPlanId": 3, "name": "Yoga básico", "description": "Ejercicios de flexibilidad y respiración", "image": "https://www.soycorredor.es/uploads/s1/51/01/81/5dc178db0de6941d2e349477-como-respirar-al-estirar.jpeg" }
+  ],
+
+  "instructions": [
+    { "id": 1, "mealId": 1, "position": "1", "description": "Lava los ingredientes." },
+    { "id": 2, "mealId": 1, "position": "2", "description": "Cocina a fuego lento por 20 minutos." },
+    { "id": 3, "mealId": 2, "position": "1", "description": "Pica la fruta y sirve fría." },
+    { "id": 4, "mealId": 3, "position": "1", "description": "Cocina el pollo a la plancha." },
+    { "id": 5, "mealId": 4, "position": "1", "description": "Prepara el batido en licuadora." }
+  ],
+
+  "ingredients": [
+    { "id": 1, "mealId": 1, "name": "Brócoli", "description": "1 taza" },
+    { "id": 2, "mealId": 1, "name": "Pechuga de pollo", "description": "150g" },
+    { "id": 3, "mealId": 2, "name": "Manzana", "description": "1 unidad" },
+    { "id": 4, "mealId": 2, "name": "Yogur natural", "description": "1/2 taza" },
+    { "id": 5, "mealId": 3, "name": "Arroz integral", "description": "1 taza" },
+    { "id": 6, "mealId": 3, "name": "Atún", "description": "1 lata" },
+    { "id": 7, "mealId": 4, "name": "Banana", "description": "1 unidad" },
+    { "id": 8, "mealId": 4, "name": "Leche de almendras", "description": "1 taza" }
+  ],
+
+  "reviews": [
+    { "id": "r2", "userId": "u2", "score": 4, "description": "Los ejercicios son exigentes pero efectivos. Me gustó el enfoque progresivo.", "healthPlanId": 1 },
+    { "id": "r3", "userId": "u3", "score": 3, "description": "Las comidas estaban bien, pero me costó seguir el ritmo de los ejercicios.", "healthPlanId": 1 },
+    { "id": "r4", "userId": "u4", "score": 4, "description": "Perdí 3kg en un mes. No es mágico, pero sí efectivo con constancia.", "healthPlanId": 1 },
+    { "id": "r5", "userId": "u5", "score": 5, "description": "Muy completo y fácil de seguir. Las recetas son simples y ricas.", "healthPlanId": 1 },
+    { "id": "r7", "userId": "u7", "score": 5, "description": "Gané músculo más rápido de lo esperado. Excelente combinación de dieta y fuerza.", "healthPlanId": 2 },
+    { "id": "r8", "userId": "u8", "score": 4, "description": "Requiere disciplina, pero da resultados si te lo tomás en serio.", "healthPlanId": 2 },
+    { "id": "r9", "userId": "u9", "score": 3, "description": "Algunos ejercicios eran demasiado avanzados para mí.", "healthPlanId": 2 },
+    { "id": "r10", "userId": "u10", "score": 5, "description": "Las recomendaciones de comida alta en proteína me encantaron.", "healthPlanId": 2 },
+    { "id": "r11", "userId": "u11", "score": 4, "description": "Muy bien estructurado. Ideal para quienes ya tienen algo de experiencia.", "healthPlanId": 2 },
+    { "id": "r12", "userId": "u12", "score": 2, "description": "Esperaba más variedad en los entrenamientos. Me resultó monótono.", "healthPlanId": 2 },
+    { "id": "r13", "userId": "u13", "score": 5, "description": "Este plan me ayudó a crear hábitos saludables sin presionarme.", "healthPlanId": 3 },
+    { "id": "r14", "userId": "u14", "score": 4, "description": "Muy balanceado y fácil de seguir. Me siento con más energía.", "healthPlanId": 3 },
+    { "id": "r15", "userId": "u15", "score": 3, "description": "Sólido, aunque algunas rutinas de ejercicio eran repetitivas.", "healthPlanId": 3 },
+    { "id": "r16", "userId": "u16", "score": 5, "description": "Excelente para mantener una vida activa y saludable.", "healthPlanId": 3 },
+    { "id": "r17", "userId": "u17", "score": 4, "description": "Me gustó la variedad en las comidas y el enfoque integral.", "healthPlanId": 3 },
+    { "id": "r18", "userId": "u18", "score": 2, "description": "Sentí que no se ajustaba a mi nivel. Demasiado general.", "healthPlanId": 3 },
+    { "id": "-egpIBT", "userId": "124", "score": 2, "description": "PRUEBA4", "healthPlanId": 4 }
   ]
 }
