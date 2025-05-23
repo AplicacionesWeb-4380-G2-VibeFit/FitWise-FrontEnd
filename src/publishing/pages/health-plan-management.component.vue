@@ -2,10 +2,11 @@
 import {HealthPlan} from "@/publishing/model/health-plan.entity.js";
 import {HealthPlanService} from "@/publishing/services/health-plan.service.js";
 import HealthPlanList from "@/publishing/components/health-plan-list.component.vue";
+import HealthPlanItemCreateAndEdit from "@/publishing/components/healthPlan-item-create-and-edit.component.vue";
 
 export default {
   name: "health-plan-management",
-  components: {HealthPlanList},
+  components: {HealthPlanItemCreateAndEdit, HealthPlanList},
   data() {
     return {
       healthPlans: [],
@@ -13,6 +14,8 @@ export default {
       healthPlanService: null,
       errors: [],
       creatorIds: [],
+      showDialog: false,
+      isEdit: false
     }
   },
   methods: {
@@ -39,6 +42,79 @@ export default {
     },
     resetToAll() {
       this.getAllHealthPlans();
+    },
+    editHealthPlan(plan) {
+      // Lógica para editar el plan
+      console.log('Editar plan:', plan);
+      this.healthPlan = new HealthPlan(plan);
+      this.isEdit = true;
+      this.submitted = false;
+      this.showDialog = true;
+
+    },
+    updateHealthPlan() {
+      this.healthPlanService.update(this.healthPlan.id, this.healthPlan).then(response => {
+        console.log('updateHealthPlan');
+        let index = this.findIndexById(this.healthPlan.id);
+        this.healthPlans[index] = new HealthPlan(response.data);
+        console.log(this.healthPlans);
+        this.notifySuccessfulAction("Category Updated");
+      }).catch(error => console.error(error));
+    },
+    deleteHealthPlan(plan) {
+      this.healthPlanService.delete(plan.id)
+          .then(() => {
+            this.notifySuccessfulAction('Plan eliminado correctamente');
+            this.getAllHealthPlans(); // Refrescar la lista
+          })
+          .catch(error => {
+            this.errors.push(error);
+            console.error('Error al eliminar:', error);
+          });
+    },
+    confirmDeleteHealthPlan(plan) {
+      this.$confirm.require({
+        message: `¿Estás seguro de eliminar el plan "${plan.name}"?`,
+        header: 'Confirmar eliminación',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sí, eliminar',
+        rejectLabel: 'Cancelar',
+        acceptClass: 'p-button-danger',
+        accept: () => this.deleteHealthPlan(plan),
+        reject: () => {}
+      });
+    },
+    onCancelRequested() {
+      this.showDialog = false;
+      this.submitted = false;
+      this.isEdit = false;
+    },
+    onSaveRequested(item) {
+      console.log('onSaveRequested');
+      this.submitted = true;
+      if (this.healthPlan.name.trim()) {
+        if (item.id) {
+          this.updateHealthPlan();
+        } else {
+          this.createHealthPlan();
+        }
+        this.showDialog = false;
+        this.isEdit = false;
+      }
+    },
+    onNewItem() {
+      this.healthPlan = new HealthPlan({});
+      this.isEdit = false;
+      this.submitted = false;
+      this.showDialog = true;
+      console.log(this.showDialog);
+    },
+    createHealthPlan() {
+      this.healthPlanService.create(this.healthPlan).then(response => {
+        let healthPlan = new HealthPlan(response.data);
+        this.healthPlans.push(healthPlan);
+        this.notifySuccessfulAction("HealthPlan Created");
+      }).catch(error => console.error(error));
     }
   },
   computed: {
@@ -70,7 +146,17 @@ export default {
         @click="getPlansByCreator(id)"
     />
   </div>
-  <health-plan-list v-if="errors" :health-plans="healthPlans"/>
+  <div class="mb-4">
+    <pv-button class="mr-2" icon="pi pi-plus" label="New" severity="success" @click="onNewItem"/>
+  </div>
+  <health-plan-list v-if="errors" :health-plans="healthPlans" @edit-plan="editHealthPlan($event)"
+                    @delete-plan="confirmDeleteHealthPlan($event)"/>
+  <health-plan-item-create-and-edit
+      :isEdit="isEdit"
+      :item="healthPlan"
+      :visible="showDialog"
+      @cancel-requested="onCancelRequested"
+      @save-requested="onSaveRequested($event)"/>
 </template>
 
 <style scoped>

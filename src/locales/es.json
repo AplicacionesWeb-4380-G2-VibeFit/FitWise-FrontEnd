@@ -1,4 +1,22 @@
 {
+  "profile": {
+    "title": "Perfil",
+    "username": "Nombre de usuario",
+    "email": "Correo electrónico",
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "gender": "Género",
+    "edit": "Editar",
+    "subscription": "Suscripción",
+    "description": "Actualiza tu información."
+  },
+
+  "followers": {
+    "followersList": "Lista de Seguidos",
+    "follow": "Seguir",
+    "delete": "Eliminar"
+  },
+
   "option": {
     "home": "Inicio",
     "about": "Acerca de",
@@ -12,5 +30,28 @@
     "intro": "Hecho con",
     "use": "utilizando",
     "author": "por el Equipo de Desarrollo de {brand}"
-  }
+  },
+  "review": {
+    "score": "Puntuación",
+    "user": "Usuario",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Agregar Reseña",
+    "update": "Actualizar Reseña",
+    "created": "Reseña creada",
+    "updated": "Reseña actualizada",
+    "deleted": "Reseña eliminada",
+    "confirm-message": "¿Estás seguro de eliminar esta reseña?",
+    "confirm-title": "Confirmar eliminación",
+    "no-reviews-title": "No hay reseñas disponibles",
+    "no-reviews-message": "Sé el primero en dejar una reseña",
+    "show-all": "Mostrar Todos",
+    "plan-count": "Total de planes con reseñas",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "description": "Descripción"
+  },
+  "success": "Éxito",
+  "yes": "Sí",
+  "no": "No"
 }
