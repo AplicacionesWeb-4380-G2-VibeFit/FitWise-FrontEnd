@@ -90,11 +90,11 @@ export default {
         acceptLabel: this.$t('yes'),
         rejectLabel: this.$t('no'),
         accept: () => {
+          // Simula la eliminación en el servicio (puedes omitir si no hay backend)
           this.reviewService.delete(reviewId).then(() => {
             this.notifySuccessfulAction('review.deleted');
-            this.selectedPlanId
-                ? this.getReviewsByPlanId(this.selectedPlanId)
-                : this.getAllReviews();
+            // Elimina la review localmente del arreglo this.reviews
+            this.reviews = this.reviews.filter(r => r.id !== reviewId);
           }).catch(error => {
             this.errors.push(error);
             console.error(error);
