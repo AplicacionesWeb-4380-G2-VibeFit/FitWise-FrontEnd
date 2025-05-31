@@ -57,7 +57,7 @@ export default {
       this.isEditing = false;
     },
     startEdit(review) {
-      this.review = new Review({...review});
+      this.review = new Review({ ...review });
       this.showForm = true;
       this.isEditing = true;
     },
