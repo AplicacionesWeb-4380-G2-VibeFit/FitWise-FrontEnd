@@ -57,7 +57,7 @@ export default {
       this.isEditing = false;
     },
     startEdit(review) {
-      this.review = new Review({ ...review });
+      this.review = new Review({...review});
       this.showForm = true;
       this.isEditing = true;
     },
@@ -90,11 +90,11 @@ export default {
         acceptLabel: this.$t('yes'),
         rejectLabel: this.$t('no'),
         accept: () => {
-          // Simula la eliminación en el servicio (puedes omitir si no hay backend)
           this.reviewService.delete(reviewId).then(() => {
             this.notifySuccessfulAction('review.deleted');
-            // Elimina la review localmente del arreglo this.reviews
-            this.reviews = this.reviews.filter(r => r.id !== reviewId);
+            this.selectedPlanId
+                ? this.getReviewsByPlanId(this.selectedPlanId)
+                : this.getAllReviews();
           }).catch(error => {
             this.errors.push(error);
             console.error(error);
@@ -116,7 +116,7 @@ export default {
 <template>
   <div>
     <!-- Confirmación para eliminar -->
-    <ConfirmDialog />
+    <ConfirmDialog/>
 
     <!-- Filtros de planes -->
     <div class="mb-4">
