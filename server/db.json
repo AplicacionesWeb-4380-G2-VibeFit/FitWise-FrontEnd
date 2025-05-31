@@ -328,6 +328,24 @@
       "price": 39.99,
       "description": "Combina alimentación saludable con ejercicio moderado.",
       "creadorId": 3
+    },
+    {
+      "id": 4,
+      "name": "Plan de control del estrés",
+      "objective": "Reducir niveles de estrés y ansiedad",
+      "duration": "12 semanas",
+      "price": 44.99,
+      "description": "Incluye sesiones de meditación guiada, rutinas de yoga suave y pautas alimenticias que favorecen el equilibrio emocional.",
+      "creadorId": 4
+    },
+    {
+      "id": 5,
+      "name": "Plan detox y limpieza",
+      "objective": "Eliminar toxinas y mejorar digestión",
+      "duration": "4 semanas",
+      "price": 29.99,
+      "description": "Basado en una alimentación rica en frutas, verduras y líquidos. Se incluyen recetas, ayunos intermitentes y ejercicios ligeros.",
+      "creadorId": 2
     }
   ],
   "purchasedPlans": [
@@ -494,5 +512,90 @@
       "description": "1 taza"
     }
   ],
-  "reviews": []
+  "reviews": [
+    {
+      "id": "r1",
+      "userId": 1,
+      "score": 5,
+      "description": "Bajé 6kg siguiendo este plan al pie de la letra. Muy recomendable.",
+      "healthPlanId": 1
+    },
+    {
+      "id": "r2",
+      "userId": 2,
+      "score": 4,
+      "description": "Los ejercicios son exigentes pero efectivos. Me gustó el enfoque progresivo.",
+      "healthPlanId": 1
+    },
+    {
+      "id": "r3",
+      "userId": 3,
+      "score": 3,
+      "description": "Las comidas estaban bien, pero me costó seguir el ritmo de los ejercicios.",
+      "healthPlanId": 1
+    },
+    {
+      "id": "r7",
+      "userId": 4,
+      "score": 5,
+      "description": "Gané músculo más rápido de lo esperado. Excelente combinación de dieta y fuerza.",
+      "healthPlanId": 2
+    },
+    {
+      "id": "r8",
+      "userId": 5,
+      "score": 4,
+      "description": "Requiere disciplina, pero da resultados si te lo tomás en serio.",
+      "healthPlanId": 2
+    },
+    {
+      "id": "r13",
+      "userId": 7,
+      "score": 5,
+      "description": "Este plan me ayudó a crear hábitos saludables sin presionarme.",
+      "healthPlanId": 3
+    },
+    {
+      "id": "r14",
+      "userId": 8,
+      "score": 4,
+      "description": "Muy balanceado y fácil de seguir. Me siento con más energía.",
+      "healthPlanId": 3
+    },
+    {
+      "id": "r15",
+      "userId": 9,
+      "score": 3,
+      "description": "Sólido, aunque algunas rutinas de ejercicio eran repetitivas.",
+      "healthPlanId": 3
+    },
+    {
+      "id": "r19",
+      "userId": 10,
+      "score": 5,
+      "description": "Las técnicas de respiración y meditación me cambiaron la vida.",
+      "healthPlanId": 4
+    },
+    {
+      "id": "r20",
+      "userId": 11,
+      "score": 4,
+      "description": "Ideal para quienes sufren de ansiedad. Lo recomiendo.",
+      "healthPlanId": 4
+    },
+    {
+      "id": "r25",
+      "userId": 12,
+      "score": 4,
+      "description": "Sentí una mejora digestiva notable. Buen plan.",
+      "healthPlanId": 5
+    },
+    {
+      "id": "r26",
+      "userId": 13,
+      "score": 3,
+      "description": "No me encantó el sabor de algunos jugos, pero cumplió su función.",
+      "healthPlanId": 5
+    }
+  ]
 }

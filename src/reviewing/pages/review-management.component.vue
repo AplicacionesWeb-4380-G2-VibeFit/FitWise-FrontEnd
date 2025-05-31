@@ -9,15 +9,15 @@ export default {
   components: { ReviewList, ReviewForm },
   data() {
     return {
-      reviews: [],
+      allReviews: [], // Todas las reviews del sistema
+      reviews: [], // Reviews filtradas (por plan o todas)
       review: new Review({}),
       reviewService: null,
       errors: [],
       reviewPlanIds: [],
       selectedPlanId: null,
       showForm: false,
-      isEditing: false,
-      reviewIdToDelete: null
+      isEditing: false
     };
   },
   methods: {
@@ -29,59 +29,76 @@ export default {
         life: 3000
       });
     },
+
+    // Cargar todas las reviews
     getAllReviews() {
       this.reviewService.getAll().then(response => {
-        const rawReviews = response.data.map(review => new Review(review));
-        this.reviews = rawReviews;
+        const rawReviews = response.data.map(r => new Review(r));
+        this.allReviews = rawReviews;
         this.reviewPlanIds = [...new Set(rawReviews.map(r => r.healthPlanId))];
-        this.selectedPlanId = null;
+
+        if (this.selectedPlanId) {
+          this.reviews = this.allReviews.filter(r => r.healthPlanId === this.selectedPlanId);
+        } else {
+          this.reviews = [...this.allReviews];
+        }
       }).catch(error => {
         this.errors.push(error);
+        this.allReviews = [];
         this.reviews = [];
         console.error(error);
       });
     },
+
+    // Cambiar a un plan específico
     getReviewsByPlanId(planId) {
-      this.reviewService.getByHealthPlanId(planId).then(response => {
-        this.reviews = response.data.map(r => new Review(r));
-        this.selectedPlanId = planId;
-      }).catch(error => {
-        this.errors.push(error);
-        this.reviews = [];
-        console.error(error);
-      });
+      this.selectedPlanId = planId;
+      this.reviews = this.allReviews.filter(r => r.healthPlanId === planId);
     },
+
+    // Mostrar todas las reviews sin filtrar
+    resetToAll() {
+      this.selectedPlanId = null;
+      this.reviews = [...this.allReviews];
+    },
+
+    // Crear nueva review
     startCreate() {
       this.review = new Review({});
       this.showForm = true;
       this.isEditing = false;
     },
+
+    // Editar una existente
     startEdit(review) {
       this.review = new Review({ ...review });
       this.showForm = true;
       this.isEditing = true;
     },
+
+    // Guardar (crear o editar)
     saveReview(review) {
       const action = this.isEditing
           ? this.reviewService.update(review.id, review)
           : this.reviewService.create(review);
 
       action.then(() => {
-        const messageKey = this.isEditing ? 'review.updated' : 'review.created';
-        this.notifySuccessfulAction(messageKey);
+        this.notifySuccessfulAction(this.isEditing ? 'review.updated' : 'review.created');
         this.showForm = false;
-        this.selectedPlanId
-            ? this.getReviewsByPlanId(this.selectedPlanId)
-            : this.getAllReviews();
+        this.getAllReviews(); // Actualizar datos desde backend tras guardar
       }).catch(error => {
         this.errors.push(error);
         console.error(error);
       });
     },
+
+    // Cancelar edición
     cancelEdit() {
       this.showForm = false;
       this.review = new Review({});
     },
+
+    // Eliminar review
     deleteReview(reviewId) {
       this.$confirm.require({
         message: this.$t('review.confirm-message'),
@@ -90,22 +107,26 @@ export default {
         acceptLabel: this.$t('yes'),
         rejectLabel: this.$t('no'),
         accept: () => {
-          // Simula la eliminación en el servicio (puedes omitir si no hay backend)
           this.reviewService.delete(reviewId).then(() => {
             this.notifySuccessfulAction('review.deleted');
-            // Elimina la review localmente del arreglo this.reviews
-            this.reviews = this.reviews.filter(r => r.id !== reviewId);
+
+            // Actualizar array maestro y filtrado
+            this.allReviews = this.allReviews.filter(r => r.id !== reviewId);
+
+            if (this.selectedPlanId) {
+              this.reviews = this.allReviews.filter(r => r.healthPlanId === this.selectedPlanId);
+            } else {
+              this.reviews = [...this.allReviews];
+            }
           }).catch(error => {
             this.errors.push(error);
             console.error(error);
           });
         }
       });
-    },
-    resetToAll() {
-      this.getAllReviews();
     }
   },
+
   created() {
     this.reviewService = new ReviewService();
     this.getAllReviews();
@@ -115,10 +136,9 @@ export default {
 
 <template>
   <div>
-    <!-- Confirmación para eliminar -->
     <ConfirmDialog />
 
-    <!-- Filtros de planes -->
+    <!-- Filtros -->
     <div class="mb-4">
       <p>{{ $t('review.plan-count') }}: {{ reviewPlanIds.length }}</p>
       <pv-button
@@ -135,7 +155,7 @@ export default {
       />
     </div>
 
-    <!-- Botón para agregar nueva review -->
+    <!-- Botón crear -->
     <div class="mb-3">
       <pv-button
           :label="$t('review.add')"
@@ -153,7 +173,7 @@ export default {
         @cancelled="cancelEdit"
     />
 
-    <!-- Lista de reviews -->
+    <!-- Lista -->
     <review-list
         v-else
         :reviews="reviews"
