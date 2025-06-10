@@ -1,17 +1,26 @@
 <script>
 import { Review } from "@/reviewing/model/review.entity.js";
+import ReviewComments from "@/reviewing/components/review-comments.component.vue";
+import ReviewReport from "@/reviewing/components/review-report.component.vue";
 
 export default {
   name: "review-list",
+  components: { ReviewComments, ReviewReport },
   props: {
     healthPlanId: {
       type: Number,
-      required: true
+      required: false
     },
     reviews: {
       type: Array,
       required: true
     }
+  },
+  data() {
+    return {
+      expandedReviewId: null,  // Para mostrar comentarios de una review
+      reportVisibleReviewId: null  // Para controlar modal reporte
+    };
   },
   methods: {
     editReview(review) {
@@ -19,6 +28,18 @@ export default {
     },
     deleteReview(reviewId) {
       this.$emit('delete-review', reviewId);
+    },
+    toggleComments(reviewId) {
+      this.expandedReviewId = this.expandedReviewId === reviewId ? null : reviewId;
+    },
+    openReportModal(reviewId) {
+      this.reportVisibleReviewId = reviewId;
+    },
+    closeReportModal() {
+      this.reportVisibleReviewId = null;
+    },
+    onReported() {
+      this.$emit('reported');
     }
   }
 };
@@ -44,8 +65,20 @@ export default {
             {{ $t('review.user') }}: {{ review.userId }}
           </div>
 
-          <!-- Botones de edición y eliminación -->
-          <div class="mt-3 flex justify-content-between">
+          <!-- Botones -->
+          <div class="mt-3 flex justify-content-between flex-wrap gap-2">
+            <pv-button
+                icon="pi pi-comments"
+                label="Comentarios"
+                class="p-button-outlined p-button-info p-button-sm"
+                @click="toggleComments(review.id)"
+            />
+            <pv-button
+                icon="pi pi-flag"
+                label="Reportar"
+                class="p-button-outlined p-button-warning p-button-sm"
+                @click="openReportModal(review.id)"
+            />
             <pv-button
                 icon="pi pi-pencil"
                 class="p-button-outlined p-button-text p-button-sm"
@@ -59,6 +92,11 @@ export default {
                 @click="deleteReview(review.id)"
             />
           </div>
+
+          <!-- Comentarios expandibles -->
+          <div v-if="expandedReviewId === review.id" class="mt-4">
+            <review-comments :reviewId="review.id" />
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +109,15 @@ export default {
         <p class="text-500">{{ $t('review.no-reviews-message') }}</p>
       </div>
     </div>
+
+    <!-- Modal Reporte -->
+    <review-report
+        v-if="reportVisibleReviewId"
+        :reviewId="reportVisibleReviewId"
+        :visible="!!reportVisibleReviewId"
+        @close="closeReportModal"
+        @reported="onReported"
+    />
   </div>
 </template>
 
@@ -78,16 +125,13 @@ export default {
 .review-list-container {
   width: 100%;
 }
-
 .review-card {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-
 .review-card:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   transform: translateY(-4px);
 }
-
 .pv-button {
   min-width: 100px;
 }

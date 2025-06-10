@@ -590,5 +590,43 @@
       "description": "No me encantó el sabor de algunos jugos, pero cumplió su función.",
       "healthPlanId": 5
     }
+  ],
+  "comments": [
+    {
+      "id": "c1",
+      "reviewId": "r1",
+      "userId": 21,
+      "text": "Totalmente de acuerdo, este plan cambió mi vida."
+    },
+    {
+      "id": "c2",
+      "reviewId": "r1",
+      "userId": 22,
+      "text": "Me gustaría saber más sobre la dieta que seguiste."
+    },
+    {
+      "id": "c3",
+      "reviewId": "r2",
+      "userId": 23,
+      "text": "Los ejercicios son difíciles pero valen la pena."
+    },
+    {
+      "id": "c4",
+      "reviewId": "r7",
+      "userId": 24,
+      "text": "¿Podrías compartir la rutina que hiciste?"
+    },
+    {
+      "id": "c5",
+      "reviewId": "r13",
+      "userId": 25,
+      "text": "Excelente para crear hábitos, gracias por compartir!"
+    },
+    {
+      "id": "c6",
+      "reviewId": "r19",
+      "userId": 26,
+      "text": "La meditación fue clave para mí también."
+    }
   ]
 }
