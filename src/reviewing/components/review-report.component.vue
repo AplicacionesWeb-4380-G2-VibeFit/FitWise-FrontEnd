@@ -1,85 +1,87 @@
 <script>
-import { ReviewReport } from "@/reviewing/model/reviewReport.entity.js";
 import { ReviewReportService } from "@/reviewing/services/reviewReport.service.js";
 
 export default {
   name: "review-report",
   props: {
     reviewId: {
-      type: String,
+      type: Number,
       required: true
     },
     visible: {
       type: Boolean,
-      required: true
+      default: false
     }
   },
-  emits: ["close", "reported"],
   data() {
     return {
-      selectedReason: "",
-      reasons: ["Inapropiado", "Spam", "Contenido falso", "Lenguaje ofensivo"],
-      reportService: new ReviewReportService(),
-      error: ""
+      reportReason: "",
+      errors: [],
+      reviewReportService: null,
+      loading: false
     };
   },
   methods: {
-    submitReport() {
-      if (!this.selectedReason) {
-        this.error = "Debes seleccionar un motivo.";
+    close() {
+      this.reportReason = "";
+      this.errors = [];
+      this.$emit('close');
+    },
+    sendReport() {
+      if (!this.reportReason.trim()) {
+        this.errors = [{ message: 'Debe indicar una razón para el reporte.' }];
         return;
       }
 
-      const report = new ReviewReport({
-        reviewId: this.reviewId,
-        userId: "USER_ID_AQUI", // ⚠️ Reemplaza con el ID real del usuario logueado
-        reason: this.selectedReason
-      });
+      this.loading = true;
 
-      this.reportService.create(report)
+      const newReport = {
+        reviewId: this.reviewId,
+        reason: this.reportReason.trim(),
+        createdAt: new Date().toISOString(),
+        status: 'pending' // o según tu backend
+      };
+
+      this.reviewReportService.create(newReport)
           .then(() => {
-            this.$emit("reported");
-            this.$emit("close");
+            this.$emit('reported');
+            this.close();
           })
-          .catch(() => {
-            this.error = "Error al enviar el reporte.";
+          .catch(error => {
+            this.errors.push(error);
+            console.error(error);
+          })
+          .finally(() => {
+            this.loading = false;
           });
     }
+  },
+  created() {
+    this.reviewReportService = new ReviewReportService();
   }
 };
 </script>
 
 <template>
-  <Dialog
-      :visible="visible"
-      modal
-      header="Reportar reseña"
-      @hide="$emit('close')"
-  >
+  <p-dialog :visible="visible" modal header="Reportar review" @hide="close" :closable="true">
     <div>
-      <p>Selecciona el motivo del reporte:</p>
-
-      <pv-dropdown
-          v-model="selectedReason"
-          :options="reasons"
-          placeholder="Motivo"
-          class="mb-3"
-      />
-
-      <pv-button
-          label="Enviar Reporte"
-          icon="pi pi-flag"
-          class="p-button-warning"
-          @click="submitReport"
-      />
-
-      <div class="text-danger mt-2" v-if="error">{{ error }}</div>
+      <textarea
+          v-model="reportReason"
+          rows="4"
+          class="p-inputtextarea p-component"
+          placeholder="Describe la razón del reporte"
+      ></textarea>
+      <div v-if="errors.length" class="text-red-600 mt-2 text-xs">
+        <div v-for="(err, idx) in errors" :key="idx">{{ err.message || err.toString() }}</div>
+      </div>
     </div>
-  </Dialog>
+    <template #footer>
+      <pv-button label="Cancelar" class="p-button-text" @click="close" :disabled="loading" />
+      <pv-button label="Enviar reporte" class="p-button-danger" @click="sendReport" :loading="loading" />
+    </template>
+  </p-dialog>
 </template>
 
 <style scoped>
-.text-danger {
-  color: red;
-}
+/* Puedes añadir estilos aquí */
 </style>

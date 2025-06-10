@@ -1,96 +1,102 @@
 <script>
-import { ReviewComment } from "@/reviewing/model/reviewComment.entity.js";
 import { ReviewCommentService } from "@/reviewing/services/reviewComment.service.js";
 
 export default {
   name: "review-comments",
   props: {
     reviewId: {
-      type: String,
+      type: Number,
       required: true
     }
   },
   data() {
     return {
       comments: [],
-      newComment: new ReviewComment({ reviewId: this.reviewId }),
-      commentService: new ReviewCommentService(),
+      newCommentText: "",
       loading: false,
-      error: ""
+      errors: [],
+      reviewCommentService: null
     };
   },
   methods: {
-    fetchComments() {
+    loadComments() {
       this.loading = true;
-      this.commentService.getByReviewId(this.reviewId)
+      this.reviewCommentService.getByReviewId(this.reviewId)
           .then(response => {
             this.comments = response.data;
-            this.loading = false;
           })
           .catch(error => {
-            this.error = "Error al cargar los comentarios.";
+            this.errors.push(error);
+            console.error(error);
+          })
+          .finally(() => {
             this.loading = false;
           });
     },
-    submitComment() {
-      if (!this.newComment.content.trim()) {
-        this.error = "El comentario no puede estar vacío.";
-        return;
-      }
+    sendComment() {
+      if (!this.newCommentText.trim()) return;
 
-      this.commentService.create(this.newComment)
-          .then(() => {
-            this.newComment = new ReviewComment({ reviewId: this.reviewId });
-            this.fetchComments();
+      const newComment = {
+        reviewId: this.reviewId,
+        text: this.newCommentText.trim(),
+        createdAt: new Date().toISOString()
+        // otros campos si aplica
+      };
+
+      this.reviewCommentService.create(newComment)
+          .then(response => {
+            this.comments.push(response.data);
+            this.newCommentText = "";
+            this.$emit('commented', { reviewId: this.reviewId, comment: response.data });
           })
-          .catch(() => {
-            this.error = "Error al enviar el comentario.";
+          .catch(error => {
+            this.errors.push(error);
+            console.error(error);
           });
     }
   },
   created() {
-    this.fetchComments();
+    this.reviewCommentService = new ReviewCommentService();
+    this.loadComments();
   }
 };
 </script>
 
 <template>
   <div class="review-comments">
-    <h4>Comentarios</h4>
+    <div v-if="loading" class="mb-2 text-sm text-gray-500">{{ $t('loading') || 'Cargando comentarios...' }}</div>
+    <ul v-if="comments.length" class="mb-2">
+      <li v-for="comment in comments" :key="comment.id" class="mb-1 border-bottom p-1">
+        <small class="text-gray-600">{{ comment.text }}</small>
+        <br />
+        <small class="text-gray-400">{{ new Date(comment.createdAt).toLocaleString() }}</small>
+      </li>
+    </ul>
+    <div v-else class="mb-2 text-sm text-gray-500">{{ $t('review.no-comments') || 'No hay comentarios aún' }}</div>
 
-    <div v-if="loading">Cargando comentarios...</div>
-    <div v-else>
-      <div v-if="comments.length">
-        <ul>
-          <li v-for="comment in comments" :key="comment.id" class="mb-2">
-            <div><strong>{{ comment.userId }}</strong></div>
-            <div>{{ comment.content }}</div>
-          </li>
-        </ul>
-      </div>
-      <div v-else>
-        <p>No hay comentarios aún.</p>
-      </div>
+    <div class="flex gap-2">
+      <input
+          v-model="newCommentText"
+          type="text"
+          class="p-inputtext p-component p-inputtext-sm"
+          :placeholder="$t('review.write-comment') || 'Escribe un comentario...'"
+          @keyup.enter="sendComment"
+      />
+      <pv-button
+          label="Enviar"
+          class="p-button-sm p-button-primary"
+          @click="sendComment"
+      />
     </div>
 
-    <div class="mt-3">
-      <pv-textarea
-          v-model="newComment.content"
-          placeholder="Escribe tu comentario..."
-          rows="3"
-          class="mb-2"
-      />
-      <pv-button label="Enviar" icon="pi pi-send" @click="submitComment" />
-
-      <div class="text-danger mt-2" v-if="error">{{ error }}</div>
+    <div v-if="errors.length" class="text-red-600 mt-2 text-xs">
+      <div v-for="(err, idx) in errors" :key="idx">{{ err.message || err.toString() }}</div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .review-comments {
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  font-size: 0.85rem;
 }
 </style>
