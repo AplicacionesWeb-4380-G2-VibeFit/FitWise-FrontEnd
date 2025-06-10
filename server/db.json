@@ -528,13 +528,6 @@
       "healthPlanId": 1
     },
     {
-      "id": "r3",
-      "userId": 3,
-      "score": 3,
-      "description": "Las comidas estaban bien, pero me costó seguir el ritmo de los ejercicios.",
-      "healthPlanId": 1
-    },
-    {
       "id": "r7",
       "userId": 4,
       "score": 5,
