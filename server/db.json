@@ -580,23 +580,16 @@
       "id": "r26",
       "userId": 13,
       "score": 3,
-      "description": "No me encantó el sabor de algunos jugos, peroE cumplió su función.",
+      "description": "No me encantó el sabor de algunos jugos, pero cumplió su función.",
       "healthPlanId": 5
     }
   ],
   "review-comments": [
     {
-      "id": "e7d79261-a6ce-4c01-a109-0cffa2d07efd",
-      "reviewId": "r1",
-      "userId": 5,
-      "content": "Muy completo y bien estructurado.",
-      "createdAt": "2025-06-11T04:02:27.678014"
-    },
-    {
       "id": "c3ead169-4e7c-4987-858a-4b2baed115ab",
       "reviewId": "r1",
       "userId": 12,
-      "content": "Tuve buenos resultados en poco tiempo.",
+      "content": "Tuve buenos resultados en poco tiempo",
       "createdAt": "2025-06-11T04:02:27.678056"
     },
     {
@@ -612,13 +605,6 @@
       "userId": 12,
       "content": "Noté una mejora en mi energía diaria.",
       "createdAt": "2025-06-11T04:02:27.678135"
-    },
-    {
-      "id": "c4812159-34e9-4864-9f38-3340baeafe0c",
-      "reviewId": "r2",
-      "userId": 7,
-      "content": "No me gustó mucho la sección de cardio.",
-      "createdAt": "2025-06-11T04:02:27.678148"
     },
     {
       "id": "16d16236-aa18-43b8-89d9-5916c995b200",
@@ -640,13 +626,6 @@
       "userId": 10,
       "content": "Lo recomendaría a mis amigos.",
       "createdAt": "2025-06-11T04:02:27.678184"
-    },
-    {
-      "id": "dc84f9b5-1ad6-45dc-b068-90a3e0ed7c64",
-      "reviewId": "r7",
-      "userId": 6,
-      "content": "No me gustó mucho la sección de cardio.",
-      "createdAt": "2025-06-11T04:02:27.678197"
     },
     {
       "id": "13562122-fea5-4e1f-ae2a-4fd69328a2ac",

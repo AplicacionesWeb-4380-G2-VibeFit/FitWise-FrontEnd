@@ -16,6 +16,7 @@ const ProfileManagementComponent = () => import('../presenting/pages/profile-man
 
 const ScheduleManagementComponent = () => import('../organizing/pages/schedule-management.component.vue');
 
+const ReviewCommentsPage = () => import('../reviewing/pages/review-comments-page.component.vue');
 const routes = [
     { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
 
@@ -36,6 +37,7 @@ const routes = [
 
     { path: '/', name: 'default', redirect: { name: 'home' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
+    { path: '/reviewing/comments', name: 'review-comments', component: ReviewCommentsPage, meta: { title: 'Review Comments' } },
 ];
 
 const router = createRouter({

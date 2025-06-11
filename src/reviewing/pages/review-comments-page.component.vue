@@ -2,26 +2,67 @@
   <div class="review-comments-page p-4">
     <h2 class="text-2xl font-semibold mb-4">{{ $t('review.comments') }}</h2>
 
-    <pv-data-table
-        :value="comments"
-        :paginator="true"
-        :rows="5"
-        :loading="loading"
-        dataKey="id"
-        class="p-datatable-sm"
-    >
-      <pv-column field="content" header="{{ $t('review.comment') }}"></pv-column>
-      <pv-column field="createdAt" header="{{ $t('created') }}" :body="formatDate"></pv-column>
-      <pv-column header="{{ $t('actions') }}" :body="actionTemplate" style="width: 8rem"></pv-column>
-    </pv-data-table>
+    <!-- Formulario para agregar comentarios -->
+    <div class="mb-6">
+      <div class="flex gap-2 mb-3">
+        <pv-input-text
+            v-model="newCommentContent"
+            :placeholder="$t('review.write-comment')"
+            class="w-full"
+        />
+        <pv-select
+            v-model="selectedReviewId"
+            :options="availableReviewIds"
+            optionLabel="label"
+            optionValue="value"
+            :placeholder="$t('review.select-review')"
+            class="w-30rem"
+        />
+        <pv-button
+            icon="pi pi-plus"
+            :label="$t('review.add-comment')"
+            @click="createComment"
+            class="p-button-success"
+        />
+      </div>
+    </div>
 
+    <!-- Comentarios agrupados por review -->
+    <div v-for="(group, reviewId) in groupedComments" :key="reviewId" class="mb-6">
+      <h3 class="text-lg font-bold mb-2">{{ $t('review.review-id') }}: {{ reviewId }}</h3>
+
+      <pv-data-table
+          :value="group"
+          :paginator="true"
+          :rows="5"
+          dataKey="id"
+          class="p-datatable-sm"
+      >
+        <pv-column field="content" :header="$t('review.comment')"></pv-column>
+        <pv-column field="createdAt" :header="$t('created')">
+          <template #body="{ data }">
+            {{ formatDate(data.createdAt) }}
+          </template>
+        </pv-column>
+        <pv-column :header="$t('actions')">
+          <template #body="{ data }">
+            <div class="flex gap-2">
+              <pv-button icon="pi pi-pencil" class="p-button-sm p-button-text" @click="editComment(data)" />
+              <pv-button icon="pi pi-trash" class="p-button-sm p-button-text p-button-danger" @click="deleteComment(data.id)" />
+            </div>
+          </template>
+        </pv-column>
+      </pv-data-table>
+    </div>
+
+    <!-- Modal de edición -->
     <pv-dialog v-model:visible="editDialogVisible" :header="$t('review.edit-comment')" modal>
       <div class="p-fluid">
         <pv-textarea v-model="editCommentContent" rows="3" autoResize />
       </div>
       <template #footer>
-        <pv-button label="{{ $t('cancel') }}" icon="pi pi-times" @click="editDialogVisible = false" class="p-button-text" />
-        <pv-button label="{{ $t('save') }}" icon="pi pi-check" @click="saveComment" class="p-button-primary" />
+        <pv-button :label="$t('cancel')" icon="pi pi-times" @click="editDialogVisible = false" class="p-button-text" />
+        <pv-button :label="$t('save')" icon="pi pi-check" @click="saveComment" class="p-button-primary" />
       </template>
     </pv-dialog>
   </div>
@@ -29,6 +70,7 @@
 
 <script>
 import { ReviewCommentService } from '@/reviewing/services/reviewComment.service.js';
+import { ReviewService } from '@/reviewing/services/review.service.js';
 
 export default {
   name: 'review-comments-page',
@@ -39,12 +81,28 @@ export default {
       editDialogVisible: false,
       selectedCommentId: null,
       editCommentContent: '',
-      service: null
+      newCommentContent: '',
+      selectedReviewId: null,
+      availableReviewIds: [],
+      service: null,
+      reviewService: null,
+      currentUserId: 1
     };
+  },
+  computed: {
+    groupedComments() {
+      return this.comments.reduce((acc, comment) => {
+        if (!acc[comment.reviewId]) acc[comment.reviewId] = [];
+        acc[comment.reviewId].push(comment);
+        return acc;
+      }, {});
+    }
   },
   created() {
     this.service = new ReviewCommentService();
+    this.reviewService = new ReviewService();
     this.loadComments();
+    this.loadReviewOptions();
   },
   methods: {
     loadComments() {
@@ -58,16 +116,19 @@ export default {
             this.loading = false;
           });
     },
-    formatDate(row) {
-      return new Date(row.createdAt).toLocaleString();
+    loadReviewOptions() {
+      this.reviewService.getAll()
+          .then(res => {
+            this.availableReviewIds = res.data.map(r => ({
+              label: `Review ${r.id} - Score ${r.score}`,
+              value: r.id
+            }));
+          })
+          .catch(err => console.error('Error loading reviews:', err));
     },
-    actionTemplate(row) {
-      return (
-          <div class="flex gap-2">
-            <pv-button icon="pi pi-pencil" class="p-button-sm p-button-text" @click={() => this.editComment(row)} />
-            <pv-button icon="pi pi-trash" class="p-button-sm p-button-text p-button-danger" @click={() => this.deleteComment(row.id)} />
-          </div>
-      );
+    formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return isNaN(date.getTime()) ? this.$t('invalid.date') : date.toLocaleString();
     },
     editComment(comment) {
       this.selectedCommentId = comment.id;
@@ -75,14 +136,17 @@ export default {
       this.editDialogVisible = true;
     },
     saveComment() {
-      const updated = {
-        id: this.selectedCommentId,
-        content: this.editCommentContent
-      };
+      const original = this.comments.find(c => c.id === this.selectedCommentId);
+      if (!original) return;
+
+      const updated = {...original, content: this.editCommentContent};
+
       this.service.update(this.selectedCommentId, updated)
           .then(() => {
             const index = this.comments.findIndex(c => c.id === this.selectedCommentId);
-            if (index !== -1) this.comments[index].content = this.editCommentContent;
+            if (index !== -1) {
+              this.comments[index] = updated;
+            }
             this.editDialogVisible = false;
           });
     },
@@ -98,6 +162,42 @@ export default {
               });
         }
       });
+    },
+    createComment() {
+      if (!this.newCommentContent.trim() || !this.selectedReviewId) {
+        this.$toast.add({
+          severity: 'warn',
+          summary: this.$t('warning'),
+          detail: this.$t('review.fill-required-fields'),
+          life: 3000
+        });
+        return;
+      }
+
+      const newComment = {
+        reviewId: this.selectedReviewId,
+        userId: this.currentUserId,
+        content: this.newCommentContent.trim(),
+        createdAt: new Date().toISOString()
+      };
+
+      this.service.create(newComment)
+          .then(res => {
+            if (res && res.data) {
+              this.comments.push(res.data);
+              this.newCommentContent = '';
+              this.selectedReviewId = null;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            this.$toast.add({
+              severity: 'error',
+              summary: this.$t('error'),
+              detail: this.$t('review.creation-error'),
+              life: 3000
+            });
+          });
     }
   }
 };

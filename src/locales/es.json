@@ -61,9 +61,22 @@
     "report-error": "Debe indicar una razón para el reporte.",
     "report-reason-placeholder": "Indica el motivo del reporte",
     "report-cancel": "Cancelar",
-    "report-submit": "Enviar Reporte"
+    "report-submit": "Enviar Reporte",
+    "review-id": "ID de Reseña",
+    "comment": "Comentario",
+    "edit-comment": "Editar Comentario",
+    "confirm-delete": "¿Estás seguro de eliminar este comentario?",
+    "fill-required-fields": "Completa todos los campos requeridos",
+    "select-review": "Selecciona una reseña",
+    "add-comment": "Agregar Comentario"
   },
   "success": "Éxito",
   "yes": "Sí",
-  "no": "No"
+  "no": "No",
+  "warning": "Advertencia",
+  "created": "Creado",
+  "actions": "Acciones",
+  "confirm": {
+    "delete": "Confirmar eliminación"
+  }
 }

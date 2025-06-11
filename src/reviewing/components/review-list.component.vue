@@ -41,7 +41,10 @@ export default {
     },
     onReported() {
       this.$emit('reported');
-    }
+    },
+    goToCommentsPage(reviewId) {
+      this.$router.push({ name: 'review-comments', query: { reviewId } });
+    },
   }
 };
 </script>
@@ -71,7 +74,7 @@ export default {
                 icon="pi pi-comments"
                 :label="$t('review.comments')"
                 class="p-button-outlined p-button-info p-button-sm"
-                @click="toggleComments(review.id)"
+                @click="goToCommentsPage(review.id)"
             />
             <pv-button
                 icon="pi pi-flag"
