@@ -33,7 +33,7 @@ export default {
     },
     sendReport() {
       if (!this.reportReason.trim()) {
-        this.errors = [{ message: this.$t('review.report-error')}];
+        this.errors = [{ message: this.$t('review.report-error') }];
         return;
       }
 
@@ -74,16 +74,26 @@ export default {
 </script>
 
 <template>
-  <pv-dialog :visible="visible" modal :header="$t('review.report') || 'Reportar reseña'" @hide="close" :closable="true">
-    <div>
+  <pv-dialog
+      :visible="visible"
+      modal
+      :closable="true"
+      :header="$t('review.report') || 'Reportar reseña'"
+      @hide="close"
+      @update:visible="close"
+  >
+    <div class="report-form">
+      <label class="report-label" for="report-textarea">
+      </label>
       <textarea
+          id="report-textarea"
           v-model="reportReason"
           rows="4"
-          class="p-inputtextarea p-component w-full"
+          class="p-inputtextarea p-component w-full report-textarea"
           :placeholder="$t('review.report-reason-placeholder')"
       ></textarea>
 
-      <div v-if="errors.length" class="text-red-600 mt-2 text-xs">
+      <div v-if="errors.length" class="report-errors">
         <div v-for="(err, idx) in errors" :key="idx">{{ err.message || err.toString() }}</div>
       </div>
     </div>
@@ -91,13 +101,13 @@ export default {
     <template #footer>
       <pv-button
           :label="$t('review.report-cancel')"
-          class="p-button-text"
+          class="p-button-text report-cancel-btn"
           @click="close"
           :disabled="loading"
       />
       <pv-button
           :label="$t('review.report-submit')"
-          class="p-button-danger"
+          class="p-button-danger report-submit-btn"
           @click="sendReport"
           :loading="loading"
       />
@@ -106,5 +116,30 @@ export default {
 </template>
 
 <style scoped>
-/* Estilos opcionales adicionales */
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.report-textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.report-errors {
+  color: #d32f2f;
+  background-color: #ffe5e5;
+  border: 1px solid #f5c2c2;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
 </style>
+
