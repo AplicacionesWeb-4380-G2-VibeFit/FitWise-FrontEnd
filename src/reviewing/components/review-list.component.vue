@@ -111,6 +111,7 @@ export default {
     <review-report
         v-if="reportVisibleReviewId"
         :reviewId="reportVisibleReviewId"
+        :userId="currentUserId"
         :visible="!!reportVisibleReviewId"
         @close="closeReportModal"
         @reported="onReported"

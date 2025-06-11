@@ -55,7 +55,13 @@
     "comment-submitted": "Comentario enviado",
     "comments": "Comentarios",
     "report": "Reportar",
-    "send": "Enviar"
+    "send": "Enviar",
+    "reported-summary": "Reporte enviado",
+    "reported-detail": "Gracias por reportar esta reseña. Nuestro equipo la revisará pronto.",
+    "report-error": "Debe indicar una razón para el reporte.",
+    "report-reason-placeholder": "Indica el motivo del reporte",
+    "report-cancel": "Cancelar",
+    "report-submit": "Enviar Reporte"
   },
   "success": "Éxito",
   "yes": "Sí",

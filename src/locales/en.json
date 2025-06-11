@@ -55,7 +55,13 @@
     "comment-submitted": "Comment submitted",
     "comments": "Comments",
     "report": "Report",
-    "send": "Send"
+    "send": "Send",
+    "reported-summary": "Report sent",
+    "reported-detail": "Thank you for reporting this review. Our team will review it soon.",
+    "report-error": "You must provide a reason for the report.",
+    "report-reason-placeholder": "Enter the reason for the report",
+    "report-cancel": "Cancel",
+    "report-submit": "Submit Report"
   },
   "success": "Success",
   "yes": "Yes",

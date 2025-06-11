@@ -22,4 +22,9 @@ export class ReviewCommentService {
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
     }
+
+    update(id, updatedComment) {
+        return httpInstance.put(`${this.resourceEndpoint}/${id}`, updatedComment);
+    }
+
 }

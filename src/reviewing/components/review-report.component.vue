@@ -5,7 +5,11 @@ export default {
   name: "review-report",
   props: {
     reviewId: {
-      type: Number,
+      type: [String, Number],
+      required: true
+    },
+    userId: {
+      type: [String, Number],
       required: true
     },
     visible: {
@@ -29,7 +33,7 @@ export default {
     },
     sendReport() {
       if (!this.reportReason.trim()) {
-        this.errors = [{ message: 'Debe indicar una razón para el reporte.' }];
+        this.errors = [{ message: this.$t('review.report-error')}];
         return;
       }
 
@@ -37,13 +41,20 @@ export default {
 
       const newReport = {
         reviewId: this.reviewId,
+        userId: this.userId,
         reason: this.reportReason.trim(),
         createdAt: new Date().toISOString(),
-        status: 'pending' // o según tu backend
+        status: 'pending'
       };
 
       this.reviewReportService.create(newReport)
           .then(() => {
+            this.$toast.add({
+              severity: 'success',
+              summary: this.$t('review.reported-summary'),
+              detail: this.$t('review.reported-detail'),
+              life: 3000
+            });
             this.$emit('reported');
             this.close();
           })
@@ -63,25 +74,37 @@ export default {
 </script>
 
 <template>
-  <p-dialog :visible="visible" modal header="Reportar review" @hide="close" :closable="true">
+  <pv-dialog :visible="visible" modal :header="$t('review.report') || 'Reportar reseña'" @hide="close" :closable="true">
     <div>
       <textarea
           v-model="reportReason"
           rows="4"
-          class="p-inputtextarea p-component"
-          placeholder="Describe la razón del reporte"
+          class="p-inputtextarea p-component w-full"
+          :placeholder="$t('review.report-reason-placeholder')"
       ></textarea>
+
       <div v-if="errors.length" class="text-red-600 mt-2 text-xs">
         <div v-for="(err, idx) in errors" :key="idx">{{ err.message || err.toString() }}</div>
       </div>
     </div>
+
     <template #footer>
-      <pv-button label="Cancelar" class="p-button-text" @click="close" :disabled="loading" />
-      <pv-button label="Enviar reporte" class="p-button-danger" @click="sendReport" :loading="loading" />
+      <pv-button
+          :label="$t('review.report-cancel')"
+          class="p-button-text"
+          @click="close"
+          :disabled="loading"
+      />
+      <pv-button
+          :label="$t('review.report-submit')"
+          class="p-button-danger"
+          @click="sendReport"
+          :loading="loading"
+      />
     </template>
-  </p-dialog>
+  </pv-dialog>
 </template>
 
 <style scoped>
-/* Puedes añadir estilos aquí */
+/* Estilos opcionales adicionales */
 </style>
