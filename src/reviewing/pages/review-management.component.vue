@@ -124,6 +124,18 @@ export default {
           });
         }
       });
+    },
+
+    // Manejar reporte de review
+    handleReported() {
+      this.$toast.add({
+        severity: 'info',
+        summary: this.$t('review.reported-summary') || 'Reporte enviado',
+        detail: this.$t('review.reported-detail') || 'Gracias por reportar esta reseña.',
+        life: 3000
+      });
+      // Opcional: refrescar reviews si es necesario
+      this.getAllReviews();
     }
   },
 
@@ -180,6 +192,7 @@ export default {
         :health-plan-id="selectedPlanId"
         @edit-review="startEdit"
         @delete-review="deleteReview"
+        @reported="handleReported"
     />
   </div>
 </template>
