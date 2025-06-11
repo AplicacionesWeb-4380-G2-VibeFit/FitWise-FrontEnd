@@ -517,7 +517,7 @@
       "id": "r1",
       "userId": 1,
       "score": 5,
-      "description": "Bajé 6kg siguiendo este plan al pie de la letra. Muy recomendable.",
+      "description": "Bajé 6kg siguiendo este plan al pie de la letra. Muy recomendable.A",
       "healthPlanId": 1
     },
     {
@@ -584,5 +584,46 @@
       "healthPlanId": 5
     }
   ],
-  "comments": []
+  "review-comments": [
+    {
+      "reviewId": "r7",
+      "userId": "12345",
+      "content": "2",
+      "createdAt": "2025-06-11T03:02:39.229Z",
+      "id": 1
+    },
+    {
+      "reviewId": "r7",
+      "userId": "12345",
+      "content": "Podria ser, pero se ve mal",
+      "createdAt": "2025-06-11T03:02:47.610Z",
+      "id": 2
+    },
+    {
+      "reviewId": "r7",
+      "userId": "12345",
+      "content": "XD",
+      "createdAt": "2025-06-11T03:03:36.147Z",
+      "id": 3
+    },
+    {
+      "reviewId": "r26",
+      "content": "Hola uwu",
+      "createdAt": "2025-06-11T03:03:58.458Z",
+      "id": 4
+    },
+    {
+      "reviewId": "r25",
+      "content": "xd",
+      "createdAt": "2025-06-11T03:04:55.024Z",
+      "id": 5
+    },
+    {
+      "reviewId": "r1",
+      "userId": 1,
+      "content": "hola",
+      "createdAt": "2025-06-11T03:07:25.619Z",
+      "id": 6
+    }
+  ]
 }

@@ -5,7 +5,11 @@ export default {
   name: "review-comments",
   props: {
     reviewId: {
-      type: Number,
+      type: String,
+      required: true
+    },
+    userId: {
+      type: [String, Number],
       required: true
     }
   },
@@ -38,16 +42,16 @@ export default {
 
       const newComment = {
         reviewId: this.reviewId,
-        text: this.newCommentText.trim(),
+        userId: this.userId,
+        content: this.newCommentText.trim(),
         createdAt: new Date().toISOString()
-        // otros campos si aplica
       };
 
       this.reviewCommentService.create(newComment)
           .then(response => {
             this.comments.push(response.data);
             this.newCommentText = "";
-            this.$emit('commented', { reviewId: this.reviewId, comment: response.data });
+            this.$emit('commented', {reviewId: this.reviewId, comment: response.data});
           })
           .catch(error => {
             this.errors.push(error);
@@ -67,8 +71,7 @@ export default {
     <div v-if="loading" class="mb-2 text-sm text-gray-500">{{ $t('loading') || 'Cargando comentarios...' }}</div>
     <ul v-if="comments.length" class="mb-2">
       <li v-for="comment in comments" :key="comment.id" class="mb-1 border-bottom p-1">
-        <small class="text-gray-600">{{ comment.text }}</small>
-        <br />
+        <small class="text-gray-600">{{ comment.content }}</small><br/>
         <small class="text-gray-400">{{ new Date(comment.createdAt).toLocaleString() }}</small>
       </li>
     </ul>

@@ -18,8 +18,9 @@ export default {
   },
   data() {
     return {
-      expandedReviewId: null,  // Para mostrar comentarios de una review
-      reportVisibleReviewId: null  // Para controlar modal reporte
+      expandedReviewId: null,
+      reportVisibleReviewId: null,
+      currentUserId: 1 // Simulación de usuario actual logueado
     };
   },
   methods: {
@@ -65,7 +66,6 @@ export default {
             {{ $t('review.user') }}: {{ review.userId }}
           </div>
 
-          <!-- Botones -->
           <div class="mt-3 flex justify-content-between flex-wrap gap-2">
             <pv-button
                 icon="pi pi-comments"
@@ -93,15 +93,13 @@ export default {
             />
           </div>
 
-          <!-- Comentarios expandibles -->
           <div v-if="expandedReviewId === review.id" class="mt-4">
-            <review-comments :reviewId="review.id" />
+            <review-comments :reviewId="review.id" :userId="currentUserId" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Mensaje cuando no hay reseñas -->
     <div v-else class="flex justify-content-center p-5">
       <div class="text-center">
         <i class="pi pi-comment text-6xl text-400 mb-3"></i>
@@ -110,7 +108,6 @@ export default {
       </div>
     </div>
 
-    <!-- Modal Reporte -->
     <review-report
         v-if="reportVisibleReviewId"
         :reviewId="reportVisibleReviewId"
