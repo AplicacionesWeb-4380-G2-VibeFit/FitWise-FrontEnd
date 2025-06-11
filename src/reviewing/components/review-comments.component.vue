@@ -86,7 +86,7 @@ export default {
           @keyup.enter="sendComment"
       />
       <pv-button
-          label="Enviar"
+          :label="$t('review.send')"
           class="p-button-sm p-button-primary"
           @click="sendComment"
       />

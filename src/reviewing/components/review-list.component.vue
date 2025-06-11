@@ -69,13 +69,13 @@ export default {
           <div class="mt-3 flex justify-content-between flex-wrap gap-2">
             <pv-button
                 icon="pi pi-comments"
-                label="Comentarios"
+                :label="$t('review.comments')"
                 class="p-button-outlined p-button-info p-button-sm"
                 @click="toggleComments(review.id)"
             />
             <pv-button
                 icon="pi pi-flag"
-                label="Reportar"
+                :label="$t('review.report')"
                 class="p-button-outlined p-button-warning p-button-sm"
                 @click="openReportModal(review.id)"
             />

@@ -49,7 +49,13 @@
     "plan-count": "Total plans with reviews",
     "cancel": "Cancel",
     "save": "Save",
-    "description": "Description"
+    "description": "Description",
+    "write-comment": "Write a comment...",
+    "no-comments": "No comments yet",
+    "comment-submitted": "Comment submitted",
+    "comments": "Comments",
+    "report": "Report",
+    "send": "Send"
   },
   "success": "Success",
   "yes": "Yes",
