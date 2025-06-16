@@ -5,11 +5,12 @@ import {User} from "@/presenting/model/user.entity.js";
 import {Follower} from "@/presenting/model/follower.entity.js";
 import { ref } from 'vue';
 import FollowerFormValidation from "@/presenting/components/follower-form-validation.component.vue";
+import CertificatesFromOtherUsers from "@/presenting/components/certificates-from-other-users.component.vue";
 
 
 export default {
   name: "followers-management",
-  components: {FollowerFormValidation},
+  components: {CertificatesFromOtherUsers, FollowerFormValidation},
   data(){
     return {
       userId: null,
@@ -214,6 +215,11 @@ export default {
                             :followers="followers"
                             @update:visible="followerDialog = $event"
                             @addFollower="handleAddFollower"/>
+
+  <certificates-from-other-users :visible="certificateDialogVisible"
+                                 :followedUserId="selectedUserId"
+                                 :key="certificateDialogKey"
+                                 @update:visible="certificateDialogVisible = $event"/>
 
 
   <!--Remove -->
