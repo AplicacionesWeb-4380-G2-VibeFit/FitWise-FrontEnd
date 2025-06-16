@@ -22,16 +22,37 @@
       "cancel": "Cancel",
       "name": "Name"
     },
-    "certificationManagement": {
-      "certificationList": {
+    "certificateManagement": {
+      "createTitle": "Add Certification",
+      "editTitle": "Edit Certification",
+      "institution": "Institution",
+      "institutionValidation": "Institution is required",
+      "certificateCode": "Certificate Code",
+      "certificateCodeValidation": "Certificate code is required",
+      "dateObtained": "Date Obtained",
+      "dateObtainedValidation": "Date obtained is required",
+      "description": "Description",
+      "descriptionValidation": "Description is required",
+      "certificateStatus": "Certificate Status",
+      "certificateStatusValidation": "Certificate status is required",
+      "yearsOfExperience": "Years of Experience",
+      "yearsOfExperienceValidation": "Years of experience is required and must be more than 0",
 
-      },
-      "certificationDialog": {
-        "createTitle": "Add Certification",
-        "editTitle": "Edit Certification",
-        "institution": "Institution",
-        "institutionValidation": "Institution is required"
-      }
+      "deleteQuestion": "Are you sure you want to delete the certificate",
+      "deleteTitle": "Delete Certificate",
+
+      "certificateListTitle": "User Certificates",
+      "certificateListAdd": "Add Certificate",
+      "certificateListExpandAll": "Expand All",
+      "certificateListCollapseAll": "Collapse All",
+      "certificateListFilter": "Filter by State, Institution and Code",
+
+      "certificateListInstitution": "Institution",
+      "certificateListStatus": "Status",
+      "certificateListCode": "Certificate Code",
+      "certificateListYears": "Years of Experience",
+      "certificateListActions": "Actions"
+
     }
   },
 

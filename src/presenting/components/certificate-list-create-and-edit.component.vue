@@ -169,6 +169,288 @@ export default {
 </script>
 
 <template>
+  <!--Create and Edit-->
+  <pv-dialog
+      v-model:visible="certificateDialog"
+      :style="{ width: '450px' }"
+      :header="!newCertificate || !newCertificate.id ? $t('profile.certificateManagement.createTitle') : $t('profile.certificateManagement.editTitle')"
+      :modal="true">
+
+    <div style=" display: flex; flex-direction: column; gap: 1.5rem;">
+
+      <div>
+        <label
+            for="institution"
+            style=" display: block;
+                    font-weight: bold;
+                    margin-bottom: 0.75rem;">
+          {{ $t('profile.certificateManagement.institution') }}
+        </label>
+        <pv-input-text
+            id="institution"
+            v-model.trim="newCertificate.institution"
+            required="true"
+            autofocus
+            :invalid="submitted && !newCertificate.institution"
+            fluid
+        />
+        <small
+            v-if="submitted && !newCertificate.institution"
+            style="color: #ef4444;"
+        >{{ $t('profile.certificateManagement.institutionValidation') }}</small>
+      </div>
+
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 1rem;">
+        <div style="grid-column: span 6 / span 6;">
+          <label
+              for="certificateCode"
+              style=" display: block;
+                    font-weight: bold;
+                    margin-bottom: 0.75rem;">
+            {{ $t('profile.certificateManagement.certificateCode') }}
+          </label>
+          <pv-input-text
+              id="certificateCode"
+              v-model.trim="newCertificate.certificateCode"
+              required="true"
+              autofocus
+              :invalid="submitted && !newCertificate.certificateCode"
+              fluid
+          />
+          <small
+              v-if="submitted && !newCertificate.certificateCode"
+              style="color: #ef4444;"
+          >{{ $t('profile.certificateManagement.certificateCodeValidation') }}</small>
+        </div>
+        <div style="grid-column: span 6 / span 6;">
+          <label
+              for="certificateCode"
+              style=" display: block;
+                    font-weight: bold;
+                    margin-bottom: 0.75rem;">
+            {{ $t('profile.certificateManagement.dateObtained') }}
+          </label>
+          <pv-date-picker
+              id="dateObtained"
+              :showIcon="true"
+              :showButtonBar="true"
+              v-model="newCertificate.dateObtained"
+              @update:modelValue="onDateObtainedChange"
+              :invalid="submitted && (!newCertificate.dateObtained || new Date(newCertificate.dateObtained) > new Date(new Date().toDateString()))"
+          />
+          <small
+              v-if="submitted && (!newCertificate.dateObtained || new Date(newCertificate.dateObtained) > new Date(new Date().toDateString()))"
+              style="color: #ef4444;"
+          >{{ $t('profile.certificateManagement.dateObtainedValidation') }}</small>
+        </div>
+      </div>
+
+
+      <div>
+        <label
+            for="description"
+            style="
+          display: block;
+          font-weight: bold;
+          margin-bottom: 0.75rem;
+        "
+        >{{ $t('profile.certificateManagement.description') }}</label>
+        <pv-textarea
+            id="description"
+            v-model="newCertificate.description"
+            required="true"
+            rows="3"
+            cols="20"
+            fluid
+            :invalid="submitted && !newCertificate.description"
+            style="resize: vertical;"
+        />
+        <small
+            v-if="submitted && !newCertificate.description"
+            style="color: #ef4444;"
+        >{{ $t('profile.certificateManagement.descriptionValidation') }}</small>
+      </div>
+
+
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 1rem;">
+        <div style="grid-column: span 6 / span 6;">
+          <label
+              for="inventoryStatus"
+              style="
+                display: block;
+                font-weight: bold;
+                margin-bottom: 0.75rem;
+              "
+          >{{ $t('profile.certificateManagement.certificateStatus') }}</label>
+          <pv-select
+              id="inventoryStatus"
+              v-model="newCertificate.status"
+              :options="statuses"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select a Status"
+              fluid
+              :invalid="submitted && !newCertificate.status"
+          ></pv-select>
+          <small
+              v-if="submitted && !newCertificate.status"
+              style="color: #ef4444;"
+          >{{ $t('profile.certificateManagement.certificateStatusValidation') }}</small>
+        </div>
+        <div style="grid-column: span 6 / span 6;">
+          <label
+              for="quantity"
+              style="
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+          "
+          >{{ $t('profile.certificateManagement.yearsOfExperience') }}</label>
+          <pv-input-number
+              id="quantity"
+              v-model="newCertificate.yearsOfWork"
+              integeronly
+              fluid
+              :invalid="submitted && (!newCertificate.yearsOfWork || newCertificate.yearsOfWork === 0)"
+          />
+          <small
+              v-if="submitted && (!newCertificate.yearsOfWork || newCertificate.yearsOfWork === 0)"
+              style="color: #ef4444;"
+          >{{ $t('profile.certificateManagement.yearsOfExperienceValidation') }}</small>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <template #footer>
+      <pv-button
+          :label="$t('profile.profileManagement.cancel')"
+          icon="pi pi-times"
+          text
+          @click="hideDialog"
+      />
+      <pv-button
+          :label="$t('profile.profileManagement.accept')"
+          icon="pi pi-check"
+          @click="saveCertificate"
+      />
+    </template>
+
+
+  </pv-dialog>
+
+  <!--Remove -->
+  <pv-dialog
+      v-model:visible="deleteCertificateDialog"
+      :style="{ width: '450px' }"
+      :header="$t('profile.certificateManagement.deleteTitle')"
+      :modal="true">
+    <div class="delete-dialog-content">
+      <i class="pi pi-exclamation-triangle delete-dialog-icon" />
+      <span>
+        {{ $t('profile.certificateManagement.deleteQuestion') }} <b>{{ deleteCertificate.certificateCode }}</b>?
+      </span>
+    </div>
+    <template #footer>
+      <pv-button label="No" icon="pi pi-times" text @click="deleteCertificateDialog = false" />
+      <pv-button label="Yes" icon="pi pi-check" @click="deleteCertificateById" />
+    </template>
+  </pv-dialog>
+
+
+
+  <div class="custom-table-wrapper">
+    <div class="certificaciones-card">
+      <div class="seguidores-titulo-profesional">{{ $t('profile.certificateManagement.certificateListTitle') }}</div>
+      <div>
+        <pv-data-table v-model:expandedRows="expandedRows" :value="filteredCertificates" dataKey="id" tableStyle="min-width: 60rem; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+          <template #header>
+            <div class="button-toolbar professional-toolbar">
+              <div class="left-buttons">
+                <pv-button :label="$t('profile.certificateManagement.certificateListAdd')" icon="pi pi-plus-circle" class="p-button-success" @click="openNew"/>
+              </div>
+              <div class="center-filter" style="flex:1; display:flex; justify-content:center; align-items:center;">
+                <pv-input-text v-model="filterText" :placeholder="$t('profile.certificateManagement.certificateListFilter')" style="width: 540px;" />
+              </div>
+              <div class="right-buttons">
+                <pv-button class="expand-all-btn" text icon="pi pi-plus" :label="$t('profile.certificateManagement.certificateListExpandAll')" @click="expandAll" />
+                <pv-button text icon="pi pi-minus" :label="$t('profile.certificateManagement.certificateListCollapseAll')" @click="collapseAll" />
+              </div>
+            </div>
+          </template>
+
+          <pv-column expander style="width: 4rem;" />
+          <pv-column field="institution" :header="$t('profile.certificateManagement.certificateListInstitution')">
+            <template #body="slotProps">
+              <span class="institution-cell table-cell-main">{{ slotProps.data.institution }}</span>
+            </template>
+          </pv-column>
+          <pv-column field="dateObtained" :header="$t('profile.certificateManagement.certificateListStatus')">
+            <template #body="slotProps">
+              <span class="table-cell-main">
+                <pv-tag :value="slotProps.data.status" :severity="getSeverity(slotProps.data.status)" />
+              </span>
+            </template>
+          </pv-column>
+
+          <pv-column field="certificateCode" :header="$t('profile.certificateManagement.certificateListCode')">
+            <template #body="slotProps">
+              <span class="table-cell-main">{{ slotProps.data.certificateCode }}</span>
+            </template>
+          </pv-column>
+
+          <pv-column field="yearsOfWork" :header="$t('profile.certificateManagement.certificateListYears')">
+            <template #body="slotProps">
+              <span class="table-cell-main">{{ slotProps.data.yearsOfWork }}</span>
+            </template>
+          </pv-column>
+
+          <pv-column :header="$t('profile.certificateManagement.certificateListActions')" style="width: 8rem;">
+            <template #body="slotProps">
+              <pv-button n icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editCertificate(slotProps.data)" />
+              <pv-button icon="pi pi-trash" class="p-button-rounded p-button-text" @click="confirmDeleteCertificate(slotProps.data)" />
+            </template>
+          </pv-column>
+
+          <template #expansion="slotProps">
+            <div class="certification-card-container">
+              <pv-card class="certification-card">
+                <template #title>
+                  <div class="cert-title-row">
+                    <span class="cert-title">{{ slotProps.data.institution }}</span>
+                    <pv-tag v-if="slotProps.data.gender" :value="slotProps.data.gender === 'male' ? 'Masculino' : 'Femenino'" :severity="slotProps.data.gender === 'male' ? 'info' : 'danger'" class="cert-tag" />
+                  </div>
+                </template>
+                <template #content>
+                  <div class="cert-content">
+                    <p><strong class="cert-label">Fecha:</strong> {{ slotProps.data.dateObtained }}</p>
+                    <p><strong class="cert-label">Descripción:</strong></p>
+                    <div class="cert-description-box">
+                      <span class="cert-description">{{ slotProps.data.description }}</span>
+                    </div>
+                    <p><strong class="cert-label">Estado:</strong> <pv-tag :value="slotProps.data.status" :severity="getSeverity(slotProps.data.status)" /></p>
+                    <p><strong class="cert-label">Código:</strong> {{ slotProps.data.certificateCode }}</p>
+                    <p><strong class="cert-label">Años de experiencia:</strong> {{ slotProps.data.yearsOfWork }}</p>
+                  </div>
+                </template>
+              </pv-card>
+            </div>
+          </template>
+        </pv-data-table>
+      </div>
+    </div>
+  </div>
+
+
+
 
 </template>
 
@@ -234,59 +516,6 @@ export default {
   background: transparent !important;
 }
 
-
-
-
-.custom-card-container {
-  padding: 0.5rem; /* Espaciado exterior grande para separar el card */
-}
-
-.custom-card {
-  max-width: 900px; /* Más ancho */
-  width: 100%;
-  margin: 0 auto 1.5rem auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px 0 rgba(60,60,100,0.10);
-  padding: 1.75rem 2rem 1.75rem 2rem; /* Mayor padding interno */
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  color: #000;
-}
-
-.card-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #000;
-  letter-spacing: 0.5px;
-}
-
-.card-description {
-  font-size: 1.08rem;
-  color: #000;
-  word-break: break-word;
-}
-
-/* Responsive para dispositivos móviles */
-@media (max-width: 900px) {
-  .custom-card {
-    max-width: 99vw;
-    padding: 1.2rem 0.7rem;
-  }
-  .custom-card-container {
-    padding: 1rem 0.2rem;
-  }
-  .card-title,
-  .card-description {
-    font-size: 0.98rem;
-  }
-}
-
-
-
-
 .delete-dialog-content {
   display: flex;
   align-items: center;
@@ -296,49 +525,6 @@ export default {
   font-size: 2rem; /* equivalente a text-3xl de Tailwind */
 }
 
-
-
-.custom-card-container {
-  display: flex;
-  justify-content: center;   /* Centra horizontalmente */
-  align-items: flex-start;   /* Alto según contenido */
-  width: 100%;
-}
-
-.custom-card {
-  width: 100%;              /* OJO, se adapta pero... */
-  max-width: 600px;         /* ...nunca crece más que esto */
-  min-width: 220px;         /* ...nunca es más chica que esto */
-  margin: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  background: #fff;
-  box-sizing: border-box;
-  transition: box-shadow 0.2s;
-}
-
-/* Responsive para pantallas pequeñas */
-@media (max-width: 650px) {
-  .custom-card {
-    max-width: 95vw;
-    padding: 0.8rem;
-  }
-}
-
-.certificaciones-titulo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #1a237e;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 8px rgba(26,35,126,0.08);
-  border-left: 5px solid #1976d2;
-  padding-left: 1rem;
-  background: linear-gradient(90deg, #e3f2fd 0%, #fff 100%);
-  border-radius: 6px 0 0 6px;
-  box-shadow: 0 1px 4px rgba(25,118,210,0.07);
-}
 
 .professional-table :deep(.p-datatable-thead > tr > th) {
   background: linear-gradient(90deg, #e3f0fd 0%, #f8fafc 100%);
@@ -415,16 +601,6 @@ export default {
   word-break: break-word;
   line-height: 1.6;
 }
-@media (max-width: 900px) {
-  .professional-card {
-    max-width: 99vw;
-    padding: 1.2rem 0.7rem;
-  }
-  .professional-expansion {
-    padding: 1rem 0.2rem 1.5rem 0.2rem;
-  }
-}
-
 
 .certification-card-container {
   display: flex;

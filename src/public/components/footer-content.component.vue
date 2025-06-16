@@ -22,9 +22,12 @@ export default {
 </template>
 
 <style scoped>
+/*
 footer {
   position: sticky;
   bottom: 0;
   flex: 0 0 auto;
 }
+*/
+
 </style>

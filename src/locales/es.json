@@ -1,20 +1,58 @@
 {
   "profile": {
-    "title": "Perfil",
-    "username": "Nombre de usuario",
-    "email": "Correo electrónico",
-    "name": "Nombre",
-    "lastname": "Apellido",
-    "gender": "Género",
-    "edit": "Editar",
-    "subscription": "Suscripción",
-    "description": "Actualiza tu información."
-  },
+    "heroImage": {
+      "title": "Tu Perfil Profesional",
+      "description": "Personaliza tu perfil, gestiona tus datos y añade tus certificaciones profesionales para destacar tu experiencia y conocimientos ante otros usuarios de la comunidad FitWise.",
+      "button": "Ver tus seguidores"
+    },
+    "profileManagement": {
+      "title": "Perfil Profesional",
+      "username": "Nombre de usuario",
+      "image": "URL de la imagen",
+      "firstname": "Nombre",
+      "lastname": "Apellido",
+      "birthdate": "Fecha de nacimiento",
+      "email": "Correo electrónico",
+      "gender": "Género",
+      "male": "Masculino",
+      "female": "Femenino",
+      "aboutMe": "Sobre mí",
+      "edit": "Editar perfil",
+      "accept": "Aceptar",
+      "cancel": "Cancelar",
+      "name": "Nombre"
+    },
+    "certificateManagement": {
+      "createTitle": "Agregar certificado",
+      "editTitle": "Editar certificado",
+      "institution": "Institución",
+      "institutionValidation": "La institución es obligatoria",
+      "certificateCode": "Código del certificado",
+      "certificateCodeValidation": "El código del certificado es obligatorio",
+      "dateObtained": "Fecha de obtención",
+      "dateObtainedValidation": "La fecha de obtención es obligatoria",
+      "description": "Descripción",
+      "descriptionValidation": "La descripción es obligatoria",
+      "certificateStatus": "Estado del certificado",
+      "certificateStatusValidation": "El estado del certificado es obligatorio",
+      "yearsOfExperience": "Años de experiencia",
+      "yearsOfExperienceValidation": "Los años de experiencia son obligatorios y deben ser mayores a 0",
 
-  "followers": {
-    "followersList": "Lista de Seguidos",
-    "follow": "Seguir",
-    "delete": "Eliminar"
+      "deleteQuestion": "¿Estás seguro de que deseas eliminar el certificado?",
+      "deleteTitle": "Eliminar certificado",
+
+      "certificateListTitle": "Certificados del usuario",
+      "certificateListAdd": "Agregar certificado",
+      "certificateListExpandAll": "Expandir todo",
+      "certificateListCollapseAll": "Colapsar todo",
+      "certificateListFilter": "Filtrar por estado, institución y código",
+
+      "certificateListInstitution": "Institución",
+      "certificateListStatus": "Estado",
+      "certificateListCode": "Código del certificado",
+      "certificateListYears": "Años de experiencia",
+      "certificateListActions": "Acciones"
+    }
   },
 
   "option": {
