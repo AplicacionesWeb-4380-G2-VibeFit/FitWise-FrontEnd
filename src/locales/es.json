@@ -68,6 +68,18 @@
       "deleteDialogTitle": "Dejar de seguir usuario",
       "deleteDialogMessage": "¿Estás seguro de que deseas dejar de seguir a este usuario?",
       "button": "Ver certificaciones"
+    },
+    "followerForm": {
+      "title": "Seguir usuario",
+      "input": "Buscar por correo electrónico",
+      "inputValidation": "El correo electrónico es obligatorio",
+      "searchButton": "Agregar",
+
+      "errorMessage": "Ocurrió un error al intentar seguir al usuario.",
+      "notFoundMessage": "No se encontró ningún usuario con ese correo electrónico.",
+      "notYouMessage": "No puedes seguir tu propio perfil.",
+      "alreadyFollowingMessage": "Ya sigues a este usuario.",
+      "followedMessage": "Ahora sigues a este usuario."
     }
   },
 

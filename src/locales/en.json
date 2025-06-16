@@ -71,7 +71,16 @@
       "button": "See Certifications"
     },
     "followerForm": {
+      "title": "Follow User",
+      "input": "Search by Email",
+      "inputValidation": "Email is required",
+      "searchButton": "Add",
 
+      "errorMessage": "An error occurred while trying to follow the user.",
+      "notFoundMessage": "No user found with that email address.",
+      "notYouMessage": "You cannot follow your own profile.",
+      "alreadyFollowingMessage": "You are already following this user.",
+      "followedMessage": "You are now following this user."
     }
   },
 

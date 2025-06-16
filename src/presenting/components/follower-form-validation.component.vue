@@ -44,12 +44,12 @@ export default {
 
       this.userService.getByEmail(email)
           .then(response => {
-            // Verifica si hay datos válidos
+            // Verifica si no se encontro nada
             if (!response.data || response.data.length === 0 || !response.data[0].id) {
               this.validationResult= {
                 severity: 'error',
                 success: true,
-                message: "Email no encontrado o datos inválidos",
+                message: "notFoundMessage",
                 icon: "pi pi-times-circle"
               };
               return;
@@ -65,7 +65,7 @@ export default {
               this.validationResult= {
                 severity: 'warn',
                 success: true,
-                message: "No puedes seguirte a ti mismo",
+                message: "notYouMessage",
                 icon: "pi pi-times-circle"
               };
               return; // Evitar que se cree un nuevo seguidor
@@ -76,14 +76,14 @@ export default {
               this.validationResult= {
                 severity: 'info',
                 success: true,
-                message: "Este usuario ya es seguido",
+                message: "alreadyFollowingMessage",
                 icon: "pi pi-times-circle"
               };
             } else {
               this.validationResult= {
                 severity: 'success',
                 success: true,
-                message: "Email válido. Puedes seguir a este usuario.",
+                message: "followedMessage",
                 icon: "pi pi-check-circle"
               };
               this.newFollower = new Follower({
@@ -105,7 +105,7 @@ export default {
             this.validationResult= {
               severity: 'error',
               success: false,
-              message: "Error buscando usuario por email.",
+              message: "errorMessage",
               icon: "pi pi-times-circle"
             };
           }
@@ -162,7 +162,7 @@ export default {
 <template>
   <pv-dialog :visible="followerDialog"
              :style="{ width: '600px', minHeight: '300px' }"
-             :header="'Agregar Seguidor'"
+             :header="$t('followers.followerForm.title')"
              :modal="true">
     <div class="search-grid">
       <div class="search-column">
@@ -172,7 +172,7 @@ export default {
             <pv-input-text
                 id="emailSearch"
                 v-model.trim="emailSearch"
-                placeholder="Buscar por email"
+                :placeholder="$t('followers.followerForm.input')"
                 class="search-input"
                 required="true"
                 autofocus
@@ -183,11 +183,11 @@ export default {
           <small
               v-if="submitted && !emailSearch"
               class="error-message"
-          >Email is required.</small>
+          >{{ $t('followers.followerForm.inputValidation') }}</small>
         </div>
       </div>
       <div class="button-column">
-        <pv-button icon="pi pi-plus" label="Agregar" @click="saveFollower" class="button-large"/>
+        <pv-button icon="pi pi-plus" :label="$t('followers.followerForm.title')" @click="saveFollower" class="button-large"/>
       </div>
     </div>
 
@@ -200,7 +200,7 @@ export default {
           @close="validationResult = null"
       >
         <i :class="validationResult.icon" class="mr-2"></i>
-        {{ validationResult.message }}
+        {{ $t('followers.followerForm.' + validationResult.message) }}
       </pv-message>
     </div>
     <!-- Información del usuario buscado -->
