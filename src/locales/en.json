@@ -1,20 +1,38 @@
 {
   "profile": {
-    "title": "Profile",
-    "username": "Username",
-    "email": "Email",
-    "name": "Name",
-    "lastname": "Lastname",
-    "gender": "Gender",
-    "edit": "Edit",
-    "subscription": "Subscription",
-    "description": "Update your information."
-  },
+    "heroImage": {
+      "title": "Your Professional Profile",
+      "description": "Customize your profile, manage your data, and add your professional certifications to highlight your experience and knowledge for other users in the FitWise community.",
+      "button": "See Your Followers"
+    },
+    "profileManagement": {
+      "title": "Professional Profile",
+      "username": "Username",
+      "image": "Image URL",
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "birthdate": "Date of Birth",
+      "email": "Email",
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "aboutMe": "About Me",
+      "edit": "Edit Profile",
+      "accept": "Accept",
+      "cancel": "Cancel",
+      "name": "Name"
+    },
+    "certificationManagement": {
+      "certificationList": {
 
-  "followers": {
-    "followers": "Followers List",
-    "follow": "Follow",
-    "delete": "Delete"
+      },
+      "certificationDialog": {
+        "createTitle": "Add Certification",
+        "editTitle": "Edit Certification",
+        "institution": "Institution",
+        "institutionValidation": "Institution is required"
+      }
+    }
   },
 
   "option": {
