@@ -34,6 +34,67 @@ export default {
 </script>
 
 <template>
+  <br>
+  <!-- Hero Section para la página de seguidos -->
+  <div style="
+    width: 90vw;
+    max-width: 9500px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto 2rem auto;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+  ">
+    <!-- Imagen de fondo -->
+    <img src="https://img.freepik.com/foto-gratis/gente-latina-entrena-al-aire-libre_23-2151039413.jpg?semt=ais_hybrid&w=740" alt="Comunidad entrenando" style="
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; min-height: 100%; object-fit: cover; object-position: top; z-index: 1; filter: brightness(0.65);">
+    <!-- Overlay verde menta con negro -->
+    <div style="
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.75) 0%, rgba(26, 188, 156, 0.75) 100%);
+      z-index: 2;
+    "></div>
+    <!-- Contenido -->
+    <div style="
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+      padding: 3.5rem 0 2.5rem 0;
+    ">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; max-width: 600px; width: 100%; padding: 0 2rem;">
+        <h1 style="font-size: 2.2rem; font-weight: bold; color: #ffffff; margin-bottom: 0.5rem;">{{ $t('followers.heroImage.title') }}</h1>
+        <p style="font-size: 1.15rem; color: #e0e0e0; margin-bottom: 1.5rem; max-width: 500px;">
+          {{ $t('followers.heroImage.description') }}
+        </p>
+        <div style="display: flex; gap: 1rem;">
+          <pv-button as-child v-slot="slotProps">
+            <router-link
+                :to="'/presenting/profile'"
+                :class="slotProps['class']"
+                style="background: #1abc9c; border: none; color: #fff; font-weight: 600; font-size: 1rem; padding: 0.75rem 2rem; border-radius: 2rem; display: inline-block; text-align: center; text-decoration: none;"
+            >
+              {{ $t('followers.heroImage.return') }}
+            </router-link>
+          </pv-button>
+          <pv-button
+              icon="pi pi-plus"
+              :label="$t('followers.heroImage.button')"
+              style="background: #ffffff; border: none; color: #1a3a2a; font-weight: 600; font-size: 1rem; padding: 0.75rem 2rem; border-radius: 2rem;"
+              @click="followedDialog = true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 </template>
 

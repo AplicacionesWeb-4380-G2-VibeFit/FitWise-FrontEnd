@@ -55,6 +55,15 @@
     }
   },
 
+  "followers": {
+    "heroImage": {
+      "title": "Tus seguidores",
+      "description": "Aquí puedes ver y gestionar los perfiles que sigues. Descubre sus certificaciones profesionales y mantente conectado con otros miembros de la comunidad FitWise.",
+      "return": "Volver a tu perfil",
+      "button": "Seguir a un usuario"
+    }
+  },
+
   "option": {
     "home": "Inicio",
     "about": "Acerca de",

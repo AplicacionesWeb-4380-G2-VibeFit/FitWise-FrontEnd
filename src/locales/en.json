@@ -56,6 +56,15 @@
     }
   },
 
+  "followers": {
+    "heroImage": {
+      "title": "Your Followers",
+      "description": "Here you can view and manage the profiles you follow. Discover their professional certifications and stay connected with other members of the FitWise community.",
+      "return": "Return to your profile",
+      "button": "Follow a user"
+    }
+  },
+
   "option": {
     "home": "Home",
     "about": "About",
