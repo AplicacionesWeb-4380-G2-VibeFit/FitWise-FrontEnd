@@ -62,6 +62,13 @@
       "description": "Here you can view and manage the profiles you follow. Discover their professional certifications and stay connected with other members of the FitWise community.",
       "return": "Return to your profile",
       "button": "Follow a user"
+    },
+    "followedUsers": {
+      "title": "List of Followed Users",
+      "filter": "Filter by name, username, or email",
+      "deleteDialogTitle": "Unfollow User",
+      "deleteDialogMessage": "Are you sure you want to unfollow this user",
+      "button": "See Certifications"
     }
   },
 

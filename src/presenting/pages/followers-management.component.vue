@@ -207,38 +207,38 @@ export default {
     </div>
   </div>
 
-  //COMPONENTS
-  //
-  //
+  <!--Components
+
+  -->
 
   <!--Remove -->
   <pv-dialog
       v-model:visible="deleteFollowerDialog"
-      :style="{ width: '450px' }" header="Delete Follower"
+      :style="{ width: '450px' }" :header="$t('followers.followedUsers.deleteDialogTitle')"
       :modal="true">
     <div class="delete-dialog-content">
       <i class="pi pi-exclamation-triangle delete-dialog-icon" />
       <span>
-            Are you sure you want to delete <b>{{ deleteFollowedUser.email }}</b>?
+            {{ $t('followers.followedUsers.deleteDialogMessage') }} <b>{{ deleteFollowedUser.email }}</b>?
       </span>
     </div>
     <template #footer>
-      <pv-button label="No" icon="pi pi-times" text @click="deleteFollowerDialog = false" />
-      <pv-button label="Yes" icon="pi pi-check" @click="deleteFollowerByFollowingUserId" />
+      <pv-button :label="$t('profile.profileManagement.cancel')" icon="pi pi-times" text @click="deleteFollowerDialog = false" />
+      <pv-button :label="$t('profile.profileManagement.accept')" icon="pi pi-check" @click="deleteFollowerByFollowingUserId" />
     </template>
   </pv-dialog>
 
 
   <div class="flex flex-col">
     <div class="card">
-      <div class="seguidores-titulo-profesional">Lista de Usuarios Seguidos</div>
+      <div class="seguidores-titulo-profesional">{{ $t('followers.followedUsers.title') }}</div>
       <pv-data-view :value="filteredFollowedUsers" :layout="layout">
         <template #header>
           <div class="flex justify-between items-center">
             <div class="flex align-items-center" style="width: 50%;">
               <span class="p-input-icon-left w-full">
                 <i class="pi pi-search" />
-                <pv-input-text v-model="filterValue" placeholder="Buscar por nombre, usuario o email..." class="w-full" />
+                <pv-input-text v-model="filterValue" :placeholder="$t('followers.followedUsers.filter')" class="w-full" />
               </span>
             </div>
             <pv-select-button v-model="layout" :options="options"
@@ -262,7 +262,9 @@ export default {
                 <div class="md:w-40 relative flex-shrink-0">
                   <pv-tag
                       v-if="item && item.gender"
-                      :value="item.gender === 'male' ? 'Male' : 'Female'"
+                      :value="item.gender === 'male'
+    ? $t('profile.profileManagement.male')
+    : $t('profile.profileManagement.female')"
                       :style="{
               position: 'absolute',
               top: '10px',
@@ -287,10 +289,10 @@ export default {
                 <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
                   <div class="flex flex-row md:flex-col justify-between items-start gap-2">
                     <div>
-                      <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">Email:</span>
+                      <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.email')}}:</span>
                       <span class="font-medium text-surface-100 text-sm" style="color: #fff;">{{ item.email }}</span>
                       <div class="text-lg font-semibold mt-2" style="color: #f5f5f5;">
-                        <span style="color: #1abc9c;">Usuario:</span> {{ item.username }}
+                        <span style="color: #1abc9c;">{{$t('profile.profileManagement.username')}}:</span> {{ item.username }}
                       </div>
                       <div class="box-nombre mt-2" style="background: #23272f;">
                 <span class="text-surface-900 font-bold text-base" style="color: #fff;">
@@ -300,7 +302,7 @@ export default {
                     </div>
                   </div>
                   <div class="flex-1 text-left md:text-center">
-                    <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">Sobre mí:</span>
+                    <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.aboutMe')}}:</span>
                     <div
                         class="text-sm"
                         style="color: #e0e0e0; background: #23272f; border-radius: 0.5rem; padding: 0.75rem; margin-top: 0.5rem; max-height: 6.5rem; overflow-y: auto; font-size: 1rem;"
@@ -311,7 +313,7 @@ export default {
                   <div class="flex flex-col md:items-end gap-8">
                     <div>
                       <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">
-                        Fecha de nacimiento <span style="font-size: 0.85em; color: #9ca3af;">(MM/DD/AA)</span>:
+                        {{$t('profile.profileManagement.birthdate')}} <span style="font-size: 0.85em; color: #9ca3af;">(MM/DD/AA)</span>:
                       </span>
                       <span class="text-sm font-medium" style="color: #fff;">{{ item.birthDate }}</span>
                     </div>
@@ -319,7 +321,7 @@ export default {
                       <pv-button icon="pi pi-trash" outlined style="color: #e74c3c; border-color: #e74c3c;" @click="confirmDeleteFollowed(item)" />
                       <pv-button
                           icon="pi pi-id-card"
-                          label="Ver Certificaciones"
+                          :label="$t('followers.followedUsers.button')"
                           class="flex-auto md:flex-initial whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
                           @click="openCertificateDialog(item.id)"
@@ -347,7 +349,9 @@ export default {
                   <div class="relative mx-auto">
                     <pv-tag
                         v-if="item && item.gender"
-                        :value="item.gender === 'male' ? 'Male' : 'Female'"
+                        :value="item.gender === 'male'
+    ? $t('profile.profileManagement.male')
+    : $t('profile.profileManagement.female')"
                         :style="{
                 position: 'absolute',
                 top: '10px',
@@ -373,10 +377,10 @@ export default {
                 <div class="pt-6">
                   <div class="flex flex-row justify-between items-start gap-2">
                     <div>
-                      <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">Email:</span>
+                      <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.email')}}:</span>
                       <span class="font-medium text-surface-100 text-sm" style="color: #fff;">{{ item.email }}</span>
                       <div class="text-lg font-semibold mt-2" style="color: #f5f5f5;">
-                        <span style="color: #1abc9c;">Usuario:</span> {{ item.username }}
+                        <span style="color: #1abc9c;">{{$t('profile.profileManagement.username')}}:</span> {{ item.username }}
                       </div>
                       <div class="box-nombre mt-2" style="background: #23272f;">
                 <span class="text-surface-900 font-bold text-base" style="color: #fff;">
@@ -386,7 +390,7 @@ export default {
                     </div>
                   </div>
                   <div class="mt-4">
-                    <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">Sobre mí:</span>
+                    <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.aboutMe')}}:</span>
                     <div
                         class="text-sm"
                         style="color: #e0e0e0; background: #23272f; border-radius: 0.5rem; padding: 0.75rem; margin-top: 0.5rem; max-height: 6.5rem; overflow-y: auto; font-size: 1rem;"
@@ -397,14 +401,14 @@ export default {
                   <div class="flex flex-col gap-6 mt-6">
                     <div>
                       <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">
-                          Fecha de nacimiento
+                          {{$t('profile.profileManagement.birthdate')}}
                         <span style="font-size: 0.85em; color: #9ca3af;">(MM/DD/AA)</span>:</span>
                       <span class="text-sm font-medium" style="color: #fff;">{{ item.birthDate }}</span>
                     </div>
                     <div class="flex gap-2">
                       <pv-button
                           icon="pi pi-id-card"
-                          label="Ver Certificaciones"
+                          :label="$t('followers.followedUsers.button')"
                           class="flex-auto whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
                           @click="openCertificateDialog(item.id)"

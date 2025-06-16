@@ -61,6 +61,13 @@
       "description": "Aquí puedes ver y gestionar los perfiles que sigues. Descubre sus certificaciones profesionales y mantente conectado con otros miembros de la comunidad FitWise.",
       "return": "Volver a tu perfil",
       "button": "Seguir a un usuario"
+    },
+    "followedUsers": {
+      "title": "Lista de usuarios seguidos",
+      "filter": "Filtrar por nombre, usuario o correo electrónico",
+      "deleteDialogTitle": "Dejar de seguir usuario",
+      "deleteDialogMessage": "¿Estás seguro de que deseas dejar de seguir a este usuario?",
+      "button": "Ver certificaciones"
     }
   },
 
