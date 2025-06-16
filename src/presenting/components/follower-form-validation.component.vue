@@ -94,7 +94,7 @@ export default {
                 if (response.data && response.data.id) {
                   this.newFollower.id = response.data.id; // Asignar el ID generado
 
-                  // Emitir un evento para agregar el nuevo seguidor a la lista en followed-details-management
+                  // Emitir un evento para agregar el nuevo seguidor a la lista
                   this.$emit('addFollower', this.userSearched, this.newFollower);
                 }
               }).catch(error => {
@@ -160,6 +160,71 @@ export default {
 </script>
 
 <template>
+  <pv-dialog :visible="followerDialog"
+             :style="{ width: '600px', minHeight: '300px' }"
+             :header="'Agregar Seguidor'"
+             :modal="true">
+    <div class="search-grid">
+      <div class="search-column">
+        <div class="input-wrapper">
+          <span class="search-input-container">
+            <i class="pi pi-search search-icon" />
+            <pv-input-text
+                id="emailSearch"
+                v-model.trim="emailSearch"
+                placeholder="Buscar por email"
+                class="search-input"
+                required="true"
+                autofocus
+                :invalid="submitted && !emailSearch"
+                fluid
+            />
+          </span>
+          <small
+              v-if="submitted && !emailSearch"
+              class="error-message"
+          >Email is required.</small>
+        </div>
+      </div>
+      <div class="button-column">
+        <pv-button icon="pi pi-plus" label="Agregar" @click="saveFollower" class="button-large"/>
+      </div>
+    </div>
+
+    <!-- Mensajes de validación -->
+    <div v-if="validationResult && validationResult.severity" class="mt-4">
+      <pv-message
+          v-if="validationResult && validationResult.severity"
+          :severity="validationResult.severity"
+          :closable=false
+          @close="validationResult = null"
+      >
+        <i :class="validationResult.icon" class="mr-2"></i>
+        {{ validationResult.message }}
+      </pv-message>
+    </div>
+    <!-- Información del usuario buscado -->
+    <div v-if="userSearched && validationResult && validationResult.severity" class="mt-4">
+      <div v-if="validationResult.severity !== 'error'">
+        <div class="user-card">
+          <div class="user-card-image">
+            <img
+                :src="userSearched.image"
+                alt="Imagen de usuario"
+                class="user-card-img"
+            />
+          </div>
+          <div class="user-card-details">
+            <span class="user-card-username">{{ userSearched.username }}</span>
+            <div class="user-card-email">{{ userSearched.email }}</div>
+            <div class="user-card-name">{{ userSearched.firstName }} {{ userSearched.lastName }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </pv-dialog>
 
 </template>
 
