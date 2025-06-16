@@ -12,6 +12,10 @@ export default {
     followedUserId: {
       type: Number,
       required: true
+    },
+    followedUserUsername: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -72,8 +76,16 @@ export default {
   <pv-dialog
       :visible="visible"
       :style="{ width: '600px' }"
-      header="Certificaciones" :modal="true"
-      @update:visible="$emit('update:visible', $event)">
+      :modal="true"
+      @update:visible="$emit('update:visible', $event)"
+  >
+    <template #header>
+      <div class="cert-header">
+        {{ $t('followers.certificateDialog.title') }}
+        <span class="username-highlight">{{ followedUserUsername }}</span>
+      </div>
+    </template>
+
     <div v-if="certificates.length > 0">
       <div class="certification-card-container">
         <pv-card v-for="cert in getPaginatedCertificates()" :key="cert.id"
@@ -81,19 +93,26 @@ export default {
           <template #title>
             <div class="cert-title-row">
               <span class="cert-title">{{ cert.institution }}</span>
-              <pv-tag v-if="cert.gender" :value="cert.gender === 'male' ? 'Masculino' : 'Femenino'" :severity="cert.gender === 'male' ? 'info' : 'danger'" class="cert-tag" />
             </div>
           </template>
           <template #content>
             <div class="cert-content">
-              <p><strong class="cert-label">Fecha:</strong> {{ cert.dateObtained }}</p>
-              <p><strong class="cert-label">Descripción:</strong></p>
+              <p><strong class="cert-label">{{ $t('followers.certificateDialog.date') }}:</strong> {{ cert.dateObtained }}</p>
+
+              <p><strong class="cert-label">{{ $t('followers.certificateDialog.description') }}:</strong></p>
               <div class="cert-description-box">
                 <span class="cert-description">{{ cert.description }}</span>
               </div>
-              <p><strong class="cert-label">Estado:</strong> <pv-tag :value="cert.status" :severity="getSeverity(cert.status)" /></p>
-              <p><strong class="cert-label">Código:</strong> {{ cert.certificateCode }}</p>
-              <p><strong class="cert-label">Años de experiencia:</strong> {{ cert.yearsOfWork }}</p>
+
+              <p><strong class="cert-label">{{ $t('followers.certificateDialog.status') }}:</strong> <pv-tag :value="cert.status" :severity="getSeverity(cert.status)" /></p>
+
+
+              <p><strong class="cert-label">{{ $t('followers.certificateDialog.code') }}:</strong></p>
+              <div class="cert-description-box">
+                <span class="cert-description">{{ cert.certificateCode }}</span>
+              </div>
+
+              <p><strong class="cert-label">{{ $t('followers.certificateDialog.years') }}:</strong> {{ cert.yearsOfWork }}</p>
             </div>
           </template>
         </pv-card>
@@ -110,6 +129,28 @@ export default {
 </template>
 
 <style scoped>
+.cert-header {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #f5f5f5;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #232526 0%, #393939 100%);
+  padding: 14px 0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.username-highlight {
+  color: #4ade80; /* verde suave */
+  font-weight: bold;
+  font-size: 1.15em;
+  margin-left: 10px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.22);
+  letter-spacing: 0.5px;
+}
+
 .certification-card-container {
   display: flex;
   flex-direction: column;

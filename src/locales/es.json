@@ -57,13 +57,13 @@
 
   "followers": {
     "heroImage": {
-      "title": "Tus seguidores",
+      "title": "Tus Seguidores",
       "description": "Aquí puedes ver y gestionar los perfiles que sigues. Descubre sus certificaciones profesionales y mantente conectado con otros miembros de la comunidad FitWise.",
       "return": "Volver a tu perfil",
       "button": "Seguir a un usuario"
     },
     "followedUsers": {
-      "title": "Lista de usuarios seguidos",
+      "title": "Lista de Usuarios Seguidos",
       "filter": "Filtrar por nombre, usuario o correo electrónico",
       "deleteDialogTitle": "Dejar de seguir usuario",
       "deleteDialogMessage": "¿Estás seguro de que deseas dejar de seguir a este usuario?",
@@ -76,10 +76,18 @@
       "searchButton": "Agregar",
 
       "errorMessage": "Ocurrió un error al intentar seguir al usuario.",
-      "notFoundMessage": "No se encontró ningún usuario con ese correo electrónico.",
+      "notFoundMessage": "No se encontró un usuario con ese correo electrónico.",
       "notYouMessage": "No puedes seguir tu propio perfil.",
       "alreadyFollowingMessage": "Ya sigues a este usuario.",
       "followedMessage": "Ahora sigues a este usuario."
+    },
+    "certificateDialog": {
+      "title": "Certificaciones obtenidas por",
+      "date": "Fecha de obtención",
+      "description": "Descripción",
+      "status": "Estado",
+      "code": "Código de certificado",
+      "years": "Años de experiencia"
     }
   },
 

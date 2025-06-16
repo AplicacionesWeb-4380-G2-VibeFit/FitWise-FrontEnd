@@ -431,14 +431,18 @@ export default {
                 </template>
                 <template #content>
                   <div class="cert-content">
-                    <p><strong class="cert-label">Fecha:</strong> {{ slotProps.data.dateObtained }}</p>
-                    <p><strong class="cert-label">Descripción:</strong></p>
+                    <p><strong class="cert-label">{{ $t('followers.certificateDialog.date') }}:</strong> {{ slotProps.data.dateObtained }}</p>
+                    <p><strong class="cert-label">{{ $t('followers.certificateDialog.description') }}:</strong></p>
                     <div class="cert-description-box">
                       <span class="cert-description">{{ slotProps.data.description }}</span>
                     </div>
-                    <p><strong class="cert-label">Estado:</strong> <pv-tag :value="slotProps.data.status" :severity="getSeverity(slotProps.data.status)" /></p>
-                    <p><strong class="cert-label">Código:</strong> {{ slotProps.data.certificateCode }}</p>
-                    <p><strong class="cert-label">Años de experiencia:</strong> {{ slotProps.data.yearsOfWork }}</p>
+                    <p><strong class="cert-label">{{ $t('followers.certificateDialog.status') }}:</strong> <pv-tag :value="slotProps.data.status" :severity="getSeverity(slotProps.data.status)" /></p>
+                    <p><strong class="cert-label">{{ $t('followers.certificateDialog.code') }}:</strong></p>
+                    <div class="cert-description-box">
+                      <span class="cert-description">{{ slotProps.data.certificateCode }}</span>
+                    </div>
+
+                    <p><strong class="cert-label">{{ $t('followers.certificateDialog.years') }}:</strong> {{ slotProps.data.yearsOfWork }}</p>
                   </div>
                 </template>
               </pv-card>

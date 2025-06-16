@@ -29,6 +29,7 @@ export default {
 
       certificateDialogVisible: false,
       selectedUserId: null,
+      selectedUserUsername: null,
       certificateDialogKey: 0, // Clave para reiniciar el componente
     }
 
@@ -84,8 +85,9 @@ export default {
           });
     },
 
-    openCertificateDialog(followedUserId) {
+    openCertificateDialog(followedUserId, followedUserUsername) {
       this.selectedUserId = followedUserId;
+      this.selectedUserUsername = followedUserUsername;
       this.certificateDialogVisible = false; // Cierra el diálogo si está abierto
       this.certificateDialogKey++; // Incrementa la clave para reiniciar el componente
       this.$nextTick(() => {
@@ -218,6 +220,7 @@ export default {
 
   <certificates-from-other-users :visible="certificateDialogVisible"
                                  :followedUserId="selectedUserId"
+                                 :followedUserUsername="selectedUserUsername"
                                  :key="certificateDialogKey"
                                  @update:visible="certificateDialogVisible = $event"/>
 
@@ -335,7 +338,7 @@ export default {
                           :label="$t('followers.followedUsers.button')"
                           class="flex-auto md:flex-initial whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
-                          @click="openCertificateDialog(item.id)"
+                          @click="openCertificateDialog(item.id,item.username)"
                       />
                     </div>
                   </div>
@@ -422,7 +425,7 @@ export default {
                           :label="$t('followers.followedUsers.button')"
                           class="flex-auto whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
-                          @click="openCertificateDialog(item.id)"
+                          @click="openCertificateDialog(item.id, item.username)"
                       />
                       <pv-button
                           icon="pi pi-trash"

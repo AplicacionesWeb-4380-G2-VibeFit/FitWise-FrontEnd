@@ -81,6 +81,14 @@
       "notYouMessage": "You cannot follow your own profile.",
       "alreadyFollowingMessage": "You are already following this user.",
       "followedMessage": "You are now following this user."
+    },
+    "certificateDialog": {
+      "title": "Certifications obtained by",
+      "date": "Date Obtained",
+      "description": "Description",
+      "status": "Status",
+      "code": "Certificate Code",
+      "years": "Years of Experience"
     }
   },
 
