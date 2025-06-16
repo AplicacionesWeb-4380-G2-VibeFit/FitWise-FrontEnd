@@ -1,10 +1,12 @@
 <script>
 import { User } from '@/presenting/model/user.entity.js';
 import { UserService } from '@/presenting/services/user.service.js';
+import CertificateListCreateAndEdit from "@/presenting/components/certificate-list-create-and-edit.component.vue";
 
 
 export default{
   name: "profile-and-certificate-management",
+  components: {CertificateListCreateAndEdit},
 
   data(){
     return {
@@ -136,6 +138,339 @@ export default{
       </div>
     </div>
   </div>
+
+
+  <pv-fluid>
+    <!-- Grid de 2 columnas: Edición de perfil (col 1) y Card DataView (col 2) -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem; align-items: start;">
+      <!-- Edición de perfil -->
+      <div>
+        <!-- ...todo el bloque de edición de perfil (sin la card) aquí... -->
+        <div style="
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+          ">
+
+          <div
+              style="display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              align-items: center; gap: 1rem;">
+            <!-- Columna Izquierda -->
+            <div>
+            </div>
+            <!-- Columna Centro -->
+            <div style="text-align: center;">
+              <span class="perfil-titulo-principal">
+                {{ $t('profile.profileManagement.title') }}
+              </span>
+            </div>
+            <!-- Columna Derecha-->
+            <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center;">
+              <pv-button
+                  v-if="!isEditModeProfile"
+                  severity="info"
+                  raised
+                  style="min-width: unset; width: auto;"
+                  @click="isEditModeProfile = true"
+              >
+                {{ $t('profile.profileManagement.edit') }}
+              </pv-button>
+              <pv-button
+                  v-if="isEditModeProfile"
+                  severity="success"
+                  raised
+                  style="min-width: unset; width: auto;"
+                  :disabled="isEditDisabled"
+                  @click="onAccept"
+              >
+                {{ $t('profile.profileManagement.accept') }}
+              </pv-button>
+              <pv-button
+                  v-if="isEditModeProfile"
+                  severity="danger"
+                  raised
+                  style="min-width: unset; width: auto;"
+                  @click="onCancel"
+              >
+                {{ $t('profile.profileManagement.cancel') }}
+              </pv-button>
+            </div>
+
+          </div>
+
+          <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                column-gap: 1rem;
+                row-gap: 0;
+                align-items: center;
+                width: 100%;
+                min-height: 230px;
+              "
+          >
+            <!-- Imagen: columna 1, filas 1 y 2 -->
+            <div
+                style="
+                  grid-row: 1 / span 2;
+                  grid-column: 1 / 2;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  height: 100%;
+                "
+            >
+              <img
+                  v-if="user && user.image"
+                  :src="userEdit.image"
+                  alt="Imagen de usuario"
+                  style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 12px;"
+              />
+
+            </div>
+
+            <!-- Username: columnas 2 y 3, fila 1 -->
+            <div
+                style="
+                  grid-row: 1 / 2;
+                  grid-column: 2 / 4;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.5rem;
+                  width: 100%;
+                "
+            >
+              <label for="username">{{ $t('profile.profileManagement.username') }}</label>
+              <pv-input-text
+                  id="username"
+                  type="text"
+                  v-model="userEdit.username"
+                  :disabled="!isEditModeProfile"
+              />
+            </div>
+
+            <!-- ImageURL: columnas 2 y 3, fila 2 -->
+            <div
+                style="
+                  grid-row: 2 / 3;
+                  grid-column: 2 / 4;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.5rem;
+                  width: 100%;
+                "
+            >
+              <label for="image">{{ $t('profile.profileManagement.image') }}</label>
+              <pv-textarea
+                  id="image"
+                  rows="4"
+                  v-model="userEdit.image"
+                  style="resize: none;"
+                  :disabled="!isEditModeProfile"
+              />
+            </div>
+          </div>
+
+
+          <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1rem;
+                width: 100%;
+                align-items: start;
+              "
+          >
+            <!-- Columna 1: Firstname -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+              <label for="firstname">{{ $t('profile.profileManagement.firstname') }}</label>
+              <pv-input-text
+                  id="firstname"
+                  type="text"
+                  v-model="userEdit.firstName"
+                  :disabled="!isEditModeProfile"
+              />
+            </div>
+
+            <!-- Columna 2: Lastname -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+              <label for="lastname">{{ $t('profile.profileManagement.lastname') }}</label>
+              <pv-input-text
+                  id="lastname"
+                  type="text"
+                  v-model="userEdit.lastName"
+                  :disabled="!isEditModeProfile"
+              />
+            </div>
+
+            <!-- Columna 3: BirthDate -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+              <label for="birthDate">{{ $t('profile.profileManagement.birthdate') }}</label>
+              <pv-date-picker
+                  id="birthDate"
+                  :showIcon="true"
+                  :showButtonBar="true"
+                  v-model="userEdit.birthDate"
+                  :disabled="!isEditModeProfile"
+              />
+            </div>
+          </div>
+
+
+          <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1rem;
+                width: 100%;
+                align-items: center;
+              "
+          >
+            <!-- Email: ocupa columnas 1 y 2 -->
+            <div style="grid-column: 1 / span 2; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+              <label for="email">{{ $t('profile.profileManagement.email') }}</label>
+              <pv-input-text id="email" type="text" v-model="userEdit.email"
+                             :disabled="!isEditModeProfile"
+              />
+            </div>
+
+            <!-- Gender: en columna 3 -->
+            <div style="grid-column: 3 / 4; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+              <label for="gender">{{ $t('profile.profileManagement.gender') }}</label>
+              <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center;">
+                <div style="display: flex; align-items: center;">
+                  <pv-radio-button
+                      id="option1"
+                      name="option"
+                      value="male"
+                      v-model="userEdit.gender"
+                      :disabled="!isEditModeProfile"
+                  />
+                  <label for="option1" style="line-height: 1; margin-left: 0.5rem;">{{ $t('profile.profileManagement.male') }}</label>
+                </div>
+                <div style="display: flex; align-items: center;">
+                  <pv-radio-button
+                      id="option2"
+                      name="option"
+                      value="female"
+                      v-model="userEdit.gender"
+                      :disabled="!isEditModeProfile"
+                  />
+                  <label for="option2" style="line-height: 1; margin-left: 0.5rem;">{{ $t('profile.profileManagement.female') }}</label>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <div
+              style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.5rem;
+                  width: 100%;
+                "
+          >
+            <label for="image">{{ $t('profile.profileManagement.aboutMe') }}</label>
+            <pv-textarea
+                id="image"
+                rows="4"
+                v-model="userEdit.aboutMe"
+                style="resize: none;"
+                :disabled="!isEditModeProfile"
+            />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Card tipo DataView -->
+      <div>
+        <div
+            style="
+          background: white;
+          border-radius: 0.75rem;
+          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+          padding: 2rem 1.5rem;
+          max-width: 400px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.5rem;
+        "
+        >
+          <div style="width: 100%; display: flex; justify-content: center;">
+            <div style="position: relative;">
+              <pv-tag
+                  v-if="user && user.gender"
+                  :value="user.gender === 'male'
+    ? $t('profile.profileManagement.male')
+    : $t('profile.profileManagement.female')"
+                  :style="{
+    position: 'absolute',
+    top: '10px',
+    left: '10px',
+    zIndex: 2,
+    background: user.gender === 'male' ? '#1976d2' : '#d32f2f',
+    color: '#fff',
+    fontWeight: 'bold',
+    borderRadius: '0.5rem',
+    padding: '0.25rem 0.75rem',
+    fontSize: '1rem',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.10)'
+  }"
+              />
+              <img
+                  v-if="user && user.image"
+                  :src="user.image"
+                  alt="Imagen de usuario"
+                  style="width: 180px; height: 180px; object-fit: cover; border-radius: 1rem; border: 2px solid #e0e0e0;"
+              />
+            </div>
+          </div>
+          <div style="width: 100%; text-align: center;">
+            <span style="font-size: 2rem; font-weight: 800; color: #1a237e; letter-spacing: 1px;">{{ user.username }}</span>
+            <div style="color: #666; font-size: 1.1rem; margin-top: 0.5rem; font-weight: 600;">
+              <span style="font-weight: 700; color: #1976d2;">{{$t('profile.profileManagement.email')}}:</span> {{ user.email }}
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 1.15rem; color: #444; font-weight: 600;">
+              <span style="font-weight: 700; color: #1976d2;">{{$t('profile.profileManagement.name')}}:</span> {{ user.firstName }} {{ user.lastName }}
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 1.05rem; color: #888; font-weight: 500;">
+              <span style="font-weight: 700; color: #1976d2;">{{$t('profile.profileManagement.birthdate')}}</span>
+              <span style="font-size: 0.95em; color: #b0b0b0; font-weight: 400;"> (MM/DD/AA):</span>
+              {{ user.birthDate }}
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 1.1rem; color: #444; font-style: italic; text-align: left; max-width: 95%; margin-left: auto; margin-right: auto; background: #f7fafd; border-radius: 0.5rem; padding: 0.75rem 1rem; min-height: 60px; word-break: break-word;">
+              <span style="font-weight: 700; color: #1976d2; display: block; margin-bottom: 0.25rem;">{{$t('profile.profileManagement.aboutMe')}}:</span>
+              <span style="white-space: pre-line;">{{ user.aboutMe }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ...resto del contenido (certificaciones, etc) ... -->
+    <br>
+    <br>
+
+    <certificate-list-create-and-edit :userId="userId"/>
+
+
+  </pv-fluid>
+
 
 </template>
 
