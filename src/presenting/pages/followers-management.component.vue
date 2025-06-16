@@ -4,11 +4,12 @@ import {FollowerService} from "@/presenting/services/follower.service.js";
 import {User} from "@/presenting/model/user.entity.js";
 import {Follower} from "@/presenting/model/follower.entity.js";
 import { ref } from 'vue';
+import FollowerFormValidation from "@/presenting/components/follower-form-validation.component.vue";
 
 
 export default {
   name: "followers-management",
-  components: {},
+  components: {FollowerFormValidation},
   data(){
     return {
       userId: null,
@@ -207,9 +208,13 @@ export default {
     </div>
   </div>
 
-  <!--Components
+  <!-- Components -->
+  <follower-form-validation :followerDialog="followerDialog"
+                            :userId="userId"
+                            :followers="followers"
+                            @update:visible="followerDialog = $event"
+                            @addFollower="handleAddFollower"/>
 
-  -->
 
   <!--Remove -->
   <pv-dialog

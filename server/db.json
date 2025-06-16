@@ -209,9 +209,9 @@
       "followingUserId": 5
     },
     {
-      "id": 9,
+      "id": 10,
       "followerUserId": 1,
-      "followingUserId": 3
+      "followingUserId": 7
     }
   ],
   "schedules": [
@@ -509,69 +509,6 @@
       "userId": 4,
       "content": "No me gustó mucho la sección de cardio.",
       "createdAt": "2025-06-11T04:02:27.678207"
-    },
-    {
-      "id": "5e52efb8-21ef-4650-a0e6-3e40b5cf6bf1",
-      "reviewId": "r14",
-      "userId": 1,
-      "content": "Muy completo y bien estructurado.",
-      "createdAt": "2025-06-11T04:02:27.678269"
-    },
-    {
-      "id": "1527dbe2-dee4-4cff-bc3b-5a720f10b865",
-      "reviewId": "r19",
-      "userId": 4,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678317"
-    },
-    {
-      "id": "adcb5463-19b6-4963-a431-207994488e4f",
-      "reviewId": "r19",
-      "userId": 3,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678326"
-    },
-    {
-      "id": "c3005148-2782-4b76-ba37-b2adfe0edae3",
-      "reviewId": "r20",
-      "userId": 2,
-      "content": "Muy completo y bien estructurado.",
-      "createdAt": "2025-06-11T04:02:27.678349"
-    },
-    {
-      "id": "bcc1d9da-502c-45d4-a655-d04113fc65bb",
-      "reviewId": "r20",
-      "userId": 5,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678361"
-    },
-    {
-      "id": "0408b609-d8f2-4c85-a815-dbbda5e91165",
-      "reviewId": "r25",
-      "userId": 3,
-      "content": "Los menús son deliciosos y variados.",
-      "createdAt": "2025-06-11T04:02:27.678386"
-    },
-    {
-      "id": "b8231326-4a9b-4d2a-a624-27c374c3ca0e",
-      "reviewId": "r25",
-      "userId": 2,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678394"
-    },
-    {
-      "id": "466894b9-9971-4c75-8517-dc605c85d349",
-      "reviewId": "r25",
-      "userId": 4,
-      "content": "No me gustó mucho la sección de cardio.",
-      "createdAt": "2025-06-11T04:02:27.678402"
-    },
-    {
-      "id": "57517599-a4a6-4c2d-8a4e-078b491975b0",
-      "reviewId": "r26",
-      "userId": 3,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678410"
     }
   ],
   "review-reports": [
