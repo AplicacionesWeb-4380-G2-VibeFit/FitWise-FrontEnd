@@ -12,7 +12,9 @@ export class UserService {
     }
 
     getByEmail(email) {
-        return httpInstance.get(`${this.resourceEndpoint}?email=${email}`);
+        return httpInstance.get(this.resourceEndpoint, {
+            params: { email: email }
+        });
     }
 
     create(resource) {

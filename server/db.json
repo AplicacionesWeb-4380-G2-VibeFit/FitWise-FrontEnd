@@ -2,277 +2,216 @@
   "users": [
     {
       "id": 1,
-      "userName": "jose_gomez",
-      "email": "jose.gomez@example.com",
-      "password": "Jose1234!"
+      "firstName": "Carlos Andrés",
+      "lastName": "Ramírez Quiñones",
+      "email": "vuelo.andino90@mail.com",
+      "birthDate": "05/10/1990",
+      "gender": "male",
+      "username": "volandolibre90",
+      "password": "pass123",
+      "image": "https://www.blogdelfotografo.com/wp-content/uploads/2022/01/retrato-anillo-luz.webp",
+      "aboutMe": "Amante del aire libre y la tecnología."
     },
     {
       "id": 2,
-      "userName": "laura.martinez",
-      "email": "laura.martinez@example.com",
-      "password": "LauraM2024*"
+      "firstName": "Lucía Fernanda",
+      "lastName": "Gómez Ortega",
+      "email": "luciernagalectora85@mail.com",
+      "birthDate": "03/15/1985",
+      "gender": "female",
+      "username": "lecturasvivas",
+      "password": "secure456",
+      "image": "https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg",
+      "aboutMe": "Me encanta la lectura y los viajes."
     },
     {
       "id": 3,
-      "userName": "carlos_rivera",
-      "email": "carlos.rivera@example.com",
-      "password": "CR!ver@88"
+      "firstName": "Andrés Felipe",
+      "lastName": "Mendoza Salinas",
+      "email": "cazadorluz.1988@mail.com",
+      "birthDate": "07/20/1988",
+      "gender": "male",
+      "username": "cazadorluz88",
+      "password": "andres123",
+      "image": "https://media.istockphoto.com/id/155068180/es/foto/guy-real.jpg?s=612x612&w=0&k=20&c=VDSua2eTduOoccz7LZZWxNhGMur6hl6jZKIqAiY3w68=",
+      "aboutMe": "Apasionado por la fotografía y la naturaleza."
     },
     {
       "id": 4,
-      "userName": "andrea.fernandez",
-      "email": "andrea.fernandez@example.com",
-      "password": "Andr3aF!"
+      "firstName": "Fernanda Alejandra",
+      "lastName": "Torres Guzmán",
+      "email": "vidaentrenada.fernanda92@mail.com",
+      "birthDate": "12/01/1992",
+      "gender": "female",
+      "username": "bienestarfull",
+      "password": "ferpass",
+      "image": "https://paulafotografia.com/wp-content/uploads/elementor/thumbs/DSC_0804-q2e7q0f0u33sxintvgdilopj1jrvpq4g1u5txv83uw.jpg",
+      "aboutMe": "Entrenadora personal y entusiasta del bienestar."
     },
     {
       "id": 5,
-      "userName": "marco_diaz",
-      "email": "marco.diaz@example.com",
-      "password": "MarcoD2025#"
+      "firstName": "Tomás Eduardo",
+      "lastName": "Vera Morales",
+      "email": "recetasbalon91@mail.com",
+      "birthDate": "08/14/1991",
+      "gender": "male",
+      "username": "futbolchef",
+      "password": "tvpass",
+      "image": "https://media.istockphoto.com/id/483265467/es/foto/retrato-de-hombre-joven.jpg?s=612x612&w=0&k=20&c=T1qM9-w_njNqIw-PaBN5ZMps8P90dz8hSuLqlAih-6E=",
+      "aboutMe": "Fanático del fútbol y la cocina casera."
     },
     {
       "id": 6,
-      "userName": "sofia.romero",
-      "email": "sofia.romero@example.com",
-      "password": "Sofi@123"
+      "firstName": "Alicia Marcela",
+      "lastName": "Morales Ríos",
+      "email": "pixelytrazo95@mail.com",
+      "birthDate": "11/30/1995",
+      "gender": "female",
+      "username": "arteentrepixels",
+      "password": "ali456",
+      "image": "https://i.pinimg.com/736x/de/e3/69/dee36934bdb15a82e5a825cd74aacddb.jpg",
+      "aboutMe": "Diseñadora gráfica apasionada por el arte digital."
     },
     {
       "id": 7,
-      "userName": "ricardo_soto",
-      "email": "ricardo.soto@example.com",
-      "password": "RicardoS0!"
-    },
-    {
-      "id": 8,
-      "userName": "valentina.mora",
-      "email": "valentina.mora@example.com",
-      "password": "V@leMora!"
-    },
-    {
-      "id": 9,
-      "userName": "martin_lopez",
-      "email": "martin.lopez@example.com",
-      "password": "Martin2024@"
-    },
-    {
-      "id": 10,
-      "userName": "camila_vargas",
-      "email": "camila.vargas@example.com",
-      "password": "CamiVg$85"
-    },
-    {
-      "id": 11,
-      "userName": "sebastian_ortiz",
-      "email": "sebastian.ortiz@example.com",
-      "password": "SebO!r123"
-    },
-    {
-      "id": 12,
-      "userName": "diana_navarro",
-      "email": "diana.navarro@example.com",
-      "password": "Diana*2025"
-    },
-    {
-      "id": 13,
-      "userName": "fernando.mendez",
-      "email": "fernando.mendez@example.com",
-      "password": "FernMZ99!"
-    },
-    {
-      "id": 14,
-      "userName": "paula_arias",
-      "email": "paula.arias@example.com",
-      "password": "Paula#A1"
-    },
-    {
-      "id": 15,
-      "userName": "alejandro_silva",
-      "email": "alejandro.silva@example.com",
-      "password": "AlexSilva@"
+      "firstName": "Diego Armando",
+      "lastName": "Reyes Barragán",
+      "email": "cineurbano.diego93@mail.com",
+      "birthDate": "04/05/1993",
+      "gender": "male",
+      "username": "urbancineasta",
+      "password": "diego789",
+      "image": "https://img.freepik.com/foto-gratis/retrato-sonriente-joven-encantador-camiseta-gris-pie-contra-fondo-liso_23-2148213406.jpg?semt=ais_hybrid&w=740",
+      "aboutMe": "Explorador urbano y amante del cine independiente."
     }
   ],
-  "profiles": [
+  "certificates": [
     {
       "id": 1,
-      "name": "José",
-      "lastname": "Gomez",
-      "gender": "male",
       "userId": 1,
-      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
+      "institution": "ISSA",
+      "dateObtained": "01/15/2020",
+      "description": "Specialized certification in bodybuilding training.sasssssss",
+      "status": "active",
+      "certificateCode": "ISSA-BB-2020-001",
+      "yearsOfWork": 2
     },
     {
       "id": 2,
-      "name": "Laura",
-      "lastname": "Martínez",
-      "gender": "female",
-      "userId": 2,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": false,
-      "membershipExpiry": ""
-    },
-    {
-      "id": 3,
-      "name": "Carlos",
-      "lastname": "Rivera",
-      "gender": "male",
-      "userId": 3,
-      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 1,
+      "institution": "ACE",
+      "dateObtained": "05/10/2018",
+      "description": "Certified Personal Trainer from ACE.",
+      "status": "expired",
+      "certificateCode": "ACE-CPT-2018-045",
+      "yearsOfWork": 3
     },
     {
       "id": 4,
-      "name": "Andrea",
-      "lastname": "Fernández",
-      "gender": "female",
-      "userId": 4,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 2,
+      "institution": "NASM",
+      "dateObtained": "08/30/2019",
+      "description": "Certified personal trainer from NASM.",
+      "status": "expired",
+      "certificateCode": "NASM-CPT-2019-089",
+      "yearsOfWork": 3
     },
     {
       "id": 5,
-      "name": "Marco",
-      "lastname": "Díaz",
-      "gender": "male",
-      "userId": 5,
-      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 3,
+      "institution": "IFPA",
+      "dateObtained": "11/10/2020",
+      "description": "Training program for high-intensity interval training.",
+      "status": "active",
+      "certificateCode": "IFPA-HIIT-2020-014",
+      "yearsOfWork": 1
     },
     {
       "id": 6,
-      "name": "Sofía",
-      "lastname": "Romero",
-      "gender": "female",
-      "userId": 6,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
+      "userId": 1,
+      "institution": "ISSA",
+      "dateObtained": "09/05/2017",
+      "description": "Certified Personal Trainer from ISSA.",
+      "status": "archived",
+      "certificateCode": "ISSA-CPT-2017-072",
+      "yearsOfWork": 5
     },
     {
       "id": 7,
-      "name": "Ricardo",
-      "lastname": "Soto",
-      "gender": "male",
-      "userId": 7,
-      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 4,
+      "institution": "Yoga Alliance",
+      "dateObtained": "02/18/2019",
+      "description": "Registered Yoga Teacher 200h.",
+      "status": "expired",
+      "certificateCode": "YA-RYT200-2019-055",
+      "yearsOfWork": 3
     },
     {
       "id": 8,
-      "name": "Valentina",
-      "lastname": "Mora",
-      "gender": "female",
-      "userId": 8,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 4,
+      "institution": "Precision Movement",
+      "dateObtained": "06/01/2022",
+      "description": "Focus on improving mobility and joint health.",
+      "status": "active",
+      "certificateCode": "PM-MOB-2022-021",
+      "yearsOfWork": 0
     },
     {
       "id": 9,
-      "name": "Martín",
-      "lastname": "López",
-      "gender": "male",
-      "userId": 9,
-      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
+      "userId": 5,
+      "institution": "CrossFit Inc.",
+      "dateObtained": "03/10/2015",
+      "description": "Introductory CrossFit training certification.",
+      "status": "archived",
+      "certificateCode": "CF-INTRO-2015-003",
+      "yearsOfWork": 7
     },
     {
       "id": 10,
-      "name": "Camila",
-      "lastname": "Vargas",
-      "gender": "female",
-      "userId": 10,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": false,
-      "membershipExpiry": ""
+      "userId": 5,
+      "institution": "CrossFit Inc.",
+      "dateObtained": "07/15/2018",
+      "description": "Advanced CrossFit coaching certification.",
+      "status": "expired",
+      "certificateCode": "CF-ADV-2018-076",
+      "yearsOfWork": 4
     },
     {
       "id": 11,
-      "name": "Sebastián",
-      "lastname": "Ortiz",
-      "gender": "male",
-      "userId": 11,
-      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
-      "isPremium": false,
-      "membershipExpiry": ""
-    },
-    {
-      "id": 12,
-      "name": "Diana",
-      "lastname": "Navarro",
-      "gender": "female",
-      "userId": 12,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
-    },
-    {
-      "id": 13,
-      "name": "Fernando",
-      "lastname": "Méndez",
-      "gender": "male",
-      "userId": 13,
-      "image": "https://www.marie-claire.es/wp-content/uploads/sites/2/2024/08/01/66ab90badc812.jpeg",
-      "isPremium": false,
-      "membershipExpiry": ""
-    },
-    {
-      "id": 14,
-      "name": "Paula",
-      "lastname": "Arias",
-      "gender": "female",
-      "userId": 14,
-      "image": "https://images.unsplash.com/photo-1616002411355-49593fd89721?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FyYSUyMGRlJTIwbXVqZXJ8ZW58MHx8MHx8fDA%3D",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
-    },
-    {
-      "id": 15,
-      "name": "Alejandro",
-      "lastname": "Silva",
-      "gender": "male",
-      "userId": 15,
-      "image": "https://media.istockphoto.com/id/1200677760/es/foto/retrato-de-apuesto-joven-sonriente-con-los-brazos-cruzados.jpg?s=612x612&w=0&k=20&c=RhKR8pxX3y_YVe5CjrRnTcNFEGDryD2FVOcUT_w3m4w=",
-      "isPremium": true,
-      "membershipExpiry": "2025-12-31"
+      "userId": 5,
+      "institution": "USA Weightlifting",
+      "dateObtained": "12/05/2020",
+      "description": "Certified in Olympic lifting techniques.",
+      "status": "active",
+      "certificateCode": "USAW-OLY-2020-039",
+      "yearsOfWork": 2
     }
   ],
-  "followedUsers": [
+  "followers": [
     {
       "id": 1,
-      "followerId": 1,
-      "followedId": 3
-    },
-    {
-      "id": 2,
-      "followerId": 1,
-      "followedId": 5
-    },
-    {
-      "id": 3,
-      "followerId": 1,
-      "followedId": 7
-    },
-    {
-      "id": 4,
-      "followerId": 1,
-      "followedId": 8
+      "followerUserId": 1,
+      "followingUserId": 2
     },
     {
       "id": 5,
-      "followerId": 1,
-      "followedId": 11
+      "followerUserId": 6,
+      "followingUserId": 2
     },
     {
       "id": 6,
-      "followerId": 1,
-      "followedId": 14
+      "followerUserId": 1,
+      "followingUserId": 6
+    },
+    {
+      "id": 8,
+      "followerUserId": 1,
+      "followingUserId": 5
+    },
+    {
+      "id": 10,
+      "followerUserId": 1,
+      "followingUserId": 7
     }
   ],
   "schedules": [
@@ -547,64 +486,15 @@
       "score": 5,
       "description": "Este plan me ayudó a crear hábitos saludables sin presionarme.",
       "healthPlanId": 3
-    },
-    {
-      "id": "r14",
-      "userId": 8,
-      "score": 4,
-      "description": "Muy balanceado y fácil de seguir. Me siento con más energía.",
-      "healthPlanId": 3
-    },
-    {
-      "id": "r19",
-      "userId": 10,
-      "score": 5,
-      "description": "Las técnicas de respiración y meditación me cambiaron la vida.",
-      "healthPlanId": 4
-    },
-    {
-      "id": "r20",
-      "userId": 11,
-      "score": 4,
-      "description": "Ideal para quienes sufren de ansiedad. Lo recomiendo.",
-      "healthPlanId": 4
-    },
-    {
-      "id": "r25",
-      "userId": 12,
-      "score": 4,
-      "description": "Sentí una mejora digestiva notable. Buen plan.",
-      "healthPlanId": 5
-    },
-    {
-      "id": "r26",
-      "userId": 13,
-      "score": 3,
-      "description": "No me encantó el sabor de algunos jugos, pero cumplió su función.",
-      "healthPlanId": 5
     }
   ],
   "review-comments": [
-    {
-      "id": "c3ead169-4e7c-4987-858a-4b2baed115ab",
-      "reviewId": "r1",
-      "userId": 12,
-      "content": "Tuve buenos resultados en poco tiempo",
-      "createdAt": "2025-06-11T04:02:27.678056"
-    },
     {
       "id": "6a1b0593-847a-4663-b16d-54fb802c750f",
       "reviewId": "r1",
       "userId": 5,
       "content": "No me gustó mucho la sección de cardio.",
       "createdAt": "2025-06-11T04:02:27.678099"
-    },
-    {
-      "id": "3ff4e257-6611-4b8c-adf9-2e6da98f030d",
-      "reviewId": "r2",
-      "userId": 12,
-      "content": "Noté una mejora en mi energía diaria.",
-      "createdAt": "2025-06-11T04:02:27.678135"
     },
     {
       "id": "16d16236-aa18-43b8-89d9-5916c995b200",
@@ -614,165 +504,11 @@
       "createdAt": "2025-06-11T04:02:27.678157"
     },
     {
-      "id": "a54a7da1-16e3-47c3-9273-22571a61b8fc",
-      "reviewId": "r7",
-      "userId": 13,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678172"
-    },
-    {
-      "id": "2ce62648-0aa9-46fd-a1e6-ab21200f59c2",
-      "reviewId": "r7",
-      "userId": 10,
-      "content": "Lo recomendaría a mis amigos.",
-      "createdAt": "2025-06-11T04:02:27.678184"
-    },
-    {
       "id": "13562122-fea5-4e1f-ae2a-4fd69328a2ac",
       "reviewId": "r8",
       "userId": 4,
       "content": "No me gustó mucho la sección de cardio.",
       "createdAt": "2025-06-11T04:02:27.678207"
-    },
-    {
-      "id": "123472b5-743e-4aae-bfa1-8334d1f3a911",
-      "reviewId": "r8",
-      "userId": 14,
-      "content": "La dieta fue fácil de seguir.",
-      "createdAt": "2025-06-11T04:02:27.678216"
-    },
-    {
-      "id": "dbef708e-ee59-4a65-968a-68d531e37f98",
-      "reviewId": "r8",
-      "userId": 13,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678225"
-    },
-    {
-      "id": "5ecd599e-ea31-4df2-ac89-97dfa3a81e3a",
-      "reviewId": "r13",
-      "userId": 8,
-      "content": "El plan fue desafiante pero valió la pena.",
-      "createdAt": "2025-06-11T04:02:27.678234"
-    },
-    {
-      "id": "53de42cb-bcd0-411d-802c-3c8846ed9779",
-      "reviewId": "r13",
-      "userId": 8,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678246"
-    },
-    {
-      "id": "91fdf1fd-dab4-4235-a784-211b4dddeeca",
-      "reviewId": "r13",
-      "userId": 15,
-      "content": "La dieta fue fácil de seguir.",
-      "createdAt": "2025-06-11T04:02:27.678259"
-    },
-    {
-      "id": "5e52efb8-21ef-4650-a0e6-3e40b5cf6bf1",
-      "reviewId": "r14",
-      "userId": 1,
-      "content": "Muy completo y bien estructurado.",
-      "createdAt": "2025-06-11T04:02:27.678269"
-    },
-    {
-      "id": "06b2353e-2cd7-443a-8bd3-624fdaba9c3d",
-      "reviewId": "r14",
-      "userId": 12,
-      "content": "Los menús son deliciosos y variados.",
-      "createdAt": "2025-06-11T04:02:27.678279"
-    },
-    {
-      "id": "e62c7921-795a-48d1-8a7d-81d7ce265b96",
-      "reviewId": "r14",
-      "userId": 14,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678294"
-    },
-    {
-      "id": "1527dbe2-dee4-4cff-bc3b-5a720f10b865",
-      "reviewId": "r19",
-      "userId": 4,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678317"
-    },
-    {
-      "id": "adcb5463-19b6-4963-a431-207994488e4f",
-      "reviewId": "r19",
-      "userId": 3,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678326"
-    },
-    {
-      "id": "28a87fe5-2fce-4fd4-8f73-b3819eef20da",
-      "reviewId": "r19",
-      "userId": 13,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678335"
-    },
-    {
-      "id": "c3005148-2782-4b76-ba37-b2adfe0edae3",
-      "reviewId": "r20",
-      "userId": 2,
-      "content": "Muy completo y bien estructurado.",
-      "createdAt": "2025-06-11T04:02:27.678349"
-    },
-    {
-      "id": "bcc1d9da-502c-45d4-a655-d04113fc65bb",
-      "reviewId": "r20",
-      "userId": 5,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678361"
-    },
-    {
-      "id": "2de141b4-b1cb-43e7-9977-15a7265533a9",
-      "reviewId": "r20",
-      "userId": 9,
-      "content": "Lo recomendaría a mis amigos.",
-      "createdAt": "2025-06-11T04:02:27.678374"
-    },
-    {
-      "id": "0408b609-d8f2-4c85-a815-dbbda5e91165",
-      "reviewId": "r25",
-      "userId": 3,
-      "content": "Los menús son deliciosos y variados.",
-      "createdAt": "2025-06-11T04:02:27.678386"
-    },
-    {
-      "id": "b8231326-4a9b-4d2a-a624-27c374c3ca0e",
-      "reviewId": "r25",
-      "userId": 2,
-      "content": "Me costó al principio, pero luego me adapté bien.",
-      "createdAt": "2025-06-11T04:02:27.678394"
-    },
-    {
-      "id": "466894b9-9971-4c75-8517-dc605c85d349",
-      "reviewId": "r25",
-      "userId": 4,
-      "content": "No me gustó mucho la sección de cardio.",
-      "createdAt": "2025-06-11T04:02:27.678402"
-    },
-    {
-      "id": "57517599-a4a6-4c2d-8a4e-078b491975b0",
-      "reviewId": "r26",
-      "userId": 3,
-      "content": "Me encantó la variedad de ejercicios.",
-      "createdAt": "2025-06-11T04:02:27.678410"
-    },
-    {
-      "id": "0b8a4120-6984-4f79-ab23-d31c4a91da21",
-      "reviewId": "r26",
-      "userId": 15,
-      "content": "Los menús son deliciosos y variados.",
-      "createdAt": "2025-06-11T04:02:27.678419"
-    },
-    {
-      "id": "a0c314e7-7bd3-4266-8d31-3b68697a1702",
-      "reviewId": "r26",
-      "userId": 12,
-      "content": "Los menús son deliciosos y variados.",
-      "createdAt": "2025-06-11T04:02:27.678427"
     }
   ],
   "review-reports": [
@@ -783,38 +519,6 @@
       "reason": "El contenido parece inapropiado.",
       "status": "pending",
       "createdAt": "2025-06-11T04:02:27.678647"
-    },
-    {
-      "id": "25b3ba3b-6592-410d-b71e-cf6899639866",
-      "reviewId": "r7",
-      "userId": 13,
-      "reason": "Contiene lenguaje ofensivo.",
-      "status": "pending",
-      "createdAt": "2025-06-11T04:02:27.678660"
-    },
-    {
-      "id": "14ca0207-4671-416e-8ebd-43dff4d74881",
-      "reviewId": "r13",
-      "userId": 8,
-      "reason": "Parece un comentario automatizado.",
-      "status": "pending",
-      "createdAt": "2025-06-11T04:02:27.678670"
-    },
-    {
-      "id": "2d2c155c-8f02-4543-87b0-9ad42cebeb3e",
-      "reviewId": "r19",
-      "userId": 12,
-      "reason": "El contenido parece inapropiado.",
-      "status": "pending",
-      "createdAt": "2025-06-11T04:02:27.678680"
-    },
-    {
-      "id": "ac995fa9-0543-4e3f-8b8a-64ee72eed24c",
-      "reviewId": "r25",
-      "userId": 14,
-      "reason": "No cumple con las normas de la comunidad.",
-      "status": "pending",
-      "createdAt": "2025-06-11T04:02:27.678691"
     },
     {
       "reviewId": "r1",

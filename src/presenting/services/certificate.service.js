@@ -1,7 +1,7 @@
 import httpInstance from "../../shared/services/http.instance.js"
 
-export class ProfileService {
-    resourceEndpoint = import.meta.env.VITE_PROFILES_ENDPOINT_PATH;
+export class CertificateService {
+    resourceEndpoint = import.meta.env.VITE_CERTIFICATES_ENDPOINT_PATH;
 
     getAll() {
         return httpInstance.get(this.resourceEndpoint);
@@ -12,7 +12,9 @@ export class ProfileService {
     }
 
     getByUserId(userId) {
-        return httpInstance.get(`${this.resourceEndpoint}?userId=${userId}`);
+        return httpInstance.get(this.resourceEndpoint, {
+            params: { userId: userId }
+        });
     }
 
     create(resource) {
