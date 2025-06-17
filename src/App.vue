@@ -7,10 +7,11 @@ import PurchasedPlanList from '@/selling/components/purchased-plan-list.componen
 import PurchasedPlanDetails from '@/selling/pages/purchased-plan-details.component.vue'
 import PurchasedPlanManagement from '@/selling/pages/purchased-plan-management.component.vue'
 import { computed } from "vue";
+import SellingView from "@/selling/pages/selling-view.vue";
 
 export default {
   name: "App",
-  components: { FooterContent, HeaderContent, PurchasedPlanList, PurchasedPlanDetails, PurchasedPlanManagement },
+  components: { SellingView, FooterContent, HeaderContent, PurchasedPlanList, PurchasedPlanDetails, PurchasedPlanManagement },
   setup() {
     const route = useRoute();
     const router = useRouter();
@@ -50,10 +51,15 @@ export default {
 
   <main>
     <router-view />
+
   </main>
 
   <footer-content />
+  <!-- Modal de Detalles -->
+  <PurchasedPlanDetails v-if="isDetailsRoute" @close="goBack" />
 
+  <!-- Modal de Crear/Editar -->
+  <PurchasedPlanManagement v-if="isCreateOrEditRoute" @close="goBack" />
 
 </template>
 
