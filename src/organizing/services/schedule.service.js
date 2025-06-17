@@ -1,4 +1,4 @@
-import httpInstance from "@/shared/services/http.instance.js";
+import httpInstance from "../../../../../../../aux folder/FitWise-FrontEnd-develop/FitWise-FrontEnd-develop/src/shared/services/http.instance.js";
 
 export class ScheduleService {
     resourceEndpoint = import.meta.env.VITE_SCHEDULES_ENDPOINT_PATH;
@@ -9,21 +9,6 @@ export class ScheduleService {
 
     getById(id) {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
-    }
-
-    getByUserId(userId) {
-        return httpInstance.get(this.resourceEndpoint, {
-            params: {
-                userId: userId
-            }
-        });
-    }
-    getByHealthPlanId(healthPlanId) {
-        return httpInstance.get(this.resourceEndpoint, {
-            params: {
-                userId: healthPlanId
-            }
-        });
     }
 
     create(resource) {
@@ -37,5 +22,4 @@ export class ScheduleService {
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
     }
-
 }
