@@ -16,7 +16,7 @@ const ReviewManagementComponent = () => import('../reviewing/pages/review-manage
 const ProfileAndCertificateManagementComponent = () => import('../presenting/pages/profile-and-certificate-management.component.vue');
 const FollowersManagementComponent = () => import('../presenting/pages/followers-management.component.vue');
 
-const ScheduleManagementComponent = () => import('../organizing/pages/schedule-management.component.vue');
+const ScheduleManagementComponent = () => import('../organizing/pages/schedule-board.component.vue');
 const ReviewCommentsPage = () => import('../reviewing/pages/review-comments-page.component.vue');
 const routes = [
     { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
