@@ -146,7 +146,7 @@ export default {
 
     getUserName(userId) {
       const user = this.users.find(u => u.id === userId);
-      return user ? user.userName : '---';
+      return user ? user.username : '---';
     },
 
     getPlanName(planId) {
