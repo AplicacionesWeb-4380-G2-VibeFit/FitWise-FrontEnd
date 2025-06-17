@@ -339,18 +339,309 @@
       "status": "expired"
     },
     {
-      "id": 3,
-      "ownerId": 101,
-      "planId": 1,
-      "purchaseDate": "2025-05-14",
-      "status": "expired"
+      "ownerId": "3",
+      "planId": "3",
+      "purchaseDate": "0001-11-11",
+      "status": "active",
+      "id": 3
     },
     {
-      "id": 4,
-      "ownerId": "asd",
-      "planId": "asd",
-      "purchaseDate": "2025-04-29",
-      "status": "active"
+      "ownerId": "4",
+      "planId": "4",
+      "purchaseDate": "2025-06-15T10:13:26.330Z",
+      "status": "active",
+      "id": 4
+    },
+    {
+      "ownerId": "10",
+      "planId": "9222",
+      "purchaseDate": "0123-03-12",
+      "status": "active",
+      "id": 5
+    },
+    {
+      "ownerId": "9",
+      "planId": "9",
+      "purchaseDate": "2025-06-15T10:14:51.607Z",
+      "status": "active",
+      "id": 6
+    },
+    {
+      "ownerId": "222222222",
+      "planId": "333333",
+      "purchaseDate": "2025-06-15T10:36:25.026Z",
+      "status": "active",
+      "id": 7
+    },
+    {
+      "ownerId": "a",
+      "planId": "aa",
+      "purchaseDate": "2025-06-15T10:41:25.692Z",
+      "status": "active",
+      "id": 8
+    },
+    {
+      "ownerId": "MTEO ES UN",
+      "planId": "ATORRANTE SIN RESPETO",
+      "purchaseDate": "11111-11-11",
+      "status": "expired",
+      "id": 9
+    },
+    {
+      "ownerId": "MARCO ES ",
+      "planId": "UNA LARCRA LARVA",
+      "purchaseDate": "2025-06-16T05:02:04.328Z",
+      "status": "active",
+      "id": 10
+    }
+  ],
+  "payments": [
+    {
+      "id": 1749978903985,
+      "ownerId": "321",
+      "planId": "321",
+      "amount": 123321,
+      "currency": "PEN",
+      "method": "paypal",
+      "status": "completed",
+      "paymentDate": "2025-06-15T09:15:03.985Z"
+    },
+    {
+      "id": 1749982406330,
+      "ownerId": "4",
+      "planId": "4",
+      "amount": 4,
+      "currency": "PEN",
+      "method": "yape",
+      "status": "completed",
+      "paymentDate": "2025-06-15T10:13:26.330Z",
+      "purchasedPlanId": 4
+    },
+    {
+      "id": 1749982441511,
+      "ownerId": "9",
+      "planId": "9",
+      "amount": 9,
+      "currency": "PEN",
+      "method": "yape",
+      "status": "completed",
+      "paymentDate": "2025-06-15T10:14:01.511Z",
+      "purchasedPlanId": 5
+    },
+    {
+      "id": 1749984108722,
+      "ownerId": "xdxdxd",
+      "planId": "xdxdxd",
+      "amount": 8888888888888888,
+      "currency": "PEN",
+      "method": "yape",
+      "status": "pending",
+      "paymentDate": "2025-06-15T10:41:48.722Z"
+    },
+    {
+      "id": 1749984861620,
+      "ownerId": "1343214342",
+      "planId": "234234",
+      "amount": 2343242,
+      "currency": "PEN",
+      "method": "yape",
+      "status": "completed",
+      "paymentDate": "2025-06-15T10:54:21.620Z",
+      "purchasedPlanId": 9
+    },
+    {
+      "id": 1750050124328,
+      "ownerId": "MARCO ES ",
+      "planId": "UNA LARCRA LARVA",
+      "amount": 100,
+      "currency": "PEN",
+      "method": "yape",
+      "status": "completed",
+      "paymentDate": "2025-06-16T05:02:04.328Z"
+    }
+  ],
+  "purchaseHistory": [
+    {
+      "payments": [
+        {
+          "id": 1749980715063,
+          "ownerId": 102,
+          "planId": 2,
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:13.566Z",
+          "purchasedPlanId": 46
+        },
+        {
+          "id": 1749979064475,
+          "ownerId": 102,
+          "planId": 2,
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:41.696Z",
+          "purchasedPlanId": 53
+        }
+      ]
+    },
+    {
+      "id": "xd",
+      "payments": [
+        {
+          "id": 1749977009154,
+          "ownerId": "xd",
+          "planId": "xd",
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:40.141Z",
+          "purchasedPlanId": 47
+        },
+        {
+          "id": 1749977032296,
+          "ownerId": "xd",
+          "planId": "xd",
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:40.392Z",
+          "purchasedPlanId": 48
+        },
+        {
+          "id": 1749978939428,
+          "ownerId": "xd",
+          "planId": "xd",
+          "amount": 123123123,
+          "currency": "PEN",
+          "method": "paypal",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:40.628Z",
+          "purchasedPlanId": 49
+        }
+      ]
+    },
+    {
+      "id": "123sfsdfasdf",
+      "payments": [
+        {
+          "id": 1749978956061,
+          "ownerId": "123sfsdfasdf",
+          "planId": "sadfasdf",
+          "amount": 123,
+          "currency": "PEN",
+          "method": "paypal",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:41.006Z",
+          "purchasedPlanId": 50
+        },
+        {
+          "id": 1749981645901,
+          "ownerId": "123sfsdfasdf",
+          "planId": "sadfasdf",
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T10:01:12.570Z",
+          "purchasedPlanId": 56
+        }
+      ]
+    },
+    {
+      "id": "asdasd",
+      "payments": [
+        {
+          "id": 1749978985596,
+          "ownerId": "asdasd",
+          "planId": "asdasd",
+          "amount": 123,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:41.236Z",
+          "purchasedPlanId": 51
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "payments": [
+        {
+          "id": 1749979046430,
+          "ownerId": "3",
+          "planId": "3",
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T09:58:41.491Z",
+          "purchasedPlanId": 52
+        },
+        {
+          "id": 1749979114200,
+          "ownerId": "3",
+          "planId": "3",
+          "amount": 0,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T10:00:57.981Z",
+          "purchasedPlanId": 54
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "payments": [
+        {
+          "id": 1749979173460,
+          "ownerId": "4",
+          "planId": "4",
+          "amount": 4,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T10:00:58.401Z",
+          "purchasedPlanId": 55
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "payments": [
+        {
+          "id": 1749982478712,
+          "ownerId": "9",
+          "planId": "9",
+          "amount": 99,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T10:14:51.638Z",
+          "purchasedPlanId": 6
+        }
+      ]
+    },
+    {
+      "id": "222222222",
+      "payments": [
+        {
+          "id": 1749983769840,
+          "ownerId": "222222222",
+          "planId": "333333",
+          "amount": 123123123,
+          "currency": "PEN",
+          "method": "yape",
+          "status": "completed",
+          "paymentDate": "2025-06-15T10:36:25.046Z",
+          "purchasedPlanId": 7
+        }
+      ]
     }
   ],
   "meals": [

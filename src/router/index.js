@@ -26,6 +26,14 @@ const routes = [
     { path: '/selling/create', name: 'selling-create', component: SellingViewComponent, meta: { title: 'Selling Create' } },
     { path: '/selling/:id', name: 'selling-details', component: SellingViewComponent, meta: { title: 'Selling Details' } },
     { path: '/selling/:id/edit', name: 'selling-edit', component: SellingViewComponent, meta: { title: 'Selling Edit' } },
+    { path: '/selling/payments/pending',  name: 'payment-pending', component: () => import('/src/selling/pages/PendingPayments.vue') },
+
+    {
+        path: '/selling/payments',
+        name: 'payment-history',
+        component: () => import('/src/selling/components/payment-history.vue'),
+        meta: { title: 'Historial de pagos' }
+    },
 
     //PRESENTING routes
     { path: '/presenting/profile', name: 'profile-view-and-edit', component: ProfileAndCertificateManagementComponent, meta: { title: 'Profile' } },
