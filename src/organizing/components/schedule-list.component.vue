@@ -1,165 +1,95 @@
 <template>
-  <div class="card">
-    <h2>Gestión de Horarios</h2>
+  <DataTable
+      :value="schedules"
+      dataKey="id"
+      class="green-table"
+      paginator :rows="5"
+  >
+    <Column field="userId" header="👤 Usuario">
+      <template #body="{ data }">{{ getUserName(data.userId) }}</template>
+    </Column>
 
-    <DataTable
-        ref="dt"
-        :value="schedules"
-        dataKey="id"
-        paginator
-        :rows="5"
-        editMode="row"
-        v-model:editingRows="editingRows"
-        class="p-datatable-gridlines"
-        @row-edit-init="onRowEditInit"
-        @row-edit-save="onRowEditSave"
-    >
-      <Column field="userId" header="Usuario">
-        <template #body="{ data }">
-          {{ getUserName(data.userId) }}
-        </template>
-        <template #editor="{ data }">
-          <Dropdown
-              v-model="data.userId"
-              :options="users"
-              optionLabel="username"
-              optionValue="id"
-              placeholder="Selecciona un usuario"
-          />
-        </template>
-      </Column>
+    <Column field="healthPlanId" header="📋 Plan de Salud">
+      <template #body="{ data }">{{ getPlanName(data.healthPlanId) }}</template>
+    </Column>
 
-      <Column field="healthPlanId" header="Plan de Salud">
-        <template #body="{ data }">
-          {{ getPlanName(data.healthPlanId) }}
-        </template>
-        <template #editor="{ data }">
-          <Dropdown
-              v-model="data.healthPlanId"
-              :options="healthPlans"
-              optionLabel="healthPlans"
-              optionValue="id"
-              placeholder="Selecciona un plan de salud"
-          />
-        </template>
-      </Column>
+    <Column field="date" header="📅 Fecha">
+      <template #body="{ data }">{{ data.date }}</template>
+    </Column>
 
-      <Column field="startDate" header="Fecha de Inicio">
-        <template #body="{ data }">
-          {{ data.startDate }}
-        </template>
-        <template #editor="{ data }">
-          <Calendar
-              v-model="data.startDate"
-              dateFormat="yy-mm-dd"
-              placeholder="Selecciona una fecha"
-          />
-        </template>
-      </Column>
-
-
-      <Column header="Acciones" bodyStyle="text-align: center">
-        <template #body="{ data, index }">
-          <Button icon="pi pi-pencil" @click="editRow(data)" v-if="!editingRows[data.id]" />
-          <Button icon="pi pi-check" class="p-button-success" @click="saveRow(data)" v-else />
-          <Button icon="pi pi-trash" class="p-button-danger" @click="deleteRow(data.id)" />
-        </template>
-      </Column>
-    </DataTable>
-  </div>
+    <Column header="⚙ Acciones" bodyStyle="text-align: center">
+      <template #body="{ data }">
+        <Button class="edit-button mr-2" @click.stop="$emit('edit-schedule', data)">
+          <i class="pi pi-pencil"></i>
+        </Button>
+        <Button class="delete-button" @click.stop="$emit('delete-schedule', data.id)">
+          <i class="pi pi-trash"></i>
+        </Button>
+      </template>
+    </Column>
+  </DataTable>
 </template>
 
 <script>
-
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
-import Dropdown from 'primevue/dropdown';
-import Calendar from 'primevue/calendar';
-
-import { ScheduleService } from '@/organizing/services/schedule.service.js';
-import { UserService } from '@/presenting/services/user.service.js';
-import { HealthPlanService } from '@/organizing/services/healthPlan.service.js';
 
 export default {
-  name: 'ScheduleListComponent',
-  components: {
-    DataTable,
-    Column,
-    Button,
-    Dropdown,
-    Calendar
-  },
-  data() {
-    return {
-      schedules: [],
-      editingRows: {} ,
-      users: [],
-      healthPlans: []
-    };
-  },
-  async mounted() {
-    const scheduleService = new ScheduleService();
-    const userService = new UserService();
-    const planService = new HealthPlanService();
-
-    const [sRes, uRes, hRes] = await Promise.all([
-      scheduleService.getAll(),
-      userService.getAll(),
-      planService.getAll()
-    ]);
-
-    console.log("Usuarios cargados:", this.users);
-    console.log("Planes de salud cargados:", this.healthPlans);
-
-
-    this.schedules = sRes.data;
-    this.users = uRes.data;
-    this.healthPlans = hRes.data;
+  name: "schedule-list",
+  components: {DataTable, Column, Button},
+  props: {
+    schedules: Array,
+    users: Array,
+    healthPlans: Array
   },
   methods: {
-    onRowEditInit(event) {
-      this.editingRows = { ...this.editingRows, [event.data.id]: true };
+    getUserName(id) {
+      const u = this.users.find(u => u.id === id);
+      return u ? u.username : '---';
     },
-    onRowEditSave(event) {
-      this.saveRow(event.data);
-    },
-
-    // Guardar fila editada
-    async saveRow(rowData) {
-      const service = new ScheduleService();
-      await service.update(rowData.id, rowData);
-      this.editingRows = {};
-    },
-
-    // Activar edición
-    editRow(rowData) {
-      this.editingRows = { ...this.editingRows, [rowData.id]: true };
-    },
-
-    // Eliminar horario
-    async deleteRow(id) {
-      const service = new ScheduleService();
-      await service.delete(id);
-      this.schedules = this.schedules.filter((s) => s.id !== id);
-    },
-
-    getUserName(userId) {
-      const user = this.users.find(u => u.id === userId);
-      return user ? user.username : '---';
-    },
-
-    getPlanName(planId) {
-      const plan = this.healthPlans.find(p => p.id === planId);
-      return plan ? plan.name : '---';
+    getPlanName(id) {
+      const p = this.healthPlans.find(p => p.id === id);
+      return p ? p.name : '---';
     }
-
   }
 };
 </script>
 
 <style scoped>
-h2 {
-  margin-bottom: 1rem;
+.green-table ::v-deep(.p-datatable-thead > tr > th) {
+  background-color: #1e7e34;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.green-table ::v-deep(.p-datatable-tbody > tr) {
+  background-color: #2e8b57;
+  color: #fff;
+}
+
+.green-table ::v-deep(.p-datatable-tbody > tr:hover) {
+  background-color: #256d46 !important;
+}
+
+.edit-button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #1c5d2f;
+}
+
+.delete-button {
+  background-color: #6bbf59;
+  border: none;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #4e9b3e;
 }
 </style>

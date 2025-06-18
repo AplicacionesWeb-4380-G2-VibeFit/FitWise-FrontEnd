@@ -22,5 +22,4 @@ export class ScheduleService {
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
     }
-
 }
