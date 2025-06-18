@@ -11,14 +11,14 @@ export class Schedule {
      * @param {string} [params.id=""] - Unique identifier for the schedule
      * @param {string} [params.userId=""] - Contains the id of a user
      * @param {string} [params.healthPlanId=""] - Contains the id of a Health Plan whose it belongs
-     * @param {string} [params.date=""] - Display the date of the schedule
+     * @param {string} [params.startDate=""] - Display the date of the schedule
      *
      */
     constructor({
                     id = "",
                     userId = "",
                     healthPlanId = "",
-                    date = "",
+                    startDate = "",
                 }) {
         /**
          * @type {string}
@@ -42,6 +42,6 @@ export class Schedule {
          * @type {string}
          * @description Display the date of the schedule
          */
-        this.date = date;
+        this.date = startDate;
     }
 }

@@ -1,74 +1,3 @@
-<template>
-  <div class="card">
-    <h2>Gestión de Horarios</h2>
-
-    <DataTable
-        ref="dt"
-        :value="schedules"
-        dataKey="id"
-        paginator
-        :rows="5"
-        editMode="row"
-        v-model:editingRows="editingRows"
-        class="p-datatable-gridlines"
-        @row-edit-init="onRowEditInit"
-        @row-edit-save="onRowEditSave"
-    >
-      <Column field="userId" header="Usuario">
-        <template #body="{ data }">
-          {{ getUserName(data.userId) }}
-        </template>
-        <template #editor="{ data }">
-          <Dropdown
-              v-model="data.userId"
-              :options="users"
-              optionLabel="username"
-              optionValue="id"
-              placeholder="Selecciona un usuario"
-          />
-        </template>
-      </Column>
-
-      <Column field="healthPlanId" header="Plan de Salud">
-        <template #body="{ data }">
-          {{ getPlanName(data.healthPlanId) }}
-        </template>
-        <template #editor="{ data }">
-          <Dropdown
-              v-model="data.healthPlanId"
-              :options="healthPlans"
-              optionLabel="healthPlans"
-              optionValue="id"
-              placeholder="Selecciona un plan de salud"
-          />
-        </template>
-      </Column>
-
-      <Column field="startDate" header="Fecha de Inicio">
-        <template #body="{ data }">
-          {{ data.startDate }}
-        </template>
-        <template #editor="{ data }">
-          <Calendar
-              v-model="data.startDate"
-              dateFormat="yy-mm-dd"
-              placeholder="Selecciona una fecha"
-          />
-        </template>
-      </Column>
-
-
-      <Column header="Acciones" bodyStyle="text-align: center">
-        <template #body="{ data, index }">
-          <Button icon="pi pi-pencil" @click="editRow(data)" v-if="!editingRows[data.id]" />
-          <Button icon="pi pi-check" class="p-button-success" @click="saveRow(data)" v-else />
-          <Button icon="pi pi-trash" class="p-button-danger" @click="deleteRow(data.id)" />
-        </template>
-      </Column>
-    </DataTable>
-  </div>
-</template>
-
 <script>
 
 import DataTable from 'primevue/datatable';
@@ -157,6 +86,78 @@ export default {
   }
 };
 </script>
+<template>
+  <div class="card">
+    <h2>Gestión de Horarios</h2>
+
+    <DataTable
+        ref="dt"
+        :value="schedules"
+        dataKey="id"
+        paginator
+        :rows="5"
+        editMode="row"
+        v-model:editingRows="editingRows"
+        class="p-datatable-gridlines"
+        @row-edit-init="onRowEditInit"
+        @row-edit-save="onRowEditSave"
+    >
+      <Column field="userId" header="Usuario">
+        <template #body="{ data }">
+          {{ getUserName(data.userId) }}
+        </template>
+        <template #editor="{ data }">
+          <Dropdown
+              v-model="data.userId"
+              :options="users"
+              optionLabel="username"
+              optionValue="id"
+              placeholder="Selecciona un usuario"
+          />
+        </template>
+      </Column>
+
+      <Column field="healthPlanId" header="Plan de Salud">
+        <template #body="{ data }">
+          {{ getPlanName(data.healthPlanId) }}
+        </template>
+        <template #editor="{ data }">
+          <Dropdown
+              v-model="data.healthPlanId"
+              :options="healthPlans"
+              optionLabel="healthPlans"
+              optionValue="id"
+              placeholder="Selecciona un plan de salud"
+          />
+        </template>
+      </Column>
+
+      <Column field="startDate" header="Fecha de Inicio">
+        <template #body="{ data }">
+          {{ data.startDate }}
+        </template>
+        <template #editor="{ data }">
+          <Calendar
+              v-model="data.startDate"
+              dateFormat="yy-mm-dd"
+              placeholder="Selecciona una fecha"
+          />
+        </template>
+      </Column>
+
+
+      <Column header="Acciones" bodyStyle="text-align: center">
+        <template #body="{ data, index }">
+          <Button icon="pi pi-pencil" @click="editRow(data)" v-if="!editingRows[data.id]" />
+          <Button icon="pi pi-check" class="p-button-success" @click="saveRow(data)" v-else />
+          <Button icon="pi pi-trash" class="p-button-danger" @click="deleteRow(data.id)" />
+        </template>
+      </Column>
+    </DataTable>
+  </div>
+</template>
+
+
 
 <style scoped>
 h2 {

@@ -44,7 +44,7 @@ import {
     DatePicker,
     RadioButton,
     Message,
-    Paginator
+    Paginator,
 } from "primevue";
 
 import i18n from "@/i18n.js";
@@ -58,6 +58,7 @@ app
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService)
+    
 
     .component('pv-button', Button)
     .component('pv-card', Card)

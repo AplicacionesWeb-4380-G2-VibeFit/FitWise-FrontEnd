@@ -4,16 +4,17 @@
 
     <!-- Aquí podrías agregar filtros o widgets -->
 
-    <ScheduleListComponent />
+    
+    <ScheduleListV2/>
   </div>
 </template>
 
 <script>
 import ScheduleListComponent from '@/organizing/components/schedule-list.component.vue';
-
+import ScheduleListV2 from "@/organizing/components/schedule-list-v2.vue";
 export default {
   name: 'ScheduleBoardComponent',
-  components:{ ScheduleListComponent }
+  components:{ ScheduleListComponent, ScheduleListV2 }
 }
 </script>
 
