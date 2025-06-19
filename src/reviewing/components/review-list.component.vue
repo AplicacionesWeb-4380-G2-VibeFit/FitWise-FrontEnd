@@ -133,7 +133,7 @@ export default {
   width: 100%;
 }
 .review-card {
-  background-color: #f6fdf9;
+  background-color: #c3e6cb;
   border: 1px solid #c3e6cb;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }

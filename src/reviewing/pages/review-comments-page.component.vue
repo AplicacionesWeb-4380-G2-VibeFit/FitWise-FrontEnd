@@ -205,7 +205,43 @@ export default {
 
 <style scoped>
 .review-comments-page {
+  background-color: rgba(40, 167, 69, 0.2);
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
 }
+
+h2 {
+  color: #1e7e34;
+}
+
+h3 {
+  color: #218838;
+}
+
+.pv-data-table ::v-deep(.p-datatable-thead > tr > th) {
+  background-color: #28a745;
+  color: white;
+  text-align: center;
+}
+
+.pv-data-table ::v-deep(.p-datatable-tbody > tr:hover) {
+  background-color: #d4edda !important;
+}
+
+.pv-data-table ::v-deep(.p-datatable-tbody > tr > td) {
+  font-size: 0.9rem;
+}
+
+.comment-errors {
+  color: #d32f2f;
+  background-color: #ffe5e5;
+  border: 1px solid #f5c2c2;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
 </style>
+

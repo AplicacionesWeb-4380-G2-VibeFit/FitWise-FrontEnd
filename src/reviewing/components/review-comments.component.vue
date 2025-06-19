@@ -100,6 +100,45 @@ export default {
 
 <style scoped>
 .review-comments {
-  font-size: 0.85rem;
+  background-color: #f6fdf9;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #d4edda;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+small.text-gray-600 {
+  color: #495057; /* texto del comentario */
+}
+
+small.text-gray-400 {
+  color: #6c757d; /* fecha del comentario */
+}
+
+input.p-inputtext {
+  width: 100%;
+}
+
+.text-red-600 {
+  color: #d32f2f;
+  background-color: #ffe5e5;
+  border: 1px solid #f5c2c2;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 </style>
+

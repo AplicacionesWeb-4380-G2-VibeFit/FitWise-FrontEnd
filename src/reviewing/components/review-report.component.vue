@@ -126,11 +126,12 @@ export default {
 .report-textarea {
   padding: 0.5rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #c3e6cb;
   font-size: 0.9rem;
   font-family: inherit;
   resize: vertical;
   min-height: 80px;
+  background-color: #f6fdf9;
 }
 
 .report-errors {
@@ -139,7 +140,20 @@ export default {
   border: 1px solid #f5c2c2;
   border-radius: 4px;
   padding: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.report-cancel-btn {
+  color: #218838;
+}
+
+.report-submit-btn {
+  background-color: #28a745;
+  border: none;
+}
+
+.report-submit-btn:hover {
+  background-color: #1e7e34;
 }
 </style>
 
