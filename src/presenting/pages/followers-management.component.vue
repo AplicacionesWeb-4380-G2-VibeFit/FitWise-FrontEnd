@@ -139,7 +139,7 @@ export default {
   },
 
   created() {
-    this.userId=1; // This should be dynamically set based on the logged-in user
+    this.userId="1"; // This should be dynamically set based on the logged-in user
     this.followerService = new FollowerService();
     this.userService = new UserService();
 

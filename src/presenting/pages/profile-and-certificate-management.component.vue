@@ -48,7 +48,7 @@ export default{
   created() {
     this.userService = new UserService();
 
-    this.userId=1; // This should be dynamically set based on the logged-in user
+    this.userId="1"; // This should be dynamically set based on the logged-in user
     // Fetch user data by ID
     this.userService.getById(this.userId).then(response => {
       this.user = new User(response.data);
