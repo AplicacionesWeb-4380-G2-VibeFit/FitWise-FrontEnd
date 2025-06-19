@@ -1,9 +1,6 @@
 <template>
   <PurchasedPlanListComponent />
-  <div class="create-button">
-    <router-link to="/selling/payments">Ver historial de pagos</router-link>
-    <router-link to="/selling/payments/pending">Pagos</router-link>
-  </div>
+
   <!-- Modal para crear o editar -->
   <PurchasedPlanManagementComponent
       v-if="isCreateOrEdit"

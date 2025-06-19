@@ -1,40 +1,40 @@
-import axios from 'axios';
+// src/selling/services/purchase-history.service.js
+import httpInstance from "@/shared/services/http.instance.js";
 
-const API_URL = 'http://localhost:3000/purchaseHistory';
+const resourceEndpoint = import.meta.env.VITE_PURCHASE_HISTORY_ENDPOINT_PATH;
 
-export const getPurchaseHistoryByUserId = async (userId) => {
-    try {
-        const res = await axios.get(`${API_URL}/${userId}`);
-        return res.data;
-    } catch (err) {
-        if (err.response && err.response.status === 404) {
-            // Si no existe, devolver uno vacío (no lanzar error)
-            return { id: userId, payments: [] };
-        } else {
-            throw err;
-        }
-    }
+/**
+ * Obtiene TODO el recurso de purchaseHistory (lista plana de usuarios con pagos)
+ */
+export const getAllPurchaseHistory = () => {
+    return httpInstance.get(resourceEndpoint);
 };
 
+/**
+ * Obtiene el historial de pagos de un usuario
+ */
+export const getPurchaseHistoryByUserId = (userId) => {
+    return httpInstance.get(`${resourceEndpoint}/${userId}`);
+};
+
+/**
+ * Añade un pago al historial de un usuario.
+ */
 export const addPaymentToHistory = async (userId, newPayment) => {
     try {
-        const res = await axios.get(`${API_URL}/${userId}`);
-        const existingPayments = res.data.payments || [];
-
-        const updatedPayments = [...existingPayments, newPayment];
-
-        return await axios.patch(`${API_URL}/${userId}`, {
-            payments: updatedPayments
+        const { data } = await httpInstance.get(`${resourceEndpoint}/${userId}`);
+        const payments = Array.isArray(data.payments) ? data.payments : [];
+        payments.push(newPayment);
+        return await httpInstance.patch(`${resourceEndpoint}/${userId}`, {
+            payments
         });
     } catch (err) {
-        if (err.response && err.response.status === 404) {
-            // ✅ Crear nuevo historial si no existe
-            return await axios.post(API_URL, {
-                id: userId,
+        if (err.response?.status === 404) {
+            return await httpInstance.post(resourceEndpoint, {
+                id:       userId,
                 payments: [newPayment]
             });
-        } else {
-            throw err;
         }
+        throw err;
     }
 };
