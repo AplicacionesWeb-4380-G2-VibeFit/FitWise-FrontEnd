@@ -24,6 +24,15 @@ export default{
 
   methods: {
     onAccept() {
+      // Aquí arreglo el birthDate para que sea un string en formato MM/DD/YYYY
+      if (this.userEdit.birthDate instanceof Date) {
+        const d = this.userEdit.birthDate;
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        this.userEdit.birthDate = `${mm}/${dd}/${yyyy}`;
+      }
+
       // Tu lógica aquí
       this.user = new User(JSON.parse(JSON.stringify(this.userEdit)));
       this.userService.update(this.userId, this.user);
@@ -322,6 +331,7 @@ export default{
                   v-model="userEdit.birthDate"
                   :disabled="!isEditModeProfile"
               />
+              <small style="color: black;">Your age must be over 18</small>
             </div>
           </div>
 
