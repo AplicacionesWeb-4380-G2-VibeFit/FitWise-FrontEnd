@@ -131,7 +131,7 @@ export default {
   font-family: inherit;
   resize: vertical;
   min-height: 80px;
-  background-color: #f6fdf9;
+  background-color: #218838;
 }
 
 .report-errors {
