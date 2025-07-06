@@ -1,11 +1,7 @@
 // src/selling/services/purchased-plans.service.js
 import httpInstance from "@/shared/services/http.instance.js";
 
-<<<<<<< Updated upstream
 const resourceEndpoint = import.meta.env.VITE_PURCHASED_PLANS_ENDPOINT_PATH;
-=======
-const API_URL = 'http://localhost:5144/api/v1/purchased-plans';
->>>>>>> Stashed changes
 
 /**
  * Obtiene todos los planes comprados

@@ -27,70 +27,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 import {
   getPendingByUser,
-  deletePayment
-} from '@/selling/services/payments.service.js';
-import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js';
-import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js';
+  deletePayment, patchPayment
+} from '@/selling/services/payments.service.js'
+import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js'
+import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js'
 
 const props = defineProps({
   userId: { type: [String, Number], required: true }
-});
-
-const pending    = ref([]);
-const loading    = ref(false);
-const error      = ref(null);
-const processing = ref(false);
-
-onMounted(async () => {
-<<<<<<< Updated upstream
-  loading.value = true;
-  try {
-    const { data } = await getPendingByUser(props.userId);
-    pending.value = data;
-  } catch (err) {
-    console.error('Error cargando pagos pendientes:', err);
-    error.value = 'No se pudieron cargar los pagos pendientes.';
-  } finally {
-    loading.value = false;
-  }
-});
-
-async function finishPayment(p) {
-  if (processing.value) return;
-  processing.value = true;
-  try {
-    const { data: plan } = await createPurchasedPlan({
-      ownerId:      p.ownerId,
-      planId:       p.planId,
-      purchaseDate: new Date().toISOString(),
-      status:       'active'
-    });
-
-    const completed = {
-      ...p,
-      status:            'completed',
-      paymentDate:       new Date().toISOString(),
-      purchasedPlanId:   plan.id
-    };
-
-    await addPaymentToHistory(p.ownerId, completed);
-    await deletePayment(p.id);
-    pending.value = pending.value.filter(x => x.id !== p.id);
-  } catch (err) {
-    console.error('Error completando el pago:', err);
-    alert('No se pudo completar el pago. Intenta de nuevo.');
-  } finally {
-    processing.value = false;
-  }
-=======
-  const res = await axios.get('http://localhost:5144/api/v1/payments')
-  pending.value = res.data.filter(p => p.status === 'pending')
 })
 
-async function finish(p) {
+const pending    = ref([])
+const loading    = ref(false)
+const error      = ref(null)
+const processing = ref(false)
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    const { data } = await getPendingByUser(props.userId)
+    // Aseguramos que solo se carguen los pagos realmente pendientes
+    pending.value = (Array.isArray(data) ? data : []).filter(p => p.status === 'pending')
+  } catch (err) {
+    console.error('Error cargando pagos pendientes:', err)
+    error.value = 'No se pudieron cargar los pagos pendientes.'
+  } finally {
+    loading.value = false
+  }
+})
+
+async function finishPayment(p) {
   try {
     // 1. Crear el plan comprado
     const plan = await createPurchasedPlan({
@@ -117,7 +85,6 @@ async function finish(p) {
   } catch (err) {
     console.error('❌ Error al completar el pago:', err)
   }
->>>>>>> Stashed changes
 }
 </script>
 

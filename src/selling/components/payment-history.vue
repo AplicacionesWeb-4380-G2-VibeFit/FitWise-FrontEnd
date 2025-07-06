@@ -24,42 +24,27 @@
 </template>
 
 <script setup>
-<<<<<<< Updated upstream
-import { ref, onMounted } from 'vue';
-import { getAllPurchaseHistory } from '@/selling/services/purchase-history.service.js';
-=======
 import { ref, onMounted } from 'vue'
->>>>>>> Stashed changes
+import { getAllPurchaseHistory } from '@/selling/services/purchase-history.service.js'
 
-const payments = ref([]);
-const loading  = ref(false);
-const error    = ref(null);
-
-import { getAllPurchaseHistory } from '@/selling/services/purchase-history.service.js';
+const payments = ref([])
+const loading  = ref(false)
+const error    = ref(null)
 
 onMounted(async () => {
-<<<<<<< Updated upstream
-  loading.value = true;
+  loading.value = true
   try {
-    const res = await getAllPurchaseHistory();
+    const res = await getAllPurchaseHistory()
     // res.data es un array de { id, payments: [...] } por usuario
-    const allPayments = res.data.flatMap(user => user.payments || []);
-    // Filtramos solo los completados
-    payments.value = allPayments.filter(p => p.status === 'completed');
+    const allPayments = res.data.flatMap(user => user.payments || [])
+    payments.value = allPayments.filter(p => p.status === 'completed')
   } catch (err) {
-    console.error('Error al cargar historial de pagos:', err);
-    error.value = 'No se pudo cargar el historial. Intenta más tarde.';
+    console.error('Error al cargar historial de pagos:', err)
+    error.value = 'No se pudo cargar el historial. Intenta más tarde.'
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-});
-=======
-  const res = await getAllPurchaseHistory();
-  const allPayments = res.flatMap(user => user.payments || []);
-  payments.value = allPayments.filter(p => p.status === 'completed');
-});
-
->>>>>>> Stashed changes
+})
 </script>
 
 <style scoped>

@@ -22,54 +22,23 @@
 </template>
 
 <script setup>
-<<<<<<< Updated upstream
-import { reactive, ref } from 'vue';
-import { createPayment } from '@/selling/services/payments.service.js';
-import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js';
-=======
 import { reactive, ref } from 'vue'
 import { createPayment } from '@/selling/services/payments.service.js'
-import {addPaymentToHistory, addPaymentToHistoryNow} from '@/selling/services/purchase-history.service.js'
-import {createPurchasedPlan} from "@/selling/services/purchased-plans.service.js"; // Asegúrate de que el path sea correcto
->>>>>>> Stashed changes
+import { addPaymentToHistoryNow } from '@/selling/services/purchase-history.service.js'
+import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js' // ✅ NUEVO
 
-const props = defineProps({ draft: Object });
-const emit  = defineEmits(['close']);
-const saving = ref(false);
+const props = defineProps({ draft: Object })
+const emit  = defineEmits(['close'])
+const saving = ref(false)
 
 const payment = reactive({
   method: 'yape',
   amount: props.draft.price || 0
-});
+})
 
-function close(result) {
-  emit('close', result);
-}
-
-async function payNow() {
-  if (payment.amount <= 0) {
-    return alert('El monto debe ser mayor que cero');
-  }
-  saving.value = true;
+async function payNow () {
+  saving.value = true
   try {
-<<<<<<< Updated upstream
-    // Crear pago completado
-    const { data: pay } = await createPayment({
-      ownerId:    props.draft.ownerId,
-      planId:     props.draft.planId,
-      amount:     payment.amount,
-      currency:   'PEN',
-      method:     payment.method,
-      status:     'completed',
-      paymentDate: new Date().toISOString()
-    });
-    // Guardar en historial
-    await addPaymentToHistory(props.draft.ownerId, pay);
-    close(pay);
-  } catch (err) {
-    console.error('Error al procesar el pago:', err);
-    alert('Ocurrió un error al procesar el pago.');
-=======
     const res = await createPayment({
       id: Date.now(),
       ownerId: props.draft.ownerId,
@@ -82,8 +51,7 @@ async function payNow() {
     })
 
     const pay = res.data
-    if (!pay || !pay.id) thr
-    ow new Error('No se generó el pago correctamente.')
+    if (!pay || !pay.id) throw new Error('No se generó el pago correctamente.')
 
     // 1. Historial
     await addPaymentToHistoryNow(props.draft.ownerId, pay)
@@ -100,48 +68,38 @@ async function payNow() {
   } catch (err) {
     console.error('❌ Error al procesar el pago:', err)
     alert('Ocurrió un error al procesar el pago.')
->>>>>>> Stashed changes
   } finally {
-    saving.value = false;
+    saving.value = false
   }
-}
-<<<<<<< Updated upstream
 
-async function payLater() {
-  if (payment.amount <= 0) {
-    return alert('El monto debe ser mayor que cero');
-  }
-  saving.value = true;
-=======
+}
 async function payLater () {
   await finish('pending')
 }
-
 async function finish (status) {
   saving.value = true
->>>>>>> Stashed changes
   try {
-    // Crear pago pendiente
-    const { data: pay } = await createPayment({
-      ownerId:    props.draft.ownerId,
-      planId:     props.draft.planId,
-      amount:     payment.amount,
-      currency:   'PEN',
-      method:     payment.method,
-      status:     'pending',
+    const pay = await createPayment({
+      id: Date.now(),
+      ownerId: props.draft.ownerId,
+      planId:  props.draft.planId,
+      amount:  payment.amount,
+      currency: 'PEN',
+      method:  payment.method,
+      status,
       paymentDate: new Date().toISOString()
-    });
-    // (Opcional) guardar en historial también
-    await addPaymentToHistory(props.draft.ownerId, pay);
-    close(pay);
+    })
+
+    emit('close', pay.data)
   } catch (err) {
-    console.error('Error al guardar el pago pendiente:', err);
-    alert('Ocurrió un error al guardar el pago.');
+    console.error('Error al guardar el pago:', err)
+    alert('Ocurrió un error al guardar el pago.')
   } finally {
-    saving.value = false;
+    saving.value = false
   }
 }
 </script>
+
 
 <style scoped>
 .overlay {
@@ -254,4 +212,3 @@ input[type="number"]:focus {
   color: #718096;
 }
 </style>
-
