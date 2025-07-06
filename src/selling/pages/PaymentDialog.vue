@@ -22,9 +22,16 @@
 </template>
 
 <script setup>
+<<<<<<< Updated upstream
 import { reactive, ref } from 'vue';
 import { createPayment } from '@/selling/services/payments.service.js';
 import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js';
+=======
+import { reactive, ref } from 'vue'
+import { createPayment } from '@/selling/services/payments.service.js'
+import {addPaymentToHistory, addPaymentToHistoryNow} from '@/selling/services/purchase-history.service.js'
+import {createPurchasedPlan} from "@/selling/services/purchased-plans.service.js"; // Asegúrate de que el path sea correcto
+>>>>>>> Stashed changes
 
 const props = defineProps({ draft: Object });
 const emit  = defineEmits(['close']);
@@ -45,6 +52,7 @@ async function payNow() {
   }
   saving.value = true;
   try {
+<<<<<<< Updated upstream
     // Crear pago completado
     const { data: pay } = await createPayment({
       ownerId:    props.draft.ownerId,
@@ -61,16 +69,57 @@ async function payNow() {
   } catch (err) {
     console.error('Error al procesar el pago:', err);
     alert('Ocurrió un error al procesar el pago.');
+=======
+    const res = await createPayment({
+      id: Date.now(),
+      ownerId: props.draft.ownerId,
+      planId:  props.draft.planId,
+      amount:  payment.amount,
+      currency: 'PEN',
+      method:  payment.method,
+      status: 'completed',
+      paymentDate: new Date().toISOString()
+    })
+
+    const pay = res.data
+    if (!pay || !pay.id) thr
+    ow new Error('No se generó el pago correctamente.')
+
+    // 1. Historial
+    await addPaymentToHistoryNow(props.draft.ownerId, pay)
+
+    // 2. Purchased Plan
+    await createPurchasedPlan({
+      ownerId: props.draft.ownerId,
+      planId: props.draft.planId,
+      purchaseDate: new Date().toISOString(),
+      status: 'active'
+    })
+
+    emit('close', pay)
+  } catch (err) {
+    console.error('❌ Error al procesar el pago:', err)
+    alert('Ocurrió un error al procesar el pago.')
+>>>>>>> Stashed changes
   } finally {
     saving.value = false;
   }
 }
+<<<<<<< Updated upstream
 
 async function payLater() {
   if (payment.amount <= 0) {
     return alert('El monto debe ser mayor que cero');
   }
   saving.value = true;
+=======
+async function payLater () {
+  await finish('pending')
+}
+
+async function finish (status) {
+  saving.value = true
+>>>>>>> Stashed changes
   try {
     // Crear pago pendiente
     const { data: pay } = await createPayment({

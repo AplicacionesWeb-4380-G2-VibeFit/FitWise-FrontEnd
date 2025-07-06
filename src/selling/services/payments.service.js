@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // src/selling/services/payments.service.js
 import httpInstance from "@/shared/services/http.instance.js";
 
@@ -34,4 +35,16 @@ export const getPendingByUser = (userId) => {
  */
 export const deletePayment = (id) => {
     return httpInstance.delete(`${resourceEndpoint}/${id}`);
+=======
+import axios from 'axios';
+
+const API = 'http://localhost:5144/api/v1/payments';
+
+export const createPayment = (p) => axios.post(API, p);
+
+export const patchPayment = (id, data) => axios.patch(`${API}/${id}`, data);
+
+export const deletePayment = async (id) => {
+    return await axios.delete(`${API}/${id}`);
+>>>>>>> Stashed changes
 };

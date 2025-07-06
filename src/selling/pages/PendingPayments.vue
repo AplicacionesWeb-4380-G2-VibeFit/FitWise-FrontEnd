@@ -45,6 +45,7 @@ const error      = ref(null);
 const processing = ref(false);
 
 onMounted(async () => {
+<<<<<<< Updated upstream
   loading.value = true;
   try {
     const { data } = await getPendingByUser(props.userId);
@@ -84,6 +85,39 @@ async function finishPayment(p) {
   } finally {
     processing.value = false;
   }
+=======
+  const res = await axios.get('http://localhost:5144/api/v1/payments')
+  pending.value = res.data.filter(p => p.status === 'pending')
+})
+
+async function finish(p) {
+  try {
+    // 1. Crear el plan comprado
+    const plan = await createPurchasedPlan({
+      ownerId: p.ownerId,
+      planId: p.planId,
+      purchaseDate: new Date().toISOString(),
+      status: 'active'
+    })
+
+    // 2. Marcar el pago como completado (con purchasedPlanId)
+    await patchPayment(p.id, {
+      status: 'completed',
+      paymentDate: new Date().toISOString(),
+      purchasedPlanId: plan.data.id
+    })
+
+    // 3. Crear historial y agregar el pago usando el id del pago como userId
+    await addPaymentToHistory(p.id, p.id)
+
+    // 4. Eliminar visualmente
+    pending.value = pending.value.filter(pay => pay.id !== p.id)
+
+    console.log('✅ Pago completado y agregado al historial')
+  } catch (err) {
+    console.error('❌ Error al completar el pago:', err)
+  }
+>>>>>>> Stashed changes
 }
 </script>
 

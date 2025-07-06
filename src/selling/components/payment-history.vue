@@ -24,14 +24,21 @@
 </template>
 
 <script setup>
+<<<<<<< Updated upstream
 import { ref, onMounted } from 'vue';
 import { getAllPurchaseHistory } from '@/selling/services/purchase-history.service.js';
+=======
+import { ref, onMounted } from 'vue'
+>>>>>>> Stashed changes
 
 const payments = ref([]);
 const loading  = ref(false);
 const error    = ref(null);
 
+import { getAllPurchaseHistory } from '@/selling/services/purchase-history.service.js';
+
 onMounted(async () => {
+<<<<<<< Updated upstream
   loading.value = true;
   try {
     const res = await getAllPurchaseHistory();
@@ -46,6 +53,13 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+=======
+  const res = await getAllPurchaseHistory();
+  const allPayments = res.flatMap(user => user.payments || []);
+  payments.value = allPayments.filter(p => p.status === 'completed');
+});
+
+>>>>>>> Stashed changes
 </script>
 
 <style scoped>
