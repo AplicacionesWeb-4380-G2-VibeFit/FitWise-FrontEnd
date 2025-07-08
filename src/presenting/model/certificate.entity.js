@@ -1,7 +1,7 @@
 export class Certificate {
     constructor({
-                    id = "",
-                    userId= "",
+                    id = 0,
+                    userId= 0,
                     institution= "",
                     dateObtained= "",
                     description= "",

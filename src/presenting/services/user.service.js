@@ -17,6 +17,12 @@ export class UserService {
         });
     }
 
+    getByProfileId(profileId) {
+        return httpInstance.get(this.resourceEndpoint, {
+            params: { profileId: profileId }
+        });
+    }
+
     create(resource) {
         return httpInstance.post(this.resourceEndpoint, resource);
     }
