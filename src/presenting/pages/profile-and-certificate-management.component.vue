@@ -3,6 +3,8 @@ import { User } from '@/presenting/model/user.entity.js';
 import { UserService } from '@/presenting/services/user.service.js';
 import CertificateListCreateAndEdit from "@/presenting/components/certificate-list-create-and-edit.component.vue";
 
+import {useAuthenticationStore} from "@/iam/services/authentication.store.js";
+
 
 export default{
   name: "profile-and-certificate-management",
@@ -12,6 +14,7 @@ export default{
     return {
       // ID del perfil del usuario que ha iniciado sesión
       loggedInProfileId: null,
+      authenticationStore: useAuthenticationStore(),
 
 
       // Usuario que se está editando
@@ -102,7 +105,8 @@ export default{
     this.userService = new UserService();
 
     // ID del perfil del usuario que ha iniciado sesión
-    this.loggedInProfileId=1;
+    // this.loggedInProfileId=1;
+    this.loggedInProfileId=this.authenticationStore.currentUserId;
 
     // El usuario se obtiene por el ID del perfil
     this.userService.getByProfileId(this.loggedInProfileId).then(response => {
