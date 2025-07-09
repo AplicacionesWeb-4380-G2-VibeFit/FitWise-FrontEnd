@@ -11,21 +11,6 @@ export class ScheduleService {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
     }
 
-    getByUserId(userId) {
-        return httpInstance.get(this.resourceEndpoint, {
-            params: {
-                userId: userId
-            }
-        });
-    }
-    getByHealthPlanId(healthPlanId) {
-        return httpInstance.get(this.resourceEndpoint, {
-            params: {
-                userId: healthPlanId
-            }
-        });
-    }
-
     create(resource) {
         return httpInstance.post(this.resourceEndpoint, resource);
     }
@@ -37,5 +22,4 @@ export class ScheduleService {
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
     }
-
 }

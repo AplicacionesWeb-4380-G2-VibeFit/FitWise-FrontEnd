@@ -1,20 +1,94 @@
 {
   "profile": {
-    "title": "Perfil",
-    "username": "Nombre de usuario",
-    "email": "Correo electrónico",
-    "name": "Nombre",
-    "lastname": "Apellido",
-    "gender": "Género",
-    "edit": "Editar",
-    "subscription": "Suscripción",
-    "description": "Actualiza tu información."
+    "heroImage": {
+      "title": "Tu Perfil Profesional",
+      "description": "Personaliza tu perfil, gestiona tus datos y añade tus certificaciones profesionales para destacar tu experiencia y conocimientos ante otros usuarios de la comunidad FitWise.",
+      "button": "Ver tus seguidores"
+    },
+    "profileManagement": {
+      "title": "Perfil Profesional",
+      "username": "Nombre de usuario",
+      "image": "URL de la imagen",
+      "firstname": "Nombre",
+      "lastname": "Apellido",
+      "birthdate": "Fecha de nacimiento",
+      "email": "Correo electrónico",
+      "gender": "Género",
+      "male": "Masculino",
+      "female": "Femenino",
+      "aboutMe": "Sobre mí",
+      "edit": "Editar perfil",
+      "accept": "Aceptar",
+      "cancel": "Cancelar",
+      "name": "Nombre"
+    },
+    "certificateManagement": {
+      "createTitle": "Agregar certificado",
+      "editTitle": "Editar certificado",
+      "institution": "Institución",
+      "institutionValidation": "La institución es obligatoria",
+      "certificateCode": "Código del certificado",
+      "certificateCodeValidation": "El código del certificado es obligatorio",
+      "dateObtained": "Fecha de obtención",
+      "dateObtainedValidation": "La fecha de obtención es obligatoria",
+      "description": "Descripción",
+      "descriptionValidation": "La descripción es obligatoria",
+      "certificateStatus": "Estado del certificado",
+      "certificateStatusValidation": "El estado del certificado es obligatorio",
+      "yearsOfExperience": "Años de experiencia",
+      "yearsOfExperienceValidation": "Los años de experiencia son obligatorios y deben ser mayores a 0",
+
+      "deleteQuestion": "¿Estás seguro de que deseas eliminar el certificado?",
+      "deleteTitle": "Eliminar certificado",
+
+      "certificateListTitle": "Certificados del usuario",
+      "certificateListAdd": "Agregar certificado",
+      "certificateListExpandAll": "Expandir todo",
+      "certificateListCollapseAll": "Colapsar todo",
+      "certificateListFilter": "Filtrar por estado, institución y código",
+
+      "certificateListInstitution": "Institución",
+      "certificateListStatus": "Estado",
+      "certificateListCode": "Código del certificado",
+      "certificateListYears": "Años de experiencia",
+      "certificateListActions": "Acciones"
+    }
   },
 
   "followers": {
-    "followersList": "Lista de Seguidos",
-    "follow": "Seguir",
-    "delete": "Eliminar"
+    "heroImage": {
+      "title": "Tus Seguidores",
+      "description": "Aquí puedes ver y gestionar los perfiles que sigues. Descubre sus certificaciones profesionales y mantente conectado con otros miembros de la comunidad FitWise.",
+      "return": "Volver a tu perfil",
+      "button": "Seguir a un usuario"
+    },
+    "followedUsers": {
+      "title": "Lista de Usuarios Seguidos",
+      "filter": "Filtrar por nombre o correo electrónico",
+      "deleteDialogTitle": "Dejar de seguir usuario",
+      "deleteDialogMessage": "¿Estás seguro de que deseas dejar de seguir a este usuario?",
+      "button": "Ver certificaciones"
+    },
+    "followerForm": {
+      "title": "Seguir usuario",
+      "input": "Buscar por correo electrónico",
+      "inputValidation": "El correo electrónico es obligatorio",
+      "searchButton": "Agregar",
+
+      "errorMessage": "Ocurrió un error al intentar seguir al usuario.",
+      "notFoundMessage": "No se encontró un usuario con ese correo electrónico.",
+      "notYouMessage": "No puedes seguir tu propio perfil.",
+      "alreadyFollowingMessage": "Ya sigues a este usuario.",
+      "followedMessage": "Ahora sigues a este usuario."
+    },
+    "certificateDialog": {
+      "title": "Certificaciones obtenidas por",
+      "date": "Fecha de obtención",
+      "description": "Descripción",
+      "status": "Estado",
+      "code": "Código de certificado",
+      "years": "Años de experiencia"
+    }
   },
 
   "option": {
@@ -49,9 +123,34 @@
     "plan-count": "Total de planes con reseñas",
     "cancel": "Cancelar",
     "save": "Guardar",
-    "description": "Descripción"
+    "description": "Descripción",
+    "write-comment": "Escribe un comentario...",
+    "no-comments": "No hay comentarios aún",
+    "comment-submitted": "Comentario enviado",
+    "comments": "Comentarios",
+    "report": "Reportar",
+    "send": "Enviar",
+    "reported-summary": "Reporte enviado",
+    "reported-detail": "Gracias por reportar esta reseña. Nuestro equipo la revisará pronto.",
+    "report-error": "Debe indicar una razón para el reporte.",
+    "report-reason-placeholder": "Indica el motivo del reporte",
+    "report-cancel": "Cancelar",
+    "report-submit": "Enviar Reporte",
+    "review-id": "ID de Reseña",
+    "comment": "Comentario",
+    "edit-comment": "Editar Comentario",
+    "confirm-delete": "¿Estás seguro de eliminar este comentario?",
+    "fill-required-fields": "Completa todos los campos requeridos",
+    "select-review": "Selecciona una reseña",
+    "add-comment": "Agregar Comentario"
   },
   "success": "Éxito",
   "yes": "Sí",
-  "no": "No"
+  "no": "No",
+  "warning": "Advertencia",
+  "created": "Creado",
+  "actions": "Acciones",
+  "confirm": {
+    "delete": "Confirmar eliminación"
+  }
 }

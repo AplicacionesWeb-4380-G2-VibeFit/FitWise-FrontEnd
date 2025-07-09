@@ -1,25 +1,39 @@
-import axios from 'axios';
+// src/selling/services/purchased-plans.service.js
+import httpInstance from "@/shared/services/http.instance.js";
 
-const API_URL = 'http://localhost:3000/purchasedPlans';
+const resourceEndpoint = import.meta.env.VITE_PURCHASED_PLANS_ENDPOINT_PATH;
 
-export const getAllPurchasedPlans = async () => {
-    const res = await axios.get(API_URL);
-    return res.data;
+/**
+ * Obtiene todos los planes comprados
+ */
+export const getAllPurchasedPlans = () => {
+    return httpInstance.get(resourceEndpoint);
 };
 
-export const getPurchasedPlanById = async (id) => {
-    const res = await axios.get(`${API_URL}/${id}`);
-    return res.data;
+/**
+ * Obtiene un plan comprado por ID
+ */
+export const getPurchasedPlanById = (id) => {
+    return httpInstance.get(`${resourceEndpoint}/${id}`);
 };
 
-export const deletePurchasedPlan = async (id) => {
-    return await axios.delete(`${API_URL}/${id}`);
+/**
+ * Crea un nuevo plan comprado
+ */
+export const createPurchasedPlan = (plan) => {
+    return httpInstance.post(resourceEndpoint, plan);
 };
 
-export const createPurchasedPlan = async (plan) => {
-    return await axios.post(API_URL, plan);
+/**
+ * Actualiza un plan comprado por ID
+ */
+export const updatePurchasedPlan = (id, plan) => {
+    return httpInstance.put(`${resourceEndpoint}/${id}`, plan);
 };
 
-export const updatePurchasedPlan = async (id, plan) => {
-    return await axios.put(`${API_URL}/${id}`, plan);
+/**
+ * Elimina un plan comprado por ID
+ */
+export const deletePurchasedPlan = (id) => {
+    return httpInstance.delete(`${resourceEndpoint}/${id}`);
 };

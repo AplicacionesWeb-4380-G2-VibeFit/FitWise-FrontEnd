@@ -1,7 +1,7 @@
 import httpInstance from "../../shared/services/http.instance.js"
 
-export class FollowedUserService {
-    resourceEndpoint = import.meta.env.VITE_FOLLOWED_USERS_ENDPOINT_PATH;
+export class FollowerService {
+    resourceEndpoint = import.meta.env.VITE_FOLLOWERS_ENDPOINT_PATH;
 
     getAll() {
         return httpInstance.get(this.resourceEndpoint);
@@ -11,9 +11,16 @@ export class FollowedUserService {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
     }
 
-    getByFollowerId(followerId) {
-        return httpInstance.get(`${this.resourceEndpoint}?followerId=${followerId}`);
+    getByFollowerUserId(userId) {
+
+        return httpInstance.get(this.resourceEndpoint, {
+            params: {
+                followerUserId: userId
+            }
+        });
     }
+
+
 
     create(resource) {
         return httpInstance.post(this.resourceEndpoint, resource);
@@ -26,4 +33,6 @@ export class FollowedUserService {
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
     }
+
+
 }

@@ -39,7 +39,12 @@ import {
     Textarea, Timeline,
     Toast,
     ToastService,
-    Toolbar
+    Toolbar,
+    Fluid,
+    DatePicker,
+    RadioButton,
+    Message,
+    Paginator
 } from "primevue";
 
 import i18n from "@/i18n.js";
@@ -87,6 +92,11 @@ app
     .component('pv-accordion-header', AccordionHeader)
     .component('pv-accordion-content', AccordionContent)
     .component('pv-divider', Divider)
+    .component('pv-fluid', Fluid)
+    .component('pv-date-picker', DatePicker)
+    .component('pv-radio-button', RadioButton)
+    .component('pv-message', Message)
+    .component('pv-paginator', Paginator)
 
     .use(router)
     .directive('tooltip', Tooltip)

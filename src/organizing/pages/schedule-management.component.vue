@@ -1,106 +1,136 @@
-<script>
-
-import {Schedule} from "@/organizing/model/schedule.entity.js";
-import {ScheduleService} from "@/organizing/services/schedule.service.js"
-import ScheduleList from "@/organizing/components/schedule-list.component.vue";
-
-export default {
-  name: "schedule-management.component.vue",
-  components: {ScheduleList},
-  data(){
-    return {
-      schedules: [],
-      schedule: new Schedule({}),
-      scheduleService: null,
-      errors: []
-    }
-  },
-  methods: {
-    notifySuccessfulAction(message) {
-      this.$toast.add({severity: 'success', summary: 'Success', detail: message, life: 3000});
-    },
-    findIndexById(id) {
-      return this.schedules.findIndex(schedule => schedule.id === id);
-    },
-    getAllSchedules() {
-      this.scheduleService.getAll().then(response => {
-        const rawScheds = response.data.map(schedule => new Schedule(schedule));
-        this.schedules = rawScheds;
-        console.log(this.schedules);
-        // Obtain uniques userIds
-        this.userIds = [...new Set(rawScheds.map(shed => shed.userId))];
-        // Obtain uniques healthPlanIds
-        this.healthPlanIds = [...new Set(rawScheds.map(shed => shed.userId))];
-      }).catch(error => { this.errors.push(error); this.schedules = []; console.log(error); });
-    },
-    getPlansByUser(userId) {
-      this.scheduleService.getByUserId(userId).then(response => {
-        this.schedules = response.data.map(schedule => new Schedule(schedule));
-        console.log(this.schedules);
-      }).catch(error => { this.errors.push(error); this.schedules = []; console.log(error); });
-    },
-    getPlansByHealthPlan(healthPlanId) {
-      this.scheduleService.getByHealthPlanId(healthPlanId).then(response => {
-        this.schedules = response.data.map(schedule => new Schedule(schedule));
-        console.log(this.schedules);
-      }).catch(error => { this.errors.push(error); this.schedules = []; console.log(error); });
-    },
-    resetToAll() {
-      this.getAllSchedules();
-    }
-  },
-  computed: {
-    uniqueUserCount() {
-      const ids = new Set(this.schedules.map(shed => shed.userId));
-      return ids.size;
-    },
-    uniqueHealthPlanCount() {
-      const ids = new Set(this.schedules.map(shed => shed.healthPlanId));
-      return ids.size;
-    }
-  },
-  created() {
-    this.scheduleService = new ScheduleService();
-    this.getAllSchedules();
-  }
-}
-</script>
-
 <template>
-  <p>Total de users únicos: {{uniqueUserCount}}</p>
-  <div class="mb-4">
-    <pv-button
-        label="Mostrar todos"
-        class="p-button-secondary mr-2 mb-2"
-        @click="resetToAll"
-    />
-    <pv-button
-        v-for="id in creatorIds"
-        :key="id"
-        class="p-button-outlined mr-2 mb-2"
-        :label="'Creador ' + id"
-        @click="getPlansByUser(id)"
-    />
-  </div>
+  <div class="schedule-management-container">
+    <div class="header-bar">
+      <Button
+          label="➕ Agregar Horario"
+          icon="pi pi-plus"
+          class="add-button"
+          @click="startCreate"
+      />
+    </div>
 
-  <p>Total de planes únicos: {{uniqueHealthPlanCount}}</p>
-  <div class="mb-4">
-    <pv-button
-        label="Mostrar todos"
-        class="p-button-secondary mr-2 mb-2"
-        @click="resetToAll"
+    <ScheduleForm
+        v-if="showForm"
+        :schedule="currentSchedule"
+        :isEditing="isEditing"
+        :users="users"
+        :healthPlans="healthPlans"
+        @saved="handleSaved"
+        @cancelled="showForm = false"
     />
-    <pv-button
-        v-for="id in creatorIds"
-        :key="id"
-        class="p-button-outlined mr-2 mb-2"
-        :label="'Creador ' + id"
-        @click="getPlansByHealthPlan(id)"
+
+    <ScheduleList
+        v-else
+        :schedules="schedules"
+        :users="users"
+        :healthPlans="healthPlans"
+        @delete-schedule="handleDelete"
+        @edit-schedule="startEdit"
     />
   </div>
-  <schedule-list v-if="errors" :schedules="schedules"/>
 </template>
 
-<style scoped>
+<script>
+import { Schedule } from "@/organizing/model/schedule.entity.js";
+import { ScheduleService } from "@/organizing/services/schedule.service.js";
+import { UserService } from "@/presenting/services/user.service.js";
+import { HealthPlanService } from "@/publishing/services/health-plan.service.js";
+import ScheduleList from "@/organizing/components/schedule-list.component.vue";
+import ScheduleForm from "@/organizing/components/schedule-form.component.vue";
+import ConfirmDialog from 'primevue/confirmdialog';
+import Button from 'primevue/button';
 
+export default {
+  name: "schedule-management",
+  components: { ScheduleList, ScheduleForm, ConfirmDialog, Button },
+  data() {
+    return {
+      schedules: [],
+      users: [],
+      healthPlans: [],
+      showForm: false,
+      isEditing: false,
+      currentSchedule: new Schedule({}),
+      service: new ScheduleService()
+    };
+  },
+  async created() {
+    const userService = new UserService();
+    const planService = new HealthPlanService();
+
+    const [sRes, uRes, hRes] = await Promise.all([
+      this.service.getAll(),
+      userService.getAll(),
+      planService.getAll()
+    ]);
+
+    this.schedules = sRes.data;
+    this.users = uRes.data;
+    this.healthPlans = hRes.data;
+  },
+  methods: {
+    reloadSchedules() {
+      this.service.getAll().then(res => this.schedules = res.data);
+    },
+    startCreate() {
+      this.currentSchedule = new Schedule({});
+      this.isEditing = false;
+      this.showForm = true;
+    },
+    startEdit(schedule) {
+      this.currentSchedule = { ...schedule };
+      this.isEditing = true;
+      this.showForm = true;
+    },
+    handleSaved(newSchedule) {
+      this.showForm = false;
+      if (!this.isEditing) {
+        this.schedules.push(newSchedule);
+      } else {
+        this.reloadSchedules();
+      }
+    },
+    handleDelete(id) {
+      console.log("handleDelete triggered for ID:", id);
+      this.$confirm.require({
+        message: '¿Estás seguro de eliminar este horario?',
+        header: 'Confirmación',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.service.delete(id).then(() => {
+            this.$toast.add({ severity: 'info', summary: 'Eliminado', detail: 'Horario eliminado', life: 3000 });
+            this.reloadSchedules();
+          });
+        }
+      });
+    }
+  }
+};
+</script>
+
+<style scoped>
+.schedule-management-container {
+  padding: 2rem;
+  background-color: gray;
+  border-radius: 8px;
+}
+
+.header-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.add-button {
+  background: linear-gradient(90deg, #28a745, #218838);
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+.add-button:hover {
+  background: linear-gradient(90deg, #218838, #1e7e34);
+}
 </style>
