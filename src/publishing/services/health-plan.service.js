@@ -11,10 +11,10 @@ export class HealthPlanService {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
     }
 
-    getByCreatorId(creatorId) {
+    getByProfileId(profileId) {
         return httpInstance.get(this.resourceEndpoint, {
             params: {
-                creadorId: creatorId
+                profileId: profileId
             }
         });
     }
@@ -29,5 +29,21 @@ export class HealthPlanService {
 
     delete(id) {
         return httpInstance.delete(`${this.resourceEndpoint}/${id}`);
+    }
+
+    getExercises(id, dayOfWeek) {
+        return httpInstance.get(`${this.resourceEndpoint}/${id}/exercises`, {
+            params: {
+                dayOfWeek: dayOfWeek
+            }
+        });
+    }
+
+    getMeals(id, dayOfWeek) {
+        return httpInstance.get(`${this.resourceEndpoint}/${id}/meals`, {
+            params: {
+                dayOfWeek: dayOfWeek
+            }
+        });
     }
 }
