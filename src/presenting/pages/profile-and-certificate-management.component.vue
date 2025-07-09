@@ -10,61 +10,35 @@ export default{
 
   data(){
     return {
-      userId: null,
+      // ID del perfil del usuario que ha iniciado sesión
+      loggedInProfileId: null,
+
+
+      // Usuario que se está editando
       user: new User({}),
-      //Para editar el usuario
+      //Para editar el usuario, y que no se modifique el original hasta que se acepte
       userEdit: new User({}),
+
       userService: null,
 
-      //Edicion de Perfil
+      //Este boolean controla si estamos en modo edición del perfil
       isEditModeProfile: false,
+      // Si es entregado o no
+      submitted: false,
+      // Si el usuario es menor de 18 años
+      isUnder18: false,
 
     }
   },
 
   methods: {
     onAccept() {
-      // Aquí arreglo el birthDate para que sea un string en formato MM/DD/YYYY
-      if (this.userEdit.birthDate instanceof Date) {
-        const d = this.userEdit.birthDate;
-        const mm = String(d.getMonth() + 1).padStart(2, '0');
-        const dd = String(d.getDate()).padStart(2, '0');
-        const yyyy = d.getFullYear();
-        this.userEdit.birthDate = `${mm}/${dd}/${yyyy}`;
-      }
-
-      // Tu lógica aquí
-      this.user = new User(JSON.parse(JSON.stringify(this.userEdit)));
-      this.userService.update(this.userId, this.user);
-
-      this.isEditModeProfile = false;
-    },
-    onCancel() {
-      this.userEdit = new User(JSON.parse(JSON.stringify(this.user)));
-      this.isEditModeProfile = false;
-    }
-
-  },
-  created() {
-    this.userService = new UserService();
-
-    this.userId="1"; // This should be dynamically set based on the logged-in user
-    // Fetch user data by ID
-    this.userService.getById(this.userId).then(response => {
-      this.user = new User(response.data);
-      this.userEdit = new User(JSON.parse(JSON.stringify(this.user)));
-    }).catch(error => {
-      console.error("Error fetching user:", error);
-      this.user = null;
-    })
-  },
-  computed: {
-    isEditDisabled() {
+      this.submitted = true;
       // Validar email (formato simple)
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       // Validar fecha de nacimiento (al menos 18 años)
-      let isUnder18 = false;
+      this.isUnder18 = false;
       if (this.userEdit.birthDate) {
         const hoy = new Date();
         const nacimiento = new Date(this.userEdit.birthDate);
@@ -72,26 +46,77 @@ export default{
         const m = hoy.getMonth() - nacimiento.getMonth();
         if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
           // No ha cumplido años aún este año
-          if (edad - 1 < 18) isUnder18 = true;
+          if (edad - 1 < 18) this.isUnder18 = true;
         } else {
-          if (edad < 18) isUnder18 = true;
+          if (edad < 18) this.isUnder18 = true;
         }
       } else {
-        isUnder18 = true;
+        this.isUnder18 = true;
       }
 
-      return (
-          !this.userEdit.username ||
-          !this.userEdit.image ||
-          !this.userEdit.firstName ||
-          !this.userEdit.lastName ||
-          isUnder18 ||
-          !this.userEdit.email ||
-          !emailRegex.test(this.userEdit.email) ||
-          !this.userEdit.gender ||
-          !this.userEdit.aboutMe
-      );
+      if (
+          this.userEdit.image &&
+          /^https?:\/\/[^\s]+$/.test(this.userEdit.image) &&
+          this.userEdit.firstName &&
+          this.userEdit.lastName &&
+          !this.isUnder18 &&
+          this.userEdit.email &&
+          emailRegex.test(this.userEdit.email) &&
+          this.userEdit.gender &&
+          this.userEdit.aboutMe
+      ) {
+        // Aquí arreglo el birthDate para que sea un string en formato MM/DD/YYYY
+        if (this.userEdit.birthDate instanceof Date) {
+          const d = this.userEdit.birthDate;
+          const mm = String(d.getMonth() + 1).padStart(2, '0');
+          const dd = String(d.getDate()).padStart(2, '0');
+          const yyyy = d.getFullYear();
+          this.userEdit.birthDate = `${mm}/${dd}/${yyyy}`;
+        }
+
+        // Tu lógica aquí
+        this.user = new User(JSON.parse(JSON.stringify(this.userEdit)));
+        this.userService.update(this.user.id, this.user);
+
+        this.isEditModeProfile = false;
+
+      }
+
+
+
+
+    },
+    onCancel() {
+      this.isEditModeProfile = false;
+      this.userEdit = new User(JSON.parse(JSON.stringify(this.user)));
+      this.submitted = false;
+    },
+    onEdit(){
+      this.isEditModeProfile = true;
+      this.userEdit = new User(JSON.parse(JSON.stringify(this.user)));
+      this.submitted = false;
     }
+
+  },
+  created() {
+    this.userService = new UserService();
+
+    // ID del perfil del usuario que ha iniciado sesión
+    this.loggedInProfileId=1;
+
+    // El usuario se obtiene por el ID del perfil
+    this.userService.getByProfileId(this.loggedInProfileId).then(response => {
+      this.user = new User(response.data[0]);
+      this.userEdit = new User(JSON.parse(JSON.stringify(this.user)));
+      console.log(this.user.id);
+    }).catch(error => {
+      console.error("Error fetching user:", error);
+      this.user = null;
+    })
+
+  },
+  computed: {
+
   }
 
 }
@@ -149,7 +174,7 @@ export default{
   </div>
 
 
-  <pv-fluid>
+  <pv-fluid v-if="loggedInProfileId && loggedInProfileId > 0">
     <!-- Grid de 2 columnas: Edición de perfil (col 1) y Card DataView (col 2) -->
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem; align-items: start;">
       <!-- Edición de perfil -->
@@ -188,7 +213,7 @@ export default{
                   severity="info"
                   raised
                   style="min-width: unset; width: auto;"
-                  @click="isEditModeProfile = true"
+                  @click="onEdit"
               >
                 {{ $t('profile.profileManagement.edit') }}
               </pv-button>
@@ -197,7 +222,7 @@ export default{
                   severity="success"
                   raised
                   style="min-width: unset; width: auto;"
-                  :disabled="isEditDisabled"
+
                   @click="onAccept"
               >
                 {{ $t('profile.profileManagement.accept') }}
@@ -247,30 +272,11 @@ export default{
 
             </div>
 
-            <!-- Username: columnas 2 y 3, fila 1 -->
-            <div
-                style="
-                  grid-row: 1 / 2;
-                  grid-column: 2 / 4;
-                  display: flex;
-                  flex-direction: column;
-                  gap: 0.5rem;
-                  width: 100%;
-                "
-            >
-              <label for="username">{{ $t('profile.profileManagement.username') }}</label>
-              <pv-input-text
-                  id="username"
-                  type="text"
-                  v-model="userEdit.username"
-                  :disabled="!isEditModeProfile"
-              />
-            </div>
 
-            <!-- ImageURL: columnas 2 y 3, fila 2 -->
+            <!-- ImageURL: columnas 2 y 3 -->
             <div
                 style="
-                  grid-row: 2 / 3;
+                  grid-row: 1 / 3;
                   grid-column: 2 / 4;
                   display: flex;
                   flex-direction: column;
@@ -286,6 +292,12 @@ export default{
                   style="resize: none;"
                   :disabled="!isEditModeProfile"
               />
+              <small
+                  v-if="submitted && (!userEdit.image || !/^https?:\/\/[^\s]+$/.test(userEdit.image))"
+                  style="color: #ef4444;"
+              >
+                Debe ingresar una URL de imagen válida
+              </small>
             </div>
           </div>
 
@@ -308,6 +320,10 @@ export default{
                   v-model="userEdit.firstName"
                   :disabled="!isEditModeProfile"
               />
+              <small
+                  v-if="submitted && !userEdit.firstName"
+                  style="color: #ef4444;"
+              >Debe poner un nombre</small>
             </div>
 
             <!-- Columna 2: Lastname -->
@@ -319,6 +335,10 @@ export default{
                   v-model="userEdit.lastName"
                   :disabled="!isEditModeProfile"
               />
+              <small
+                  v-if="submitted && !userEdit.lastName"
+                  style="color: #ef4444;"
+              >Debe poner un apellido</small>
             </div>
 
             <!-- Columna 3: BirthDate -->
@@ -331,7 +351,12 @@ export default{
                   v-model="userEdit.birthDate"
                   :disabled="!isEditModeProfile"
               />
-              <small style="color: black;">Your age must be over 18</small>
+              <small
+                  v-if="submitted && (!userEdit.birthDate || isUnder18)"
+                  style="color: #ef4444;"
+              >
+                Debe poner una fecha de nacimiento que confirme que tiene 18 años o más
+              </small>
             </div>
           </div>
 
@@ -351,6 +376,12 @@ export default{
               <pv-input-text id="email" type="text" v-model="userEdit.email"
                              :disabled="!isEditModeProfile"
               />
+              <small
+                  v-if="submitted && (!userEdit.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEdit.email))"
+                  style="color: #ef4444;"
+              >
+                Debe poner un email válido
+              </small>
             </div>
 
             <!-- Gender: en columna 3 -->
@@ -361,7 +392,7 @@ export default{
                   <pv-radio-button
                       id="option1"
                       name="option"
-                      value="male"
+                      value="Male"
                       v-model="userEdit.gender"
                       :disabled="!isEditModeProfile"
                   />
@@ -371,13 +402,19 @@ export default{
                   <pv-radio-button
                       id="option2"
                       name="option"
-                      value="female"
+                      value="Female"
                       v-model="userEdit.gender"
                       :disabled="!isEditModeProfile"
                   />
                   <label for="option2" style="line-height: 1; margin-left: 0.5rem;">{{ $t('profile.profileManagement.female') }}</label>
                 </div>
               </div>
+              <small
+                  v-if="submitted && !userEdit.gender"
+                  style="color: #ef4444;"
+              >
+                Debe seleccionar un género
+              </small>
             </div>
 
 
@@ -400,6 +437,12 @@ export default{
                 style="resize: none;"
                 :disabled="!isEditModeProfile"
             />
+            <small
+                v-if="submitted && !userEdit.aboutMe"
+                style="color: #ef4444;"
+            >
+              Debe ingresar una descripción
+            </small>
           </div>
 
         </div>
@@ -425,7 +468,7 @@ export default{
             <div style="position: relative;">
               <pv-tag
                   v-if="user && user.gender"
-                  :value="user.gender === 'male'
+                  :value="user.gender === 'Male'
     ? $t('profile.profileManagement.male')
     : $t('profile.profileManagement.female')"
                   :style="{
@@ -433,7 +476,7 @@ export default{
     top: '10px',
     left: '10px',
     zIndex: 2,
-    background: user.gender === 'male' ? '#1976d2' : '#d32f2f',
+    background: user.gender === 'Male' ? '#1976d2' : '#d32f2f',
     color: '#fff',
     fontWeight: 'bold',
     borderRadius: '0.5rem',
@@ -451,9 +494,8 @@ export default{
             </div>
           </div>
           <div style="width: 100%; text-align: center;">
-            <span style="font-size: 2rem; font-weight: 800; color: #1a237e; letter-spacing: 1px;">{{ user.username }}</span>
-            <div style="color: #666; font-size: 1.1rem; margin-top: 0.5rem; font-weight: 600;">
-              <span style="font-weight: 700; color: #1976d2;">{{$t('profile.profileManagement.email')}}:</span> {{ user.email }}
+            <div style="font-size: 1.45rem; font-weight: 800; color: #1a237e; text-align: center; width: 100%; margin: 0.5rem 0 1rem 0; letter-spacing: 0.5px;">
+              {{ user.email }}
             </div>
             <div style="margin-top: 0.5rem; font-size: 1.15rem; color: #444; font-weight: 600;">
               <span style="font-weight: 700; color: #1976d2;">{{$t('profile.profileManagement.name')}}:</span> {{ user.firstName }} {{ user.lastName }}
@@ -472,11 +514,13 @@ export default{
       </div>
     </div>
 
-    <!-- ...resto del contenido (certificaciones, etc) ... -->
+    <!-- ...resto del contenido (certificaciones, etc) ...-->
     <br>
     <br>
 
-    <certificate-list-create-and-edit :userId="userId"/>
+    <certificate-list-create-and-edit v-if="user && user.id > 0" :userId="user.id"/>
+
+
 
 
   </pv-fluid>

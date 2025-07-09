@@ -1,15 +1,14 @@
 export class User {
     constructor({
-        id = "",
+        id = 0,
         firstName = "",
         lastName = "",
         email = "",
         birthDate = "",
         gender = "",
-        username = "",
-        password = "",
                     image= "",
                     aboutMe="",
+        profileId = 0,
     }) {
         this.id = id;
         this.firstName = firstName;
@@ -17,9 +16,8 @@ export class User {
         this.email = email;
         this.birthDate = birthDate;
         this.gender = gender;
-        this.username = username;
-        this.password = password;
         this.image = image;
         this.aboutMe = aboutMe;
+        this.profileId = profileId;
     }
 }

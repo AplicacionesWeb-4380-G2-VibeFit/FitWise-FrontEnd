@@ -65,7 +65,7 @@
     },
     "followedUsers": {
       "title": "List of Followed Users",
-      "filter": "Filter by name, username, or email",
+      "filter": "Filter by name or email",
       "deleteDialogTitle": "Unfollow User",
       "deleteDialogMessage": "Are you sure you want to unfollow this user",
       "button": "See Certifications"
