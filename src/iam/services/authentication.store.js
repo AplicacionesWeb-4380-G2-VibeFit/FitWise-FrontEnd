@@ -2,6 +2,7 @@ import {AuthenticationService} from "./authentication.service.js";
 import {defineStore} from "pinia";
 import {SignInResponse} from "../model/sign-in.response.js";
 import {SignUpResponse} from "../model/sign-up.response.js";
+import {useSessionStore} from "@/shared/stores/sessionStore.js";
 
 const authenticationService = new AuthenticationService();
 
@@ -59,6 +60,10 @@ export const useAuthenticationStore = defineStore('authentication',{
                     this.username = signInResponse.username;
                     localStorage.setItem('token', signInResponse.token);
                     console.log(signInResponse);
+
+                    const sessionStore = useSessionStore(); // Obtener la instancia del sessionStore
+                    sessionStore.setUserId(signInResponse.id);
+
                     router.push({ name: 'home' });
                 })
                 .catch(error => {
@@ -102,6 +107,11 @@ export const useAuthenticationStore = defineStore('authentication',{
             this.username = '';
             localStorage.removeItem('token');
             console.log('Signed out');
+
+            // <--- ¡LIMPIAR TAMBIÉN EL SESSION STORE AL CERRAR SESIÓN! --->
+            const sessionStore = useSessionStore();
+            sessionStore.clearSession();
+
             router.push({ name: 'sign-in' });
         }
     }

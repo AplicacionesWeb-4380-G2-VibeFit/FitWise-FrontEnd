@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useSessionStore = defineStore('session', {
     state: () => ({
-        userId: 1, // Renamed to userId to emphasize it's the *user* session
+        userId: null, // Renamed to userId to emphasize it's the *user* session
         // You might also store other global session info here, e.g., userName, isAuthenticated
     }),
     actions: {

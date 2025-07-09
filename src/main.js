@@ -1,5 +1,8 @@
 // main.js (o main entry)
 import { createApp } from 'vue'
+
+import {useSessionStore} from "@/shared/stores/sessionStore.js";
+
 import App from './App.vue'
 import pinia from "@/pinia.js";
 import router from "./router/index.js";
@@ -106,6 +109,11 @@ app
     .component('pv-tab-view', TabView)
     .component('pv-tab-panel', TabPanel)
 
+
+
     .use(router)
     .directive('tooltip', Tooltip)
     .mount('#app')
+
+const sessionStore = useSessionStore();
+sessionStore.initializeSession();

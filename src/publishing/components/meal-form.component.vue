@@ -1,13 +1,11 @@
 <script>
 import {Meal} from "@/publishing/model/meal.entity.js";
-import {Textarea as PvTextarea} from "primevue";
 
 export default {
   name: "meal-form",
-  components: {PvTextarea},
   emits: ['save', 'hide'],
   props: {
-    meal: {
+    editingMeal: {
       type: Meal,
       default: null,
     },
@@ -26,13 +24,14 @@ export default {
   },
   watch: {
     dialogVisible: {
+      immediate: true,
       handler(newValue) {
         this.visible = newValue;
 
         if (newValue) {
-          if (this.meal) {
+          if (this.editingMeal) {
             // Modo edición
-            this.mealData = new Meal({ ...this.meal });
+            this.mealData = new Meal({ ...this.editingMeal });
           } else {
             // Modo creación
             this.mealData = new Meal({});
@@ -40,7 +39,6 @@ export default {
           this.submitted = false;
         }
       },
-      immediate: true
     }
   },
   computed: {
@@ -51,7 +49,7 @@ export default {
       return this.isEditMode ? 'Actualizar Meal' : 'Guardar Meal';
     },
     isEditMode() {
-      return this.meal !== null && this.meal.id !== undefined;
+      return this.editingMeal !== null && this.editingMeal.id !== undefined;
     }
   },
   methods: {
@@ -68,7 +66,7 @@ export default {
         const payload = new Meal({
           ...this.mealData,
         });
-        this.$emit('save', payload);
+        this.$emit('save', payload, this.isEditMode);
       } catch (error) {
         console.error("Error al guardar meal:", error);
       } finally {
