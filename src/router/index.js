@@ -21,6 +21,10 @@ const FollowersManagementComponent = () => import('../presenting/pages/followers
 
 const ScheduleManagementComponent = () => import('../organizing/pages/schedule-management.component.vue');
 const ReviewCommentsPage = () => import('../reviewing/pages/review-comments-page.component.vue');
+
+const SignInComponent = () => import('../iam/pages/sign-in.component.vue');
+const SignUpComponent = () => import('../iam/pages/sign-up.component.vue');
+
 const routes = [
     { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
 
@@ -53,7 +57,10 @@ const routes = [
 
     { path: '/reviewing', name: 'reviewing', component: ReviewManagementComponent, meta: { title: 'Reviews' } },
 
-    { path: '/', name: 'default', redirect: { name: 'home' } },
+    {   path: '/sign-in',               name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign-In' } },
+    {   path: '/sign-up',               name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign-Up' } },
+
+    { path: '/', name: 'default', redirect: { name: 'sign-in' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
     { path: '/reviewing/comments', name: 'review-comments', component: ReviewCommentsPage, meta: { title: 'Review Comments' } },
 ];

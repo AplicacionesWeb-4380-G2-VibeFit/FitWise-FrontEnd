@@ -1,9 +1,10 @@
 <script>
 import LanguageSwitcher from "@/public/components/language-switcher.component.vue";
+import AuthenticationSection from "@/iam/components/authentication-section.component.vue";
 
 export default {
   name: "header-content",
-  components: { LanguageSwitcher },
+  components: {AuthenticationSection, LanguageSwitcher },
   data() {
     return {
       drawer: false
@@ -39,6 +40,7 @@ export default {
         </div>
       </template>
       <template #end>
+        <authentication-section/>
         <language-switcher/>
       </template>
     </pv-toolbar>
