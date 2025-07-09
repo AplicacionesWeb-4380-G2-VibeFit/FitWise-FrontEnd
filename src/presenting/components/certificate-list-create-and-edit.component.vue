@@ -29,9 +29,9 @@ export default {
 
       submitted: false,
       statuses: [
-        { label: 'ACTIVE', value: 'active' },
-        { label: 'EXPIRED', value: 'expired' },
-        { label: 'ARCHIVED', value: 'archived' }
+        { label: 'ACTIVE', value: 'Active' },
+        { label: 'EXPIRED', value: 'Expired' },
+        { label: 'ARCHIVED', value: 'Archived' }
       ],
       filterText: '', // Add filter text data property
     }
@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     getAllCertificatesByUserId() {
+      console.log("userId", this.userId);
       this.certificateService.getByUserId(this.userId).then(response => {
         this.certificates = response.data.map(certificate =>  new Certificate(certificate));
       }).catch(error => {
@@ -68,12 +69,12 @@ export default {
     },
     getSeverity(status) {
       switch (status) {
-        case 'active':
+        case 'Active':
           return 'success';
-        case 'expired':
+        case 'Expired':
           return 'danger';
-        case 'pending':
-          return 'warning';
+        case 'Archived':
+          return 'info';
         default:
           return 'info';
       }
@@ -92,11 +93,16 @@ export default {
     },
     saveCertificate() {
       this.submitted = true;
-      if (this.newCertificate.institution
-          && this.newCertificate.certificateCode
-          && this.newCertificate.description
-          && this.newCertificate.status
-          && this.newCertificate.yearsOfWork > 0) {
+      if (
+          this.newCertificate.institution &&
+          this.newCertificate.dateObtained &&
+          this.newCertificate.certificateCode &&
+          this.newCertificate.description &&
+          this.newCertificate.status &&
+          this.newCertificate.yearsOfWork > 0 &&
+          this.validateCertificateCode(this.newCertificate.certificateCode, this.newCertificate.dateObtained) &&
+          new Date(this.newCertificate.dateObtained) <= new Date(new Date().toDateString())
+      ) {
 
         if( this.newCertificate.id) {
           //Edit existing certificate
@@ -112,7 +118,8 @@ export default {
           }).catch(error => {
             console.error("Error updating certificate:", error);
           });
-          } else {
+          }
+        else {
             //Create certificate
             this.certificateService.create(this.newCertificate).then(response => {
               this.certificates.push(new Certificate(response.data));
@@ -157,6 +164,17 @@ export default {
         this.newCertificate.dateObtained = '';
       }
     },
+
+    // Validate Certificate Code
+    validateCertificateCode(code, dateObtained) {
+      const regex = /^[a-zA-Z]{2,10}-(\d{4})-\d{4}-[a-zA-Z0-9]{4}$/;
+      const match = code.match(regex);
+      if (!match) return false;
+      if (!dateObtained) return false;
+      const codeYear = match[1];
+      const obtainedYear = new Date(dateObtained).getFullYear().toString();
+      return codeYear === obtainedYear;
+    }
 
 
   },
@@ -221,9 +239,11 @@ export default {
               fluid
           />
           <small
-              v-if="submitted && !newCertificate.certificateCode"
+              v-if="submitted && (!newCertificate.certificateCode || !validateCertificateCode(newCertificate.certificateCode, newCertificate.dateObtained))"
               style="color: #ef4444;"
-          >{{ $t('profile.certificateManagement.certificateCodeValidation') }}</small>
+          >
+            El código debe tener el año igual al de la fecha de obtención.
+          </small>
         </div>
         <div style="grid-column: span 6 / span 6;">
           <label

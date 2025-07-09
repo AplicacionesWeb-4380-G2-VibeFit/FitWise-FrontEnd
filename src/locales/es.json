@@ -64,7 +64,7 @@
     },
     "followedUsers": {
       "title": "Lista de Usuarios Seguidos",
-      "filter": "Filtrar por nombre, usuario o correo electrónico",
+      "filter": "Filtrar por nombre o correo electrónico",
       "deleteDialogTitle": "Dejar de seguir usuario",
       "deleteDialogMessage": "¿Estás seguro de que deseas dejar de seguir a este usuario?",
       "button": "Ver certificaciones"

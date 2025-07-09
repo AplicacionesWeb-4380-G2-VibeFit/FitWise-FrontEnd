@@ -71,7 +71,7 @@ export default {
               return; // Evitar que se cree un nuevo seguidor
             }
             if (
-                this.followers.some(follower => follower.followingUserId === this.userSearched.id)
+                this.followers.some(follower => follower.followedUserId === this.userSearched.id)
             ) {
               this.validationResult= {
                 severity: 'info',
@@ -88,7 +88,7 @@ export default {
               };
               this.newFollower = new Follower({
                 followerUserId: this.userId,
-                followingUserId: this.userSearched.id
+                followedUserId: this.userSearched.id
               });
               this.followerService.create(this.newFollower).then(response => {
                 if (response.data && response.data.id) {
@@ -215,7 +215,6 @@ export default {
             />
           </div>
           <div class="user-card-details">
-            <span class="user-card-username">{{ userSearched.username }}</span>
             <div class="user-card-email">{{ userSearched.email }}</div>
             <div class="user-card-name">{{ userSearched.firstName }} {{ userSearched.lastName }}</div>
           </div>

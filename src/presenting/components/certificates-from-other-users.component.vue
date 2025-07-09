@@ -13,7 +13,7 @@ export default {
       type: Number,
       required: true
     },
-    followedUserUsername: {
+    followedUserEmail: {
       type: String,
       required: true
     }
@@ -82,7 +82,7 @@ export default {
     <template #header>
       <div class="cert-header">
         {{ $t('followers.certificateDialog.title') }}
-        <span class="username-highlight">{{ followedUserUsername }}</span>
+        <span class="username-highlight">{{ followedUserEmail }}</span>
       </div>
     </template>
 

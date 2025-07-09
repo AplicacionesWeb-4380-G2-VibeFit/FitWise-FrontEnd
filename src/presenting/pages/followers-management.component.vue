@@ -13,7 +13,13 @@ export default {
   components: {CertificatesFromOtherUsers, FollowerFormValidation},
   data(){
     return {
-      userId: null,
+      // ID del perfil del usuario que ha iniciado sesión
+      loggedInProfileId: null,
+
+      //Usuario que ha iniciado sesión
+      loggedInUser: null,
+
+
       followers: [],
       followedUsers: [],
       filterValue: '', // Nueva variable para filtrar seguidores
@@ -29,21 +35,22 @@ export default {
 
       certificateDialogVisible: false,
       selectedUserId: null,
-      selectedUserUsername: null,
+      selectedUserEmail: null,
       certificateDialogKey: 0, // Clave para reiniciar el componente
     }
 
   },
   methods: {
     getFollowedUsersByUserId(){
-      this.followerService.getByFollowerUserId(this.userId).then(
+      this.followerService.getByFollowerUserId(this.loggedInUser.id).then(
         (response) => {
           this.followers = response.data.map(follower => new Follower(follower));
+          console.log(this.followers);
           // Ejecutar solo si followers NO está vacío
           if (this.followers.length > 0) {
             this.followedUsers = []; // Limpia la lista antes de llenarla
             for (const follower of this.followers) {
-              this.userService.getById(follower.followingUserId)
+              this.userService.getById(follower.followedUserId)
                   .then(response => {
                     const user = new User(response.data);
                     this.followedUsers.push(user);
@@ -71,11 +78,11 @@ export default {
       this.deleteFollowedUser = new User({ ...item }); // Copiar los datos del objeto en lugar de asignar el puntero
     },
 
-    deleteFollowerByFollowingUserId() {
-      const followerToDelete = this.followers.find(follower => follower.followingUserId === this.deleteFollowedUser.id);
+    deleteFollowerByFollowedUserId() {
+      const followerToDelete = this.followers.find(follower => follower.followedUserId === this.deleteFollowedUser.id);
       this.followerService.delete(followerToDelete.id)
           .then(() => {
-            this.followers = this.followers.filter(follower => follower.followingUserId !== this.deleteFollowedUser.id);
+            this.followers = this.followers.filter(follower => follower.followedUserId !== this.deleteFollowedUser.id);
             this.followedUsers = this.followedUsers.filter(user => user.id !== this.deleteFollowedUser.id);
             this.deleteFollowerDialog = false;
             console.log("Follower deleted successfully");
@@ -85,9 +92,9 @@ export default {
           });
     },
 
-    openCertificateDialog(followedUserId, followedUserUsername) {
+    openCertificateDialog(followedUserId, followedUserEmail) {
       this.selectedUserId = followedUserId;
-      this.selectedUserUsername = followedUserUsername;
+      this.selectedUserEmail = followedUserEmail;
       this.certificateDialogVisible = false; // Cierra el diálogo si está abierto
       this.certificateDialogKey++; // Incrementa la clave para reiniciar el componente
       this.$nextTick(() => {
@@ -118,12 +125,10 @@ export default {
         const firstName = normalize(user.firstName);
         const lastName = normalize(user.lastName);
         const fullName = [firstName, lastName].filter(Boolean).join(' ');
-        const username = normalize(user.username);
         const email = normalize(user.email);
 
 
-        return username.includes(searchTerm) ||
-            email.includes(searchTerm) ||
+        return email.includes(searchTerm) ||
             fullName.includes(searchTerm);
       });
     }
@@ -139,11 +144,21 @@ export default {
   },
 
   created() {
-    this.userId="1"; // This should be dynamically set based on the logged-in user
+    // ID del perfil del usuario que ha iniciado sesión
+    this.loggedInProfileId=1;
+
     this.followerService = new FollowerService();
     this.userService = new UserService();
 
-    this.getFollowedUsersByUserId();
+    // El usuario se obtiene por el ID del perfil
+    this.userService.getByProfileId(this.loggedInProfileId).then(response => {
+      this.loggedInUser = new User(response.data[0]);
+      console.log(this.loggedInUser.id);
+      this.getFollowedUsersByUserId(); // Ahora sí, después de cargar el usuario
+    }).catch(error => {
+      console.error("Error fetching user:", error);
+      this.loggedInUser = null;
+    });
 
 
   }
@@ -211,36 +226,39 @@ export default {
     </div>
   </div>
 
-  <!-- Components -->
-  <follower-form-validation :followerDialog="followerDialog"
-                            :userId="userId"
-                            :followers="followers"
-                            @update:visible="followerDialog = $event"
-                            @addFollower="handleAddFollower"/>
+  <div v-if="loggedInProfileId > 0 && loggedInUser && loggedInUser.id > 0">
 
-  <certificates-from-other-users :visible="certificateDialogVisible"
-                                 :followedUserId="selectedUserId"
-                                 :followedUserUsername="selectedUserUsername"
-                                 :key="certificateDialogKey"
-                                 @update:visible="certificateDialogVisible = $event"/>
+    <!-- Components -->
+    <follower-form-validation :followerDialog="followerDialog"
+                              :userId="loggedInUser.id"
+                              :followers="followers"
+                              @update:visible="followerDialog = $event"
+                              @addFollower="handleAddFollower"/>
+
+    <certificates-from-other-users :visible="certificateDialogVisible"
+                                   :followedUserId="selectedUserId"
+                                   :followedUserEmail="selectedUserEmail"
+                                   :key="certificateDialogKey"
+                                   @update:visible="certificateDialogVisible = $event"/>
 
 
-  <!--Remove -->
-  <pv-dialog
-      v-model:visible="deleteFollowerDialog"
-      :style="{ width: '450px' }" :header="$t('followers.followedUsers.deleteDialogTitle')"
-      :modal="true">
-    <div class="delete-dialog-content">
-      <i class="pi pi-exclamation-triangle delete-dialog-icon" />
-      <span>
-            {{ $t('followers.followedUsers.deleteDialogMessage') }} <b>{{ deleteFollowedUser.email }}</b>?
-      </span>
-    </div>
-    <template #footer>
-      <pv-button :label="$t('profile.profileManagement.cancel')" icon="pi pi-times" text @click="deleteFollowerDialog = false" />
-      <pv-button :label="$t('profile.profileManagement.accept')" icon="pi pi-check" @click="deleteFollowerByFollowingUserId" />
-    </template>
-  </pv-dialog>
+    <!--Remove -->
+    <pv-dialog
+        v-model:visible="deleteFollowerDialog"
+        :style="{ width: '450px' }" :header="$t('followers.followedUsers.deleteDialogTitle')"
+        :modal="true">
+      <div class="delete-dialog-content">
+        <i class="pi pi-exclamation-triangle delete-dialog-icon" />
+        <span>
+              {{ $t('followers.followedUsers.deleteDialogMessage') }} <b>{{ deleteFollowedUser.email }}</b>?
+        </span>
+      </div>
+      <template #footer>
+        <pv-button :label="$t('profile.profileManagement.cancel')" icon="pi pi-times" text @click="deleteFollowerDialog = false" />
+        <pv-button :label="$t('profile.profileManagement.accept')" icon="pi pi-check" @click="deleteFollowerByFollowedUserId" />
+      </template>
+    </pv-dialog>
+  </div>
 
 
   <div class="flex flex-col">
@@ -306,7 +324,7 @@ export default {
                       <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.email')}}:</span>
                       <span class="font-medium text-surface-100 text-sm" style="color: #fff;">{{ item.email }}</span>
                       <div class="text-lg font-semibold mt-2" style="color: #f5f5f5;">
-                        <span style="color: #1abc9c;">{{$t('profile.profileManagement.username')}}:</span> {{ item.username }}
+                        <span style="color: #1abc9c;">Nombre Completo:</span>
                       </div>
                       <div class="box-nombre mt-2" style="background: #23272f;">
                 <span class="text-surface-900 font-bold text-base" style="color: #fff;">
@@ -338,7 +356,7 @@ export default {
                           :label="$t('followers.followedUsers.button')"
                           class="flex-auto md:flex-initial whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
-                          @click="openCertificateDialog(item.id,item.username)"
+                          @click="openCertificateDialog(item.id,item.email)"
                       />
                     </div>
                   </div>
@@ -394,7 +412,7 @@ export default {
                       <span class="font-medium text-surface-400 text-sm" style="color: #1abc9c;">{{$t('profile.profileManagement.email')}}:</span>
                       <span class="font-medium text-surface-100 text-sm" style="color: #fff;">{{ item.email }}</span>
                       <div class="text-lg font-semibold mt-2" style="color: #f5f5f5;">
-                        <span style="color: #1abc9c;">{{$t('profile.profileManagement.username')}}:</span> {{ item.username }}
+                        <span style="color: #1abc9c;">Nombre Completo:</span>
                       </div>
                       <div class="box-nombre mt-2" style="background: #23272f;">
                 <span class="text-surface-900 font-bold text-base" style="color: #fff;">
@@ -425,7 +443,7 @@ export default {
                           :label="$t('followers.followedUsers.button')"
                           class="flex-auto whitespace-nowrap"
                           style="background: #1e5cb3; color: #fff; border: none; font-weight: 600;"
-                          @click="openCertificateDialog(item.id, item.username)"
+                          @click="openCertificateDialog(item.id, item.email)"
                       />
                       <pv-button
                           icon="pi pi-trash"
