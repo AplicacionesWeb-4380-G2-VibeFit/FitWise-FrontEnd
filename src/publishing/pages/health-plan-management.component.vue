@@ -2,162 +2,156 @@
 import {HealthPlan} from "@/publishing/model/health-plan.entity.js";
 import {HealthPlanService} from "@/publishing/services/health-plan.service.js";
 import HealthPlanList from "@/publishing/components/health-plan-list.component.vue";
-import HealthPlanItemCreateAndEdit from "@/publishing/components/healthPlan-item-create-and-edit.component.vue";
+import {useSessionStore} from "@/shared/stores/sessionStore.js";
+import HealthPlanForm from "@/publishing/components/health-plan-form.component.vue";
 
 export default {
   name: "health-plan-management",
-  components: {HealthPlanItemCreateAndEdit, HealthPlanList},
+  components: {HealthPlanForm, HealthPlanList},
   data() {
     return {
       healthPlans: [],
       healthPlan: new HealthPlan({}),
-      healthPlanService: null,
+      healthPlanService: new HealthPlanService(),
       errors: [],
-      creatorIds: [],
-      showDialog: false,
-      isEdit: false
+      displayDialog: false, // Controls dialog visibility
+      selectedPlan: null,   // Holds the plan being edited (or null for new)
+      loadingPlans: false,  // For loading state of the list
     }
   },
-  methods: {
-    notifySuccessfulAction(message) {
-      this.$toast.add({severity: 'success', summary: 'Success', detail: message, life: 3000});
-    },
-    findIndexById(id) {
-      return this.healthPlans.findIndex(healthPlan => healthPlan.id === id);
-    },
-    getAllHealthPlans() {
-      this.healthPlanService.getAll().then(response => {
-        const rawPlans = response.data.map(healthPlan => new HealthPlan(healthPlan));
-        this.healthPlans = rawPlans;
-        console.log(this.healthPlans);
-        // Obtener creadorIds únicos
-        this.creatorIds = [...new Set(rawPlans.map(plan => plan.creadorId))];
-      }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error); });
-    },
-    getPlansByCreator(creatorId) {
-      this.healthPlanService.getByCreatorId(creatorId).then(response => {
+  methods:{
+    getHealthPlansByProfileId(userId){
+      this.healthPlanService.getByProfileId(userId).then(response => {
         this.healthPlans = response.data.map(healthPlan => new HealthPlan(healthPlan));
         console.log(this.healthPlans);
-      }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error); });
+      }).catch(error => { this.errors.push(error); this.healthPlans = []; console.log(error);});
     },
-    resetToAll() {
-      this.getAllHealthPlans();
-    },
-    editHealthPlan(plan) {
-      // Lógica para editar el plan
-      console.log('Editar plan:', plan);
-      this.healthPlan = new HealthPlan(plan);
-      this.isEdit = true;
-      this.submitted = false;
-      this.showDialog = true;
+    fetchDataBasedOnSession() {
+      const sessionStore = useSessionStore();
+      const currentUserId = sessionStore.getUserId;
 
-    },
-    updateHealthPlan() {
-      this.healthPlanService.update(this.healthPlan.id, this.healthPlan).then(response => {
-        console.log('updateHealthPlan');
-        let index = this.findIndexById(this.healthPlan.id);
-        this.healthPlans[index] = new HealthPlan(response.data);
-        console.log(this.healthPlans);
-        this.notifySuccessfulAction("Category Updated");
-      }).catch(error => console.error(error));
-    },
-    deleteHealthPlan(plan) {
-      this.healthPlanService.delete(plan.id)
-          .then(() => {
-            this.notifySuccessfulAction('Plan eliminado correctamente');
-            this.getAllHealthPlans(); // Refrescar la lista
-          })
-          .catch(error => {
-            this.errors.push(error);
-            console.error('Error al eliminar:', error);
-          });
-    },
-    confirmDeleteHealthPlan(plan) {
-      this.$confirm.require({
-        message: `¿Estás seguro de eliminar el plan "${plan.name}"?`,
-        header: 'Confirmar eliminación',
-        icon: 'pi pi-exclamation-triangle',
-        acceptLabel: 'Sí, eliminar',
-        rejectLabel: 'Cancelar',
-        acceptClass: 'p-button-danger',
-        accept: () => this.deleteHealthPlan(plan),
-        reject: () => {}
-      });
-    },
-    onCancelRequested() {
-      this.showDialog = false;
-      this.submitted = false;
-      this.isEdit = false;
-    },
-    onSaveRequested(item) {
-      console.log('onSaveRequested');
-      this.submitted = true;
-      if (this.healthPlan.name.trim()) {
-        if (item.id) {
-          this.updateHealthPlan();
-        } else {
-          this.createHealthPlan();
-        }
-        this.showDialog = false;
-        this.isEdit = false;
+      if (currentUserId) {
+        console.log(`Fetching data for user: ${currentUserId}`);
+        this.getHealthPlansByProfileId(currentUserId);
+      } else {
+        console.log('User not authenticated/session not active.');
+        this.healthPlans = [];
       }
     },
-    onNewItem() {
-      this.healthPlan = new HealthPlan({});
-      this.isEdit = false;
-      this.submitted = false;
-      this.showDialog = true;
-      console.log(this.showDialog);
+    deleteSelectedPlan(planId) {
+      console.log('Parent received delete event for ID:', planId);
+      this.$confirm.require({
+        message: '¿Está seguro que desea eliminar este plan de salud? Esta acción no se puede deshacer.',
+        header: 'Confirmar Eliminación',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sí, Eliminar',
+        rejectLabel: 'Cancelar',
+        acceptClass: 'p-button-danger',
+        accept: async () => { // Async function to await the delete call
+          try {
+            await this.healthPlanService.delete(planId);
+            this.$toast.add({
+              severity: 'success',
+              summary: 'Eliminado',
+              detail: 'El plan de salud ha sido eliminado exitosamente.',
+              life: 3000
+            });
+            this.fetchDataBasedOnSession();
+          } catch (error) {
+            console.error("Error deleting health plan:", error);
+            this.$toast.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Hubo un error al eliminar el plan de salud.',
+              life: 3000
+            });
+            this.errors.push(error);
+          }
+        },
+        reject: () => {
+          this.$toast.add({
+            severity: 'info',
+            summary: 'Cancelado',
+            detail: 'La eliminación del plan ha sido cancelada.',
+            life: 3000
+          });
+        }
+      });
     },
-    createHealthPlan() {
-      this.healthPlanService.create(this.healthPlan).then(response => {
-        let healthPlan = new HealthPlan(response.data);
-        this.healthPlans.push(healthPlan);
-        this.notifySuccessfulAction("HealthPlan Created");
-      }).catch(error => console.error(error));
-    }
+    // --- Dialog Management Methods ---
+    openNewPlanDialog() {
+      this.selectedPlan = null;
+      this.displayDialog = true;
+    },
+    editSelectedPlan(plan) {
+      this.selectedPlan = plan;
+      this.displayDialog = true;
+    },
+    closeDialog() {
+      this.displayDialog = false;
+      this.selectedPlan = null;
+    },
+
+    // --- Save/Update Logic ---
+    async handleSaveHealthPlan(planData, isEditMode) {
+      try {
+        if (isEditMode) {
+          await this.healthPlanService.update(planData.id, planData);
+          this.$toast.add({ severity: 'success', summary: 'Actualizado', detail: 'Plan de salud actualizado exitosamente.', life: 3000 });
+        } else {
+          await this.healthPlanService.create(planData);
+          this.$toast.add({ severity: 'success', summary: 'Creado', detail: 'Plan de salud creado exitosamente.', life: 3000 });
+        }
+        this.fetchDataBasedOnSession();
+        this.closeDialog();
+      } catch (error) {
+        console.error("Error saving health plan:", error);
+        this.$toast.add({ severity: 'error', summary: 'Error', detail: 'Hubo un error al guardar el plan de salud.', life: 3000 });
+        this.errors.push(error);
+      }
+    },
+    viewSelectedPlan(planId) {
+      console.log('Parent received view event for ID:', planId);
+      this.$router.push(`/publishing/details/${planId}`);
+    },
   },
-  computed: {
-    uniqueCreadorCount() {
-      const ids = new Set(this.healthPlans.map(plan => plan.creadorId));
-      return ids.size;
-    }
-  },
-  created() {
-    this.healthPlanService = new HealthPlanService();
-    this.getAllHealthPlans();
+  mounted() {
+    const sessionStore = useSessionStore();
+    sessionStore.initializeSession();
+    this.fetchDataBasedOnSession();
   }
 }
 </script>
 
 <template>
-  <p>Total de creadores únicos: {{ uniqueCreadorCount }}</p>
-  <div class="mb-4">
-    <pv-button
-        label="Mostrar todos"
-        class="p-button-secondary mr-2 mb-2"
-        @click="resetToAll"
+  <div class="p-4 w-full max-w-none">
+    <div class="flex justify-content-end mb-4">
+      <pv-button label="Crear Nuevo Plan" icon="pi pi-plus" class="p-button-primary" @click="openNewPlanDialog" />
+    </div>
+
+    <health-plan-list
+        :health-plans="healthPlans"
+        @viewPlan="viewSelectedPlan"
+        @editPlan="editSelectedPlan"
+        @deletePlan="deleteSelectedPlan"
     />
-    <pv-button
-        v-for="id in creatorIds"
-        :key="id"
-        class="p-button-outlined mr-2 mb-2"
-        :label="'Creador ' + id"
-        @click="getPlansByCreator(id)"
+
+    <div v-if="errors.length > 0" class="p-error p-3 mt-4">
+      <p>Ocurrió un error:</p>
+      <ul>
+        <li v-for="(error, index) in errors" :key="index">{{ error.message || error }}</li>
+      </ul>
+    </div>
+
+    <health-plan-form
+        :dialogVisible="displayDialog"
+        :editingPlan="selectedPlan"
+        @save="handleSaveHealthPlan"
+        @hide="closeDialog"
     />
   </div>
-  <div class="mb-4">
-    <pv-button class="mr-2" icon="pi pi-plus" label="New" severity="success" @click="onNewItem"/>
-  </div>
-  <health-plan-list v-if="errors" :health-plans="healthPlans" @edit-plan="editHealthPlan($event)"
-                    @delete-plan="confirmDeleteHealthPlan($event)"/>
-  <health-plan-item-create-and-edit
-      :isEdit="isEdit"
-      :item="healthPlan"
-      :visible="showDialog"
-      @cancel-requested="onCancelRequested"
-      @save-requested="onSaveRequested($event)"/>
 </template>
 
 <style scoped>
+
 </style>

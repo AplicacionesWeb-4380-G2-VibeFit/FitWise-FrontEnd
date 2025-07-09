@@ -1,11 +1,13 @@
 export class Meal {
     constructor({
         id = "",
-        healthPlanId = "",
-        image = ""
-                }) {
+        name = "",
+        description = "",
+        imageUri = ""
+                }){
         this.id = id;
-        this.healthPlanId = healthPlanId;
-        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.imageUri = imageUri;
     }
 }

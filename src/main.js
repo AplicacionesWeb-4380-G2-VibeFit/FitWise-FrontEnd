@@ -1,5 +1,8 @@
 // main.js (o main entry)
 import { createApp } from 'vue'
+
+import {useSessionStore} from "@/shared/stores/sessionStore.js";
+
 import App from './App.vue'
 import pinia from "@/pinia.js";
 import router from "./router/index.js";
@@ -44,10 +47,11 @@ import {
     DatePicker,
     RadioButton,
     Message,
-    Paginator
+    Paginator, ProgressSpinner, IftaLabel, TabView, TabPanel
 } from "primevue";
 
 import i18n from "@/i18n.js";
+import Dropdown from "primevue/dropdown";
 
 const app = createApp(App);
 
@@ -98,6 +102,18 @@ app
     .component('pv-message', Message)
     .component('pv-paginator', Paginator)
 
+    .component('pv-drop-down', Dropdown)
+    .component('pv-progress-spinner', ProgressSpinner)
+    .component('pv-ifta-label', IftaLabel)
+
+    .component('pv-tab-view', TabView)
+    .component('pv-tab-panel', TabPanel)
+
+
+
     .use(router)
     .directive('tooltip', Tooltip)
     .mount('#app')
+
+const sessionStore = useSessionStore();
+sessionStore.initializeSession();
