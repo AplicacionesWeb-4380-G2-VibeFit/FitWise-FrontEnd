@@ -9,8 +9,11 @@ const SellingViewComponent = () => import('../selling/pages/selling-view.vue');
 const HomeComponent = () => import('../public/pages/home.component.vue');
 const AboutComponent = () => import('../public/pages/about.component.vue');
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
+
 const HealthPlanManagementComponent = () => import('../publishing/pages/health-plan-management.component.vue');
 const HealthPlanDetailsComponent = () => import('../publishing/pages/health-plan-details.component.vue');
+const MealAndExerciseManagementComponent = () => import('../publishing/pages/meal-and-exercise-management.component.vue');
+
 const ReviewManagementComponent = () => import('../reviewing/pages/review-management.component.vue');
 // PRESENTING routes
 const ProfileAndCertificateManagementComponent = () => import('../presenting/pages/profile-and-certificate-management.component.vue');
@@ -18,6 +21,10 @@ const FollowersManagementComponent = () => import('../presenting/pages/followers
 
 const ScheduleManagementComponent = () => import('../organizing/pages/schedule-management.component.vue');
 const ReviewCommentsPage = () => import('../reviewing/pages/review-comments-page.component.vue');
+
+const SignInComponent = () => import('../iam/pages/sign-in.component.vue');
+const SignUpComponent = () => import('../iam/pages/sign-up.component.vue');
+
 const routes = [
     { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
 
@@ -43,11 +50,17 @@ const routes = [
     { path: '/organizing', name: 'organizing', component: ScheduleManagementComponent, meta: { title: 'Schedule' } },
 
     { path: '/about', name: 'about', component: AboutComponent, meta: { title: 'About us' } },
+
     { path: '/publishing', name: 'publishing', component: HealthPlanManagementComponent, meta: { title: 'Health Plans' } },
     { path: '/publishing/details/:id', name: 'details', component: HealthPlanDetailsComponent, meta: { title: 'Health Plan Details' } },
+    { path: '/meal-exercise-management', name: 'meal-and-exercise', component: MealAndExerciseManagementComponent, meta: { title: 'Meal and Exercise' } },
+
     { path: '/reviewing', name: 'reviewing', component: ReviewManagementComponent, meta: { title: 'Reviews' } },
 
-    { path: '/', name: 'default', redirect: { name: 'home' } },
+    {   path: '/sign-in',               name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign-In' } },
+    {   path: '/sign-up',               name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign-Up' } },
+
+    { path: '/', name: 'default', redirect: { name: 'sign-in' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
     { path: '/reviewing/comments', name: 'review-comments', component: ReviewCommentsPage, meta: { title: 'Review Comments' } },
 ];

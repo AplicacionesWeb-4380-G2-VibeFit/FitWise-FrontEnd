@@ -1,22 +1,10 @@
 import httpInstance from "@/shared/services/http.instance.js";
 
-export class IngredientService {
-    resourceEndpoint = import.meta.env.VITE_INGREDIENTS_ENDPOINT_PATH;
-
-    getAll() {
-        return httpInstance.get(this.resourceEndpoint);
-    }
+export class HealthPlanMealService {
+    resourceEndpoint = import.meta.env.VITE_HEALTH_PLAN_MEAL_ENDPOINT_PATH;
 
     getById(id) {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
-    }
-
-    getByMealId(mealId) {
-        return httpInstance.get(this.resourceEndpoint, {
-            params: {
-                mealId: mealId
-            }
-        });
     }
 
     create(resource) {
