@@ -13,6 +13,9 @@ export default {
     return {
       username: "",
       password: "",
+
+      //Presionado
+      signInPressed: false
     };
   },
   methods: {
@@ -24,6 +27,12 @@ export default {
      * The store will update the current username and signed in status.
      */
     onSignIn() {
+      this.signInPressed= true;
+
+      if(!this.username || !this.password) {
+        return; // No hacer nada si faltan campos
+      }
+
       let authenticationStore = useAuthenticationStore();
       let signInRequest = new SignInRequest(this.username, this.password);
       authenticationStore.signIn(signInRequest, this.$router);
@@ -43,15 +52,15 @@ export default {
         <div class="field mt-5">
           <pv-float-label>
             <label for="username">Username</label>
-            <pv-input-text id="username" v-model="username" :class="{'p-invalid': !username}"/>
-            <small v-if="!username" class="p-invalid">Username is required.</small>
+            <pv-input-text id="username" v-model="username" :class="{'p-invalid': !username && signInPressed}"/>
+            <small v-if="!username && signInPressed" class="p-invalid">Username is required.</small>
           </pv-float-label>
         </div>
         <div class="p-field mt-5">
           <pv-float-label>
             <label for="password">Password</label>
-            <pv-input-text id="password" v-model="password" :class="{'p-invalid': !password}" type="password"/>
-            <small v-if="!password" class="p-invalid">Password is required.</small>
+            <pv-input-text id="password" v-model="password" :class="{'p-invalid': !password && signInPressed}" type="password"/>
+            <small v-if="!password && signInPressed" class="p-invalid">Password is required.</small>
           </pv-float-label>
         </div>
         <div class="p-field mt-5">
