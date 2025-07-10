@@ -2,11 +2,25 @@
   <div class="form-container p-4">
     <div class="p-field mb-3">
       <label class="form-label">👤 Usuario</label>
-      <Dropdown v-model="localSchedule.userId" :options="users" optionLabel="username" optionValue="id" placeholder="Selecciona usuario" class="p-inputtext-lg" />
+      <Dropdown
+          v-model="localSchedule.userId"
+          :options="users"
+          optionLabel="fullName"
+          optionValue="id"
+          placeholder="Selecciona usuario"
+          class="w-full"
+      />
     </div>
     <div class="p-field mb-3">
       <label class="form-label">📋 Plan de Salud</label>
-      <Dropdown v-model="localSchedule.healthPlanId" :options="healthPlans" optionLabel="name" optionValue="id" placeholder="Selecciona plan" class="p-inputtext-lg" />
+      <Dropdown
+          v-model="localSchedule.healthPlanId"
+          :options="healthPlans"
+          optionLabel="planName"
+          optionValue="id"
+          placeholder="Selecciona plan"
+          class="w-full"
+      />
     </div>
     <div class="p-field mb-3">
       <label class="form-label">📅 Fecha</label>

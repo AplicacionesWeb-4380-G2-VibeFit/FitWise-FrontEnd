@@ -34,10 +34,13 @@
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
+// Puedes mantener estos imports para futuras funciones
+import { UserService } from "@/presenting/services/user.service.js";
+import { HealthPlanService } from "@/publishing/services/health-plan.service.js";
 
 export default {
   name: "schedule-list",
-  components: {DataTable, Column, Button},
+  components: { DataTable, Column, Button },
   props: {
     schedules: Array,
     users: Array,
@@ -45,16 +48,17 @@ export default {
   },
   methods: {
     getUserName(id) {
-      const u = this.users.find(u => u.id === id);
-      return u ? u.username : '---';
+      const user = this.users.find(u => u.id === id);
+      return user ? `${user.firstName} ${user.lastName}` : 'Desconocido';
     },
     getPlanName(id) {
-      const p = this.healthPlans.find(p => p.id === id);
-      return p ? p.name : '---';
+      const plan = this.healthPlans.find(p => p.id === id);
+      return plan ? plan.planName : 'Desconocido';
     }
   }
 };
 </script>
+
 
 <style scoped>
 .green-table ::v-deep(.p-datatable-thead > tr > th) {

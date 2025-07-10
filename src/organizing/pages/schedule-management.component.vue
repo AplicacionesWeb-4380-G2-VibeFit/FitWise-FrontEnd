@@ -46,8 +46,8 @@ export default {
   data() {
     return {
       schedules: [],
-      users: [],
-      healthPlans: [],
+      users: Array,
+      healthPlans: Array,
       showForm: false,
       isEditing: false,
       currentSchedule: new Schedule({}),
@@ -65,8 +65,17 @@ export default {
     ]);
 
     this.schedules = sRes.data;
-    this.users = uRes.data;
+
+    // ⬇️ Agregar fullName al usuario
+    this.users = uRes.data.map(u => ({
+      ...u,
+      fullName: `${u.firstName} ${u.lastName}`
+    }));
+
     this.healthPlans = hRes.data;
+
+    console.log("Usuarios:", this.users);
+    console.log("Planes de salud:", this.healthPlans);
   },
   methods: {
     reloadSchedules() {
