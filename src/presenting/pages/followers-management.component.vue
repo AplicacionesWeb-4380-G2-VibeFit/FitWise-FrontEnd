@@ -6,6 +6,7 @@ import {Follower} from "@/presenting/model/follower.entity.js";
 import { ref } from 'vue';
 import FollowerFormValidation from "@/presenting/components/follower-form-validation.component.vue";
 import CertificatesFromOtherUsers from "@/presenting/components/certificates-from-other-users.component.vue";
+import {useAuthenticationStore} from "@/iam/services/authentication.store.js";
 
 
 export default {
@@ -15,6 +16,7 @@ export default {
     return {
       // ID del perfil del usuario que ha iniciado sesión
       loggedInProfileId: null,
+      authenticationStore: useAuthenticationStore(),
 
       //Usuario que ha iniciado sesión
       loggedInUser: null,
@@ -145,7 +147,9 @@ export default {
 
   created() {
     // ID del perfil del usuario que ha iniciado sesión
-    this.loggedInProfileId=1;
+    //this.loggedInProfileId=1;
+    this.loggedInProfileId=this.authenticationStore.currentUserId;
+
 
     this.followerService = new FollowerService();
     this.userService = new UserService();
