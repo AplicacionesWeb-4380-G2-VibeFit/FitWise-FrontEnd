@@ -22,77 +22,84 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
-import { createPayment } from '@/selling/services/payments.service.js';
-import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js';
+import { reactive, ref } from 'vue'
+import { createPayment } from '@/selling/services/payments.service.js'
+import { addPaymentToHistoryNow } from '@/selling/services/purchase-history.service.js'
+import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js' // ✅ NUEVO
 
-const props = defineProps({ draft: Object });
-const emit  = defineEmits(['close']);
-const saving = ref(false);
+const props = defineProps({ draft: Object })
+const emit  = defineEmits(['close'])
+const saving = ref(false)
 
 const payment = reactive({
   method: 'yape',
   amount: props.draft.price || 0
-});
+})
 
-function close(result) {
-  emit('close', result);
-}
-
-async function payNow() {
-  if (payment.amount <= 0) {
-    return alert('El monto debe ser mayor que cero');
-  }
-  saving.value = true;
+async function payNow () {
+  saving.value = true
   try {
-    // Crear pago completado
-    const { data: pay } = await createPayment({
-      ownerId:    props.draft.ownerId,
-      planId:     props.draft.planId,
-      amount:     payment.amount,
-      currency:   'PEN',
-      method:     payment.method,
-      status:     'completed',
+    const res = await createPayment({
+      id: Date.now(),
+      ownerId: props.draft.ownerId,
+      planId:  props.draft.planId,
+      amount:  payment.amount,
+      currency: 'PEN',
+      method:  payment.method,
+      status: 'completed',
       paymentDate: new Date().toISOString()
-    });
-    // Guardar en historial
-    await addPaymentToHistory(props.draft.ownerId, pay);
-    close(pay);
-  } catch (err) {
-    console.error('Error al procesar el pago:', err);
-    alert('Ocurrió un error al procesar el pago.');
-  } finally {
-    saving.value = false;
-  }
-}
+    })
 
-async function payLater() {
-  if (payment.amount <= 0) {
-    return alert('El monto debe ser mayor que cero');
-  }
-  saving.value = true;
-  try {
-    // Crear pago pendiente
-    const { data: pay } = await createPayment({
-      ownerId:    props.draft.ownerId,
-      planId:     props.draft.planId,
-      amount:     payment.amount,
-      currency:   'PEN',
-      method:     payment.method,
-      status:     'pending',
-      paymentDate: new Date().toISOString()
-    });
-    // (Opcional) guardar en historial también
-    await addPaymentToHistory(props.draft.ownerId, pay);
-    close(pay);
+    const pay = res.data
+    if (!pay || !pay.id) throw new Error('No se generó el pago correctamente.')
+
+    // 1. Historial
+    await addPaymentToHistoryNow(props.draft.ownerId, pay)
+
+    // 2. Purchased Plan
+    await createPurchasedPlan({
+      ownerId: props.draft.ownerId,
+      planId: props.draft.planId,
+      purchaseDate: new Date().toISOString(),
+      status: 'active'
+    })
+
+    emit('close', pay)
   } catch (err) {
-    console.error('Error al guardar el pago pendiente:', err);
-    alert('Ocurrió un error al guardar el pago.');
+    console.error('❌ Error al procesar el pago:', err)
+    alert('Ocurrió un error al procesar el pago.')
   } finally {
-    saving.value = false;
+    saving.value = false
+  }
+
+}
+async function payLater () {
+  await finish('pending')
+}
+async function finish (status) {
+  saving.value = true
+  try {
+    const pay = await createPayment({
+      id: Date.now(),
+      ownerId: props.draft.ownerId,
+      planId:  props.draft.planId,
+      amount:  payment.amount,
+      currency: 'PEN',
+      method:  payment.method,
+      status,
+      paymentDate: new Date().toISOString()
+    })
+
+    emit('close', pay.data)
+  } catch (err) {
+    console.error('Error al guardar el pago:', err)
+    alert('Ocurrió un error al guardar el pago.')
+  } finally {
+    saving.value = false
   }
 }
 </script>
+
 
 <style scoped>
 .overlay {
@@ -205,4 +212,3 @@ input[type="number"]:focus {
   color: #718096;
 }
 </style>
-

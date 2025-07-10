@@ -24,7 +24,7 @@ export const getPendingByUser = (userId) => {
     return httpInstance.get(resourceEndpoint, {
         params: {
             ownerId: userId,
-            status:  "pending"
+            status: "pending"
         }
     });
 };

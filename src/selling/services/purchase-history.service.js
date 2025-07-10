@@ -20,21 +20,49 @@ export const getPurchaseHistoryByUserId = (userId) => {
 /**
  * Añade un pago al historial de un usuario.
  */
-export const addPaymentToHistory = async (userId, newPayment) => {
+export const addPaymentToHistory = async (userId, paymentId) => {
     try {
-        const { data } = await httpInstance.get(`${resourceEndpoint}/${userId}`);
-        const payments = Array.isArray(data.payments) ? data.payments : [];
-        payments.push(newPayment);
+        // POST: crea nuevo historial
+        await httpInstance.post(resourceEndpoint, {
+            userId: String(userId) // ✅ así lo espera el backend
+        });
+
+        // PATCH: añade el payment
         return await httpInstance.patch(`${resourceEndpoint}/${userId}`, {
-            payments
+            paymentId
         });
     } catch (err) {
-        if (err.response?.status === 404) {
-            return await httpInstance.post(resourceEndpoint, {
-                id:       userId,
-                payments: [newPayment]
+        if (err.response && (err.response.status === 400 || err.response.status === 409)) {
+            // ya existe, solo hace patch
+            return await httpInstance.patch(`${resourceEndpoint}/${userId}`, {
+                paymentId
             });
+        } else {
+            throw err;
         }
-        throw err;
     }
 };
+
+
+/**
+ * Versión alternativa para añadir un pago en tiempo real
+ */
+export const addPaymentToHistoryNow = async (userId, payment) => {
+    try {
+        // Asegura que solo mandas el userId como string
+        await httpInstance.post(resourceEndpoint, { userId })
+
+        // Agrega el ID del pago
+        return await httpInstance.patch(`${resourceEndpoint}/${userId}`, {
+            paymentId: payment.id
+        })
+    } catch (err) {
+        if (err.response?.status === 400) {
+            return await httpInstance.patch(`${resourceEndpoint}/${userId}`, {
+                paymentId: payment.id
+            })
+        } else {
+            throw err
+        }
+    }
+}

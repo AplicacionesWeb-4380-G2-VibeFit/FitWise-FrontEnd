@@ -27,62 +27,63 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 import {
   getPendingByUser,
-  deletePayment
-} from '@/selling/services/payments.service.js';
-import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js';
-import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js';
+  deletePayment, patchPayment
+} from '@/selling/services/payments.service.js'
+import { createPurchasedPlan } from '@/selling/services/purchased-plans.service.js'
+import { addPaymentToHistory } from '@/selling/services/purchase-history.service.js'
 
 const props = defineProps({
   userId: { type: [String, Number], required: true }
-});
+})
 
-const pending    = ref([]);
-const loading    = ref(false);
-const error      = ref(null);
-const processing = ref(false);
+const pending    = ref([])
+const loading    = ref(false)
+const error      = ref(null)
+const processing = ref(false)
 
 onMounted(async () => {
-  loading.value = true;
+  loading.value = true
   try {
-    const { data } = await getPendingByUser(props.userId);
-    pending.value = data;
+    const { data } = await getPendingByUser(props.userId)
+    // Aseguramos que solo se carguen los pagos realmente pendientes
+    pending.value = (Array.isArray(data) ? data : []).filter(p => p.status === 'pending')
   } catch (err) {
-    console.error('Error cargando pagos pendientes:', err);
-    error.value = 'No se pudieron cargar los pagos pendientes.';
+    console.error('Error cargando pagos pendientes:', err)
+    error.value = 'No se pudieron cargar los pagos pendientes.'
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-});
+})
 
 async function finishPayment(p) {
-  if (processing.value) return;
-  processing.value = true;
   try {
-    const { data: plan } = await createPurchasedPlan({
-      ownerId:      p.ownerId,
-      planId:       p.planId,
+    // 1. Crear el plan comprado
+    const plan = await createPurchasedPlan({
+      ownerId: p.ownerId,
+      planId: p.planId,
       purchaseDate: new Date().toISOString(),
-      status:       'active'
-    });
+      status: 'active'
+    })
 
-    const completed = {
-      ...p,
-      status:            'completed',
-      paymentDate:       new Date().toISOString(),
-      purchasedPlanId:   plan.id
-    };
+    // 2. Marcar el pago como completado (con purchasedPlanId)
+    await patchPayment(p.id, {
+      status: 'completed',
+      paymentDate: new Date().toISOString(),
+      purchasedPlanId: plan.data.id
+    })
 
-    await addPaymentToHistory(p.ownerId, completed);
-    await deletePayment(p.id);
-    pending.value = pending.value.filter(x => x.id !== p.id);
+    // 3. Crear historial y agregar el pago usando el id del pago como userId
+    await addPaymentToHistory(p.id, p.id)
+
+    // 4. Eliminar visualmente
+    pending.value = pending.value.filter(pay => pay.id !== p.id)
+
+    console.log('✅ Pago completado y agregado al historial')
   } catch (err) {
-    console.error('Error completando el pago:', err);
-    alert('No se pudo completar el pago. Intenta de nuevo.');
-  } finally {
-    processing.value = false;
+    console.error('❌ Error al completar el pago:', err)
   }
 }
 </script>
