@@ -6,6 +6,7 @@ import {Follower} from "@/presenting/model/follower.entity.js";
 import { ref } from 'vue';
 import FollowerFormValidation from "@/presenting/components/follower-form-validation.component.vue";
 import CertificatesFromOtherUsers from "@/presenting/components/certificates-from-other-users.component.vue";
+import {useAuthenticationStore} from "@/iam/services/authentication.store.js";
 
 
 export default {
@@ -15,6 +16,7 @@ export default {
     return {
       // ID del perfil del usuario que ha iniciado sesión
       loggedInProfileId: null,
+      authenticationStore: useAuthenticationStore(),
 
       //Usuario que ha iniciado sesión
       loggedInUser: null,
@@ -145,7 +147,9 @@ export default {
 
   created() {
     // ID del perfil del usuario que ha iniciado sesión
-    this.loggedInProfileId=1;
+    //this.loggedInProfileId=1;
+    this.loggedInProfileId=this.authenticationStore.currentUserId;
+
 
     this.followerService = new FollowerService();
     this.userService = new UserService();
@@ -294,7 +298,7 @@ export default {
                 <div class="md:w-40 relative flex-shrink-0">
                   <pv-tag
                       v-if="item && item.gender"
-                      :value="item.gender === 'male'
+                      :value="item.gender === 'Male'
     ? $t('profile.profileManagement.male')
     : $t('profile.profileManagement.female')"
                       :style="{
@@ -302,7 +306,7 @@ export default {
               top: '10px',
               left: '10px',
               zIndex: 2,
-              background: item.gender === 'male' ? '#1976d2' : '#d32f2f',
+              background: item.gender === 'Male' ? '#1976d2' : '#d32f2f',
               color: '#fff',
               fontWeight: 'bold',
               borderRadius: '0.5rem',
@@ -381,7 +385,7 @@ export default {
                   <div class="relative mx-auto">
                     <pv-tag
                         v-if="item && item.gender"
-                        :value="item.gender === 'male'
+                        :value="item.gender === 'Male'
     ? $t('profile.profileManagement.male')
     : $t('profile.profileManagement.female')"
                         :style="{
@@ -389,7 +393,7 @@ export default {
                 top: '10px',
                 left: '10px',
                 zIndex: 2,
-                background: item.gender === 'male' ? '#1976d2' : '#d32f2f',
+                background: item.gender === 'Male' ? '#1976d2' : '#d32f2f',
                 color: '#fff',
                 fontWeight: 'bold',
                 borderRadius: '0.5rem',
